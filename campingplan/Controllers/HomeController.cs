@@ -12,6 +12,10 @@ namespace campingplan.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         public ActionResult About()
         {
