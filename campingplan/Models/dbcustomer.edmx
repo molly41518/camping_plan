@@ -4,15 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="campingplanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="campingplanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="mno" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="maccount" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="mpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="maccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="mpassword" Type="nvarchar" MaxLength="50" />
           <Property Name="mnickname" Type="nvarchar" MaxLength="50" />
           <Property Name="memail" Type="nvarchar" MaxLength="250" />
           <Property Name="birth_date" Type="date" />
@@ -20,8 +20,7 @@
         <EntityContainer Name="campingplanModelStoreContainer">
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="campingplanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,9 +29,9 @@
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="maccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="mpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="maccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mnickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="memail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="birth_date" Type="DateTime" Precision="0" />

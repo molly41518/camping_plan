@@ -24,7 +24,7 @@ namespace campingplan.Models
         public string maccount { get; set; }
 
         [DisplayName("密碼")]
-        [Required(ErrorMessage ="密碼不可空白")]
+        [Required(ErrorMessage = "密碼不可空白")]
         public string mpassword { get; set; }
 
         [DisplayName("暱稱")]
