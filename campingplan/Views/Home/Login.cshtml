@@ -27,7 +27,12 @@
                 <input id="Submit1" type="submit" value="登入" />
                 <input id="Reset1" type="reset" value="取消" />
             </div>
+            @ViewBag.Message
         </div>
         
     </div>
 </form>
+
+<div>
+    @Html.ActionLink("返回", "Index")
+</div>
