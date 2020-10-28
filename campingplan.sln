@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "campingplan", "campingplan\campingplan.csproj", "{94F7ABE6-A079-41FA-915B-BE01330A66B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "goshopping", "..\..\vs2019\1022\goshopping\goshopping\goshopping.csproj", "{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{94F7ABE6-A079-41FA-915B-BE01330A66B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F7ABE6-A079-41FA-915B-BE01330A66B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F7ABE6-A079-41FA-915B-BE01330A66B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

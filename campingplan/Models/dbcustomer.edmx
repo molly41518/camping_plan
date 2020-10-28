@@ -13,12 +13,29 @@
           <Property Name="mno" Type="nvarchar" MaxLength="50" />
           <Property Name="maccount" Type="nvarchar" MaxLength="50" />
           <Property Name="mpassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="mname" Type="nvarchar" MaxLength="50" />
           <Property Name="mnickname" Type="nvarchar" MaxLength="50" />
           <Property Name="memail" Type="nvarchar" MaxLength="250" />
           <Property Name="birth_date" Type="date" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="varify_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="isvarify" Type="int" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ptype" Type="nchar" MaxLength="10" />
+          <Property Name="pno" Type="nchar" MaxLength="50" />
+          <Property Name="pname" Type="nchar" MaxLength="50" />
+          <Property Name="pdescription" Type="nchar" MaxLength="250" />
+          <Property Name="pprice" Type="int" />
+          <Property Name="pimg" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="campingplanModelStoreContainer">
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -32,13 +49,30 @@
           <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="maccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mnickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="memail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isvarify" Type="Int32" />
         </EntityType>
         <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="product" EntityType="campingplanModel.product" />
         </EntityContainer>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ptype" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="pno" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="pname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="pdescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="pprice" Type="Int32" />
+          <Property Name="pimg" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -48,6 +82,10 @@
           <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="campingplanModel.customer">
               <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="isvarify" ColumnName="isvarify" />
+                <ScalarProperty Name="varify_code" ColumnName="varify_code" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
                 <ScalarProperty Name="mno" ColumnName="mno" />
                 <ScalarProperty Name="maccount" ColumnName="maccount" />
@@ -55,6 +93,19 @@
                 <ScalarProperty Name="mnickname" ColumnName="mnickname" />
                 <ScalarProperty Name="memail" ColumnName="memail" />
                 <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="campingplanModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="pimg" ColumnName="pimg" />
+                <ScalarProperty Name="pprice" ColumnName="pprice" />
+                <ScalarProperty Name="pdescription" ColumnName="pdescription" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
+                <ScalarProperty Name="ptype" ColumnName="ptype" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

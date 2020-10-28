@@ -1,0 +1,71 @@
+﻿@model campingplan.Models.cvmLogin
+
+@{Layout = null;}
+
+
+@using (Ajax.BeginForm("Login", "Customer",new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "POST" }, new { @class = "modal-dialog modal-dialog-centered modal-lg" }))
+{
+    @Html.AntiForgeryToken()
+    @*<div class="modal fade" id="modal-id">*@
+    @*<div class="modal-dialog modal-dialog-centered modal-lg">*@
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">會員登入</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="~/Content/images/bg/bg-4.jpg" class="img-fluid my-2" />
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustomerAccount, htmlAttributes: new { @class = "control-label" })
+                                <div>
+                                    @Html.EditorFor(model => model.CustomerAccount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CustomerAccount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustomerPassword, htmlAttributes: new { @class = "control-label" })
+                                <div>
+                                    @Html.EditorFor(model => model.CustomerPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CustomerPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="checkbox col-lg-1 pr-0" style="display:inline-block">
+                                    @Html.EditorFor(model => model.Remember)
+                                    @Html.ValidationMessageFor(model => model.Remember, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-11 " style="display:inline-block">
+                                    @Html.LabelFor(model => model.Remember, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <p class="text-danger my-0">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+                <input type="submit" class="btn btn-default" value="登入">
+                @Ajax.ActionLink("註冊", "Register", "Customer", null, new AjaxOptions { OnSuccess = "showDialogRegister", HttpMethod = "GET" }, new { @class = "btn btn-default" })
+
+
+            </div>
+        </div>
+    @*</div>*@
+    @*</div>*@
+
+
+}

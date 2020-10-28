@@ -125,9 +125,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Class\AppEnums.cs" />
+    <Compile Include="App_Class\Cryptographys.cs" />
+    <Compile Include="App_Class\CustomerAccount.cs" />
+    <Compile Include="App_Class\GmailService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -157,6 +162,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelMetaData\customer.cs" />
+    <Compile Include="Models\product.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\cvmLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +174,19 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\camping\bootstrap-grid.css" />
+    <Content Include="Content\camping\bootstrap-grid.min.css" />
+    <Content Include="Content\camping\bootstrap-reboot.css" />
+    <Content Include="Content\camping\bootstrap-reboot.min.css" />
+    <Content Include="Content\camping\bootstrap.css" />
+    <Content Include="Content\camping\bootstrap.min.css" />
+    <Content Include="Content\images\bg\bg-1.jpeg" />
+    <Content Include="Content\images\bg\bg-2.jpg" />
+    <Content Include="Content\images\bg\bg-4.jpg" />
+    <Content Include="Content\images\index-photo.jpeg" />
+    <Content Include="Content\images\logo-03.png" />
+    <Content Include="Content\images\logo\logo-04.png" />
+    <Content Include="Content\images\product\C0001.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -188,12 +211,31 @@
     <Content Include="Models\dbcustomer.edmx.diagram">
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\camping\bootstrap-grid.css.map" />
+    <Content Include="Content\camping\bootstrap-grid.min.css.map" />
+    <Content Include="Content\camping\bootstrap-reboot.css.map" />
+    <Content Include="Content\camping\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\camping\bootstrap.css.map" />
+    <Content Include="Content\camping\bootstrap.min.css.map" />
+    <Content Include="Scripts\camping\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\camping\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\camping\bootstrap.js.map" />
+    <Content Include="Scripts\camping\bootstrap.min.js.map" />
+    <Content Include="Content\images\bg\bg-3.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\camping\bootstrap.bundle.js" />
+    <Content Include="Scripts\camping\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\camping\bootstrap.js" />
+    <Content Include="Scripts\camping\bootstrap.min.js" />
+    <Content Include="Scripts\camping\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\camping\popper.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -213,8 +255,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Shared\_Layout - Login.cshtml" />
+    <Content Include="Views\Product\Shop.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Customer\VerifyEmail.cshtml" />
+    <Content Include="Views\Customer\SendEmailResult.cshtml" />
+    <Content Include="Views\Shared\_LayoutIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1">
         <EntityTypeShape EntityType="campingplanModel.customer" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

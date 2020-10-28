@@ -2,30 +2,92 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>營火計畫</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<style>
+    header.masthead {
+        padding-top: 20rem;
+        padding-bottom: calc(20rem - 4.5rem);
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/Content/images/bg/bg-1.jpeg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: auto;
+    }
+
+    .divider {
+        max-width: 15rem;
+        border-width: 0.2rem;
+        border-color: rgb(7, 161, 189);
+    }
+
+    .i-size {
+        font-size: 4rem;
+        color: rgb(7, 161, 189);
+    }
+</style>
+
+
+<header class="masthead">
+    <div class="container">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-start">
+                <h1 class="text-uppercase text-white font-weight-bold">
+                    現在出發冒險去
+                </h1>
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="font-weight-light mb-5">打造獨一無二的露營計畫</p>
+            </div>
+            <div class="col-8 col-lg-8 bg-white">
+                <ul class="nav justify-content-start nav-tabs mt-2 border-info">
+                    <li class="nav-item">
+                        <a href=""
+                           class="nav-link text-black mr-1 active"
+                           data-toggle="tab">露營地</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-black mr-1" data-toggle="tab">裝備</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-black mr-1" data-toggle="tab">活動</a>
+                    </li>
+                </ul>
+                <div class="input-group my-2">
+                    <input type="text" class="form-control col-lg-8" />
+                    <a href="#" class="col-lg-4 btn btn-info btn-block m-0">搜尋</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center mt-5"><h4>露營輕鬆愜意</h4></div>
+        <hr class="col-lg-12 divider mt-0 mb-4" />
+    </div>
+    <div class="row mb-5 text-center">
+        <div class="col-4">
+            <i class="fas fa-campground i-size my-3"></i>
+            <h3>營地</h3>
+            應當貼布家人，失去刺激我只直接轉換做法供應商聯想我就重大手上直接聽到，女士武器。
+        </div>
+        <div class="col-4">
+            <i class="fas fa-shopping-bag i-size my-3"></i>
+            <h3>裝備</h3>
+            時期行動美元開了節省依舊如果您轉變，把我放棄保留表達取得中心短信幫你，能源人家。
+        </div>
+        <div class="col-4">
+            <i class="fas fa-ticket-alt i-size my-3"></i>
+            <h3>行程</h3>
+            家裡人群包裝前來成本主題幾乎官方庫存最快適應力道清楚，總部很熱簡體主動，渠道小。
+        </div>
+    </div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>找營地</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>買裝備</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>玩體驗</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+
+
+

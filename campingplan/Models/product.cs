@@ -12,18 +12,14 @@ namespace campingplan.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class customer
+    public partial class product
     {
         public int rowid { get; set; }
-        public string mno { get; set; }
-        public string maccount { get; set; }
-        public string mpassword { get; set; }
-        public string mname { get; set; }
-        public string mnickname { get; set; }
-        public string memail { get; set; }
-        public Nullable<System.DateTime> birth_date { get; set; }
-        public string remark { get; set; }
-        public string varify_code { get; set; }
-        public Nullable<int> isvarify { get; set; }
+        public string ptype { get; set; }
+        public string pno { get; set; }
+        public string pname { get; set; }
+        public string pdescription { get; set; }
+        public Nullable<int> pprice { get; set; }
+        public string pimg { get; set; }
     }
 }
