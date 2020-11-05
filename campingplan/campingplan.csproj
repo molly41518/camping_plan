@@ -129,11 +129,13 @@
     <Compile Include="App_Class\Cryptographys.cs" />
     <Compile Include="App_Class\CustomerAccount.cs" />
     <Compile Include="App_Class\GmailService.cs" />
+    <Compile Include="App_Class\Shop.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,6 +145,9 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\categorys.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
@@ -256,12 +261,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
-    <Content Include="Views\Shared\_Layout - Login.cshtml" />
     <Content Include="Views\Product\Shop.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Customer\VerifyEmail.cshtml" />
     <Content Include="Views\Customer\SendEmailResult.cshtml" />
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />
+    <Content Include="Views\Product\CategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

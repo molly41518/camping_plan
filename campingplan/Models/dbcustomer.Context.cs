@@ -26,6 +26,7 @@ namespace campingplan.Models
         }
     
         public virtual DbSet<customer> customer { get; set; }
+        public virtual DbSet<categorys> categorys { get; set; }
         public virtual DbSet<product> product { get; set; }
     }
 }

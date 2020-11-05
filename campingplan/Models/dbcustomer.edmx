@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="campingplanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorys">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parentid" Type="int" />
+          <Property Name="category_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="rowid" />
@@ -26,14 +35,16 @@
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ptype" Type="nchar" MaxLength="10" />
-          <Property Name="pno" Type="nchar" MaxLength="50" />
-          <Property Name="pname" Type="nchar" MaxLength="50" />
-          <Property Name="pdescription" Type="nchar" MaxLength="250" />
+          <Property Name="categoryid" Type="int" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" />
+          <Property Name="plocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="pname" Type="nvarchar" MaxLength="50" />
+          <Property Name="pdescription" Type="nvarchar" MaxLength="250" />
           <Property Name="pprice" Type="int" />
-          <Property Name="pimg" Type="nchar" MaxLength="50" />
+          <Property Name="pimg" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityContainer Name="campingplanModelStoreContainer">
+          <EntitySet Name="categorys" EntityType="Self.categorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -59,19 +70,30 @@
         </EntityType>
         <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
           <EntitySet Name="product" EntityType="campingplanModel.product" />
         </EntityContainer>
+        <EntityType Name="categorys">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentid" Type="Int32" />
+          <Property Name="category_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ptype" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="pno" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="pname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="pdescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="categoryid" Type="Int32" />
+          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pdescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="pprice" Type="Int32" />
-          <Property Name="pimg" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="pimg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="plocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -96,15 +118,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="categorys">
+            <EntityTypeMapping TypeName="campingplanModel.categorys">
+              <MappingFragment StoreEntitySet="categorys">
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_no" ColumnName="category_no" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="product">
             <EntityTypeMapping TypeName="campingplanModel.product">
               <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="plocation" ColumnName="plocation" />
                 <ScalarProperty Name="pimg" ColumnName="pimg" />
                 <ScalarProperty Name="pprice" ColumnName="pprice" />
                 <ScalarProperty Name="pdescription" ColumnName="pdescription" />
                 <ScalarProperty Name="pname" ColumnName="pname" />
                 <ScalarProperty Name="pno" ColumnName="pno" />
-                <ScalarProperty Name="ptype" ColumnName="ptype" />
+                <ScalarProperty Name="categoryid" ColumnName="categoryid" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>

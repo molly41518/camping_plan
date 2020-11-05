@@ -12,15 +12,11 @@ namespace campingplan.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class product
+    public partial class categorys
     {
         public int rowid { get; set; }
-        public Nullable<int> categoryid { get; set; }
-        public string pno { get; set; }
-        public string pname { get; set; }
-        public string pdescription { get; set; }
-        public Nullable<int> pprice { get; set; }
-        public string pimg { get; set; }
-        public string plocation { get; set; }
+        public Nullable<int> parentid { get; set; }
+        public string category_no { get; set; }
+        public string category_name { get; set; }
     }
 }

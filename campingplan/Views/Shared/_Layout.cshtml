@@ -1,5 +1,4 @@
-﻿@model campingplan.Models.cvmLogin
-@using campingplan.App_Class
+﻿@using campingplan.App_Class
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +15,29 @@
     @RenderSection("styles", required: false)
     @RenderSection("scripts", required: false)
 
+    <script src="@Url.Content("~/Scripts/camping/jquery-3.5.1.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                // check if scroll event happened
+                if ($(document).scrollTop() > 10) {
+                    // check if user scrolled more than 50 from top of the browser window
+                    $(".navbar-fixed-top").css("background-color", "#f8f8f8");
+                    $("nav").addClass("navbarshadow");
+                    $("a").addClass("text-info");
+                    $("#dropdown").removeClass("bg-dark");
+                    // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+                } else {
+                    $(".navbar-fixed-top").css("background-color", "transparent");
+                    $("nav").removeClass("navbarshadow");
+                    $("a").removeClass("text-info");
+                    $("#dropdown").addClass("bg-dark");
+                    // if not, change it back to transparent
+                }
+            });
+        });
+    </script>
+
     <script type="text/javascript">
         function showDialogLogin(data) {
             $("#showLogin").html(data);
@@ -29,22 +51,53 @@
     </script>
 
 
+
+
     <style>
         * {
             font-family: 微軟正黑體;
         }
 
-        header.masthead {
+        #carousel-1,
+        #carousel-2,
+        #carousel-3 {
             padding-top: 20rem;
             padding-bottom: calc(20rem - 4.5rem);
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg-1.jpeg");
+        }
+
+        #carousel-1 {
+            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-1.jpeg");
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: scroll;
-            background-size: auto;
+            background-size: cover;
         }
 
-        .navbar {
+        #carousel-2 {
+            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-2.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover;
+        }
+
+        #carousel-3 {
+            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-4.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: cover;
+        }
+
+        .carousel-caption {
+            top: 35%;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbarshadow {
             -webkit-box-shadow: 0 8px 6px -6px #444;
             -moz-box-shadow: 0 8px 6px -6px #555;
             box-shadow: 0 8px 6px -6px #777;
@@ -61,8 +114,15 @@
             color: rgb(7, 161, 189);
         }
 
-        .mowh {
-            max-width: 70%;
+        .navFixed {
+            z-index: 10;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin-top: 0;
+            min-width: 100%;
+            transition: opacity 0.5s ease-out;
+            background-color: white;
         }
     </style>
 
@@ -70,9 +130,10 @@
 </head>
 <body>
     <!-- navbar-expand-lg 是指在 lg 範圍以上才會直接展開選項 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
-        <a class="navbar-brand js-scroll-trigger p-0" href="#">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px;" />
+    <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
+         id="navsr">
+        <a class="navbar-brand js-scroll-trigger p-0" href="#" id="navbr">
+            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -85,14 +146,32 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto my-2 my-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link js-scroll-trigger text-info" href="#">購物商城</a>
+                <li class="dropdown nav-item">
+                    <a href="#"
+                       data-toggle="dropdown"
+                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">購物商城</a>
+                    <ul id="dropdown"
+                        class="dropdown-menu bg-dark"
+                        role="menu"
+                        aria-labelledby="tutorial">
+                        @{
+                            var lists1 = Shop.Getategorys(0);
+                            foreach (var item1 in lists1)
+                            {
+                                <li role="presentation">
+                                    @Html.ActionLink(item1.category_name, "CategoryList" , "Product" , new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger atextcolor" })
+                                    
+                                </li>
+
+                            }
+                        }
+                    </ul>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger text-info" href="#">營火傳遞</a>
+                    <a class="nav-link js-scroll-trigger atextcolor" href="#">營火傳遞</a>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger text-info"
+                    <a class="nav-link js-scroll-trigger atextcolor"
                        href="#"
                        aria-disabled="true">關於我們</a>
                 </li>
@@ -138,8 +217,8 @@
     </footer>
 
 
-    <script src="@Url.Content("~/Scripts/camping/jquery-3.5.1.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>
+
+    @*<script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>*@
     <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/popper.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>

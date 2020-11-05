@@ -1,0 +1,126 @@
+﻿@model IEnumerable<campingplan.Models.product>
+
+@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    * {
+        font-family: 微軟正黑體;
+    }
+
+    .masthead {
+        padding-top: 10rem;
+        padding-bottom: calc(18rem - 4.5rem);
+        background-image: url(/Content/images/bg/bg-4.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: auto;
+        height: 1%;
+    }
+    .selectdate {
+        padding: 0;
+    }
+
+    .campitem {
+        list-style: none;
+        display: inline-block;
+        width: 6rem;
+        height: 3rem;
+        border: 1px solid black;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .camptype {
+        list-style: none;
+        display: inline-block;
+        width: 5rem;
+        height: 1rem;
+        border: 1px solid black;
+        font-size: 13px;
+        text-align: center;
+        padding-bottom: 1rem;
+        transition:all 1s;
+    }
+
+    .carditem:hover {
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+        transform: translate3d(0, -1rem, 0);
+        /*transform: scale(1.5,1.5);*/
+        /*transform: skew(30deg,0);*/
+    }
+</style>
+
+
+
+
+<header class="masthead mb-5">
+    <div class="container">
+        <div class="row text-center align-self-center justify-content-center">
+            <div class="col-12 col-lg-12">
+                <h3 class="text-uppercase text-white font-weight-bold">露營地</h3>
+            </div>
+            <div class="col-8 col-lg-8 bg-white mt-1">
+                <div class="input-group my-2">
+                    <input type="text" class="form-control col-lg-8" />
+                    <a href="#" class="col-lg-4 btn btn-info btn-block m-0">搜尋</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            string productimgname = string.Format("{0}.jpeg", @item.pimg);
+            <div class="col-lg-4 mt-5">
+                <div class="card carditem" style="width: 22rem">
+                    <img class="card-img-top"
+                         src="~/Content/images/product/@productimgname",
+                         alt="Card image cap" />
+                    <div class="card-body">
+                        <span>@item.plocation</span>
+                        <h5 class="card-title">@item.pname</h5>
+                        <ul class="selectdate">
+                            <li class="camptype align-self-center justify-content-center">
+                                <a>高海拔</a>
+                            </li>
+                            <li class="camptype">
+                                <a>中部營區</a>
+                            </li>
+                            <li class="camptype">
+                                <a>近河邊</a>
+                            </li>
+                            <li class="camptype">
+                                <a>兒童遊戲區</a>
+                            </li>
+                        </ul>
+                        <hr />
+                        <span>$@item.pprice</span>
+                        <span>4.5</span>
+                        <ul class="selectdate">
+                            <li class="campitem align-self-center justify-content-center">
+                                <a>10-24(六) <br /><span> 只剩<em>17</em>帳 </span></a>
+                            </li>
+
+                            <li class="campitem">
+                                <a>10-31(六) <br /><span> 只剩<em>34</em>帳 </span></a>
+                            </li>
+
+                            <li class="campitem">
+                                <a>11-07(六) <br /><span> 只剩<em>34</em>帳 </span></a>
+                            </li>
+                        </ul>
+                        <a href="/iproduct_camping_item.html"
+                           class="btn btn-primary col-lg-12">訂購</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
