@@ -20,6 +20,7 @@
         background-size: auto;
         height: 1%;
     }
+
     .selectdate {
         padding: 0;
     }
@@ -43,7 +44,7 @@
         font-size: 13px;
         text-align: center;
         padding-bottom: 1rem;
-        transition:all 1s;
+        transition: all 1s;
     }
 
     .carditem:hover {
@@ -64,10 +65,17 @@
                 <h3 class="text-uppercase text-white font-weight-bold">露營地</h3>
             </div>
             <div class="col-8 col-lg-8 bg-white mt-1">
-                <div class="input-group my-2">
-                    <input type="text" class="form-control col-lg-8" />
-                    <a href="#" class="col-lg-4 btn btn-info btn-block m-0">搜尋</a>
-                </div>
+                @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
+                {
+
+                    <div class="input-group my-2">
+
+                        @Html.TextBox("searchString", null, new { @class = "form-control col-lg-8" })
+                        <input type="submit" class="col-lg-4 btn btn-info btn-block m-0" value="搜尋" />
+
+                    </div>
+
+                }
             </div>
         </div>
     </div>
@@ -81,7 +89,7 @@
             <div class="col-lg-4 mt-5">
                 <div class="card carditem" style="width: 22rem">
                     <img class="card-img-top"
-                         src="~/Content/images/product/@productimgname",
+                         src="~/Content/images/product/@productimgname" ,
                          alt="Card image cap" />
                     <div class="card-body">
                         <span>@item.plocation</span>

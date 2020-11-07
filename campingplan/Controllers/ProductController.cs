@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +19,18 @@ namespace campingplan.Controllers
             ViewBag.CategoryNo = id;
             ViewBag.CategoryName = Shop.GetCategoryName(id, ref int_id);
             var model = db.product.Where(m => m.categoryid == int_id).OrderBy(m => m.pno).ToList();
+
+            //關鍵字搜尋
+            string searchwords = Request.Form["searchString"];
+            if (searchwords != null)
+            {
+                ViewBag.SearchKeywordProductList = Shop.GetCategoryName(id, ref int_id);
+                model = db.product.Where(m => m.categoryid == int_id && m.pname.Contains(searchwords)).OrderBy(m => m.pno).ToList();
+            }
+
             return View(model);
+
         }
+
     }
 }
