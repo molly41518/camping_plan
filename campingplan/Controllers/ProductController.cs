@@ -29,7 +29,21 @@ namespace campingplan.Controllers
             }
 
             return View(model);
+        }
 
+        public ActionResult ProductDetail(string id)
+        {
+            if(id == null) id = "C0001";
+            var modal = db.product.Where(m => m.pno == id).FirstOrDefault();
+            var typedetail = db.product_typedetail.Where(m => m.pno == id).FirstOrDefault();
+
+            return View(modal);
+        }
+        [HttpPost]
+        public ActionResult ProductDetail(string qty, string camptype, string product_no)
+        {
+            string str_data = product_no + "" + qty + "" + camptype;
+            return View();
         }
 
     }

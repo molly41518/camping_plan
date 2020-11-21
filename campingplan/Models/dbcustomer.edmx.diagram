@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="campingplanModel.customer" Width="1.5" PointX="1.375" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="3.375" PointY="3.25" />
         <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="campingplanModel.product_typedetail" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -33,6 +33,12 @@ namespace campingplan.App_Class
             }
             return str_name;
         }
+        public static List<product_typedetail> Postproduct_typedetail(string id)
+        {
+            dbcon db = new dbcon();
+            var lists = db.product_typedetail.Where(m => m.pno == id).OrderBy(m => m.ptype_no).ToList();
+            return lists;
+        }
     }
     
 }

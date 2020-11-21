@@ -43,10 +43,37 @@
           <Property Name="pprice" Type="int" />
           <Property Name="pimg" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'campingplan.dbo.product_typedetail' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="product_typedetail">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" />
+          <Property Name="parea_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="parea_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_price" Type="int" />
+          <Property Name="ptype_dep" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityContainer Name="campingplanModelStoreContainer">
           <EntitySet Name="categorys" EntityType="Self.categorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_typedetail" EntityType="Self.product_typedetail" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [product_typedetail].[rowid] AS [rowid], 
+    [product_typedetail].[pno] AS [pno], 
+    [product_typedetail].[parea_no] AS [parea_no], 
+    [product_typedetail].[parea_name] AS [parea_name], 
+    [product_typedetail].[ptype_no] AS [ptype_no], 
+    [product_typedetail].[ptype_name] AS [ptype_name], 
+    [product_typedetail].[ptype_price] AS [ptype_price], 
+    [product_typedetail].[ptype_dep] AS [ptype_dep]
+    FROM [dbo].[product_typedetail] AS [product_typedetail]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -72,6 +99,7 @@
           <EntitySet Name="customer" EntityType="Self.customer" />
           <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
           <EntitySet Name="product" EntityType="campingplanModel.product" />
+          <EntitySet Name="product_typedetail" EntityType="campingplanModel.product_typedetail" />
         </EntityContainer>
         <EntityType Name="categorys">
           <Key>
@@ -94,6 +122,19 @@
           <Property Name="pprice" Type="Int32" />
           <Property Name="pimg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="plocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="product_typedetail">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parea_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parea_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_price" Type="Int32" />
+          <Property Name="ptype_dep" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -138,6 +179,20 @@
                 <ScalarProperty Name="pname" ColumnName="pname" />
                 <ScalarProperty Name="pno" ColumnName="pno" />
                 <ScalarProperty Name="categoryid" ColumnName="categoryid" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_typedetail">
+            <EntityTypeMapping TypeName="campingplanModel.product_typedetail">
+              <MappingFragment StoreEntitySet="product_typedetail">
+                <ScalarProperty Name="ptype_dep" ColumnName="ptype_dep" />
+                <ScalarProperty Name="ptype_price" ColumnName="ptype_price" />
+                <ScalarProperty Name="ptype_name" ColumnName="ptype_name" />
+                <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
+                <ScalarProperty Name="parea_name" ColumnName="parea_name" />
+                <ScalarProperty Name="parea_no" ColumnName="parea_no" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
