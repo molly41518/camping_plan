@@ -56,6 +56,41 @@ namespace campingplan.Controllers
             return RedirectToAction("BackProdutList");
         }
 
+        //編輯商品
+        public ActionResult BackProductEdit(int pr_rowid)
+        {
+            var model = db.product.FirstOrDefault(m => m.rowid == pr_rowid);
+            if (model != null)
+            {
+                return View(model);
+            }
+            return RedirectToAction("BackProdutList");
+
+        }
+
+        [HttpPost]
+        public ActionResult BackProductEdit(product model)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var product = db.product.Where(m => m.rowid == model.rowid).FirstOrDefault();
+            db.Configuration.ValidateOnSaveEnabled = false;
+            product.pno = model.pno;
+            product.plocation = model.plocation;
+            product.pname = model.pname;
+            product.pprice = model.pprice;
+            product.pimg = model.pimg;
+            product.pdescription = model.pdescription;
+            db.SaveChanges();
+            return RedirectToAction("BackProdutList");
+
+        }
+
+
 
     }
 }
