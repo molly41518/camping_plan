@@ -1,0 +1,262 @@
+﻿@using campingplan.App_Class
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 營火計畫</title>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/camping/bootstrap.min.css")" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css" />
+    <script src="@Url.Content("~/Scripts/camping/jquery-3.5.1.min.js")"></script>
+
+    @*擴充自己的css script*@
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        function showDialogLogin(data) {
+            $("#showLogin").html(data);
+            $("#showLogin").modal('show');
+        }
+        function showDialogRegister(data) {
+            $("#showRegister").html(data);
+            $("#showLogin").modal('hide');
+            $("#showRegister").modal('show');
+        }
+    </script>
+
+    <style>
+        * {
+            font-family: 微軟正黑體;
+            list-style: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .masthead {
+            padding-top: 10rem;
+            padding-bottom: calc(18rem - 4.5rem);
+            background-image: url(/img/bg/bg-2.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: auto;
+            height: 1%;
+        }
+
+        .navbar {
+            -webkit-box-shadow: 0 8px 6px -6px #444;
+            -moz-box-shadow: 0 8px 6px -6px #555;
+            box-shadow: 0 8px 6px -6px #777;
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        .i-act {
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+
+        .add,
+        .del {
+            font-size: 1.1rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .mg-product {
+            margin-top: 6rem;
+            margin-bottom: 3rem;
+        }
+
+        .people {
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        .list {
+            box-shadow: 2px 0px 9px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .title-item {
+            height: 24px;
+            width: 7px;
+            background-color: rgb(0, 174, 255);
+        }
+    </style>
+
+
+</head>
+<body>
+    <!-- navbar-expand-lg 是指在 lg 範圍以上才會直接展開選項 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <a class="navbar-brand js-scroll-trigger p-0" href="index.html">
+            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
+        </a>
+        <h5 class="d-inline m-0 pt-2">後台管理</h5>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                @if (CustomerAccount.IsLogin)
+                {
+                    <li class="nav-item">
+                        <span class="nav-link">個人資料</span>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("登出", "Logout", "Customer", null, new { @class = "nav-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @Ajax.ActionLink("登入", "Login", "Customer", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
+                    </li>
+
+                }
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal fade mt-5" id="showLogin"></div>
+    <div class="modal fade" id="showRegister"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-2 sidebar vh-100 bg-info list">
+                <div class="sidebar-header text-center text-white mt-5">
+                    <i class="far fa-user fa-5x bg-white p-4 mt-5 people text-info"></i>
+                    <p class="mt-2">HI! 管理員 molly</p>
+                </div>
+
+
+                <div class="list-group list-group-flush bg-dark mt-4">
+                    <a class="list-group-item list-group-item-action bg-info text-white"
+                       href="#"><i class="fas fa-users mr-2 text-dark"></i>成員管理</a>
+
+                    <a class="list-group-item list-group-item-action bg-info text-white"
+                       href="#"><i class="fas fa-users-cog mr-2 text-dark"></i>會員管理</a>
+                    <a class="list-group-item list-group-item-action bg-info text-white"
+                       href="#"><i class="fas fa-shopping-bag mr-2 text-dark"></i>商品管理</a>
+                    <a class="list-group-item list-group-item-action bg-info text-white"
+                       href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">其他</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row small text-white">
+                <div class="col-12 col-lg-3 small">
+                    <div class="row">
+                        <div class="col-6 col-lg-8 mb-2">
+                            <img src="/logo/logo-04.png" alt="" class="img-fluid" />
+                        </div>
+                    </div>
+                    <p>體驗，遇見更美好的自己</p>
+                    <p>
+                        Niceday 玩體驗成立於
+                        2013年，提供特色體驗預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
+                    </p>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>認識我們</p>
+                    <ul class="p-0">
+                        <li>關於營火計畫</li>
+                        <li>露營攻略部落格</li>
+                        <li>加入我們</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>合作營火</p>
+                    <ul class="p-0">
+                        <li>商家加入</li>
+                        <li>聯合行銷</li>
+                        <li>企業合作</li>
+                        <li>同業交易</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>網站資訊</p>
+                    <ul class="p-0">
+                        <li>常見問題 FAQ</li>
+                        <li>服務條款</li>
+                        <li>隱私權條款</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3 small">
+                    <p>追蹤我們</p>
+                    <ul class="p-0">
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-facebook-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-line"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-youtube-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-instagram-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-twitter-square"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row text-white">
+                <span class="col-12 col-lg-2 small text-muted text-center text-lg-left">
+                    © camping, Inc.
+                </span>
+                <span class="col-12 col-lg-10 small text-center text-lg-right text-muted">
+                    客服信箱：service@camping.tw | 客服中心：02-8912-6200 |
+                    服務時間：週一～週日 10:00 - 18:00
+                </span>
+            </div>
+        </div>
+    </footer>
+
+
+
+    @*<script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/camping/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+</body>
+</html>

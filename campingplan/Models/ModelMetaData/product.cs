@@ -47,6 +47,8 @@ namespace campingplan.Models
             [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
             [DisplayName("價錢")]
             public Nullable<int> pprice { get; set; }
+
+            [DisplayName("圖片")]
             public string pimg { get; set; }
 
             [Required(ErrorMessage = "不可空白!!")]

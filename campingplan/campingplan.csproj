@@ -377,10 +377,10 @@
     <Content Include="Views\BackProdut\BackProdutList.cshtml" />
     <Content Include="Views\BackProdut\BackProdutInsert.cshtml" />
     <Content Include="Views\BackProdut\BackProductEdit.cshtml" />
+    <Content Include="Views\Shared\_Layoutback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
