@@ -33,6 +33,7 @@ namespace campingplan.Controllers
         public ActionResult BackProdutInsert()
         {
             product model = new product();
+            ViewBag.detail = new product_typedetail();
             return View(model);
         }
 
@@ -49,7 +50,9 @@ namespace campingplan.Controllers
             var product = db.product.Where(m => m.pno == model.pno).FirstOrDefault();
             if (product != null) { ModelState.AddModelError("", "商品編號重複"); bln_error = true; }
             if (bln_error) return View(model);
-
+            
+            DateTime value = DateTime.Now;
+            model.psetdate = value;
             db.Configuration.ValidateOnSaveEnabled = false;
             db.product.Add(model);
             db.SaveChanges();
@@ -76,13 +79,12 @@ namespace campingplan.Controllers
             {
                 return View(model);
             }
-
+            
             var product = db.product.Where(m => m.rowid == model.rowid).FirstOrDefault();
             db.Configuration.ValidateOnSaveEnabled = false;
             product.pno = model.pno;
             product.plocation = model.plocation;
             product.pname = model.pname;
-            product.pprice = model.pprice;
             product.pimg = model.pimg;
             product.pdescription = model.pdescription;
             db.SaveChanges();

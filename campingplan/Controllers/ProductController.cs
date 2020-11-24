@@ -33,10 +33,8 @@ namespace campingplan.Controllers
 
         public ActionResult ProductDetail(string id)
         {
-            if(id == null) id = "C0001";
             var modal = db.product.Where(m => m.pno == id).FirstOrDefault();
             var typedetail = db.product_typedetail.Where(m => m.pno == id).FirstOrDefault();
-
             return View(modal);
         }
         [HttpPost]

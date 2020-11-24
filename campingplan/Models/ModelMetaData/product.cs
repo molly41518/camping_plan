@@ -43,10 +43,10 @@ namespace campingplan.Models
             [DisplayName("商品內容")]
             public string pdescription { get; set; }
 
-            [Required(ErrorMessage = "不可空白!!")]
-            [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
-            [DisplayName("價錢")]
-            public Nullable<int> pprice { get; set; }
+            //[Required(ErrorMessage = "不可空白!!")]
+            //[DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
+            //[DisplayName("價錢")]
+            //public Nullable<int> pprice { get; set; }
 
             [DisplayName("圖片")]
             public string pimg { get; set; }

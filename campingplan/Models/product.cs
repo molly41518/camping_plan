@@ -14,13 +14,24 @@ namespace campingplan.Models
     
     public partial class product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public product()
+        {
+            this.product_typedetail = new HashSet<product_typedetail>();
+        }
+    
         public int rowid { get; set; }
         public Nullable<int> categoryid { get; set; }
         public string pno { get; set; }
         public string plocation { get; set; }
         public string pname { get; set; }
         public string pdescription { get; set; }
-        public Nullable<int> pprice { get; set; }
+        public System.DateTime psetdate { get; set; }
         public string pimg { get; set; }
+        public Nullable<int> pstatus { get; set; }
+        public string pmapurl { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product_typedetail> product_typedetail { get; set; }
     }
 }

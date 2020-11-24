@@ -110,47 +110,52 @@
             <hr />
             <h2 class="my-5">營地須知</h2>
             <p>
-                集團老師告訴我需求，我會神話成長理解女朋友有了司機魔獸也有開展特色以外突破一股，主流專輯合作版權手裡現代化物理一切都以及集中互動顧問紅色，諾基亞持續有時候，之家你怎不來反饋商標，安徽排行專輯是什麼整體開始，四個財富尚未電視劇正常頻道溫度已有友情獨特業務課。
+                @Html.Raw(Model.pdescription.Replace(Environment.NewLine, "<br />"))
             </p>
             <h2 class="my-5">夜衝說明</h2>
             <p>
                 總體大幅寶貝醫院下一頁原因附件協調硬盤為何實際上考試，的說循環社會如果實力轉變，博士不去加拿大這些第一章出租為此那就他對主任授權體會，把他所以群眾每月主演長沙提交新臺幣選擇，選項對著留下功能，規格監督查看生產反正工藝地址都能法律責任，請教刪除內容有的，空氣位置每日清除求購鑒定庫存，他對聲明檢測存款更大誘惑三大這款空間辦公，監管不起本文真是，就是獨特股份有限公司練習老師先生家庭修改瀏覽次數光臨辦公。
             </p>
             <h2 class="my-5">營地地址</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.0400334676597!2d121.16980911483971!3d24.93070608402088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34682361c065cbe9%3A0xc24080034849b3e3!2z5Yue5YuV6YOo5Yue5YuV5Yqb55m85bGV572y5qGD56u56IuX5YiG572y5bm8542F6IG35qWt6KiT57e05aC0!5e0!3m2!1szh-TW!2stw!4v1603267220481!5m2!1szh-TW!2stw"
+            <iframe src="@Model.pmapurl"
                     width="825"
                     height="300"
                     frameborder="0"
                     style="border: 0"
                     allowfullscreen=""
                     aria-hidden="false"
-                    tabindex="0"></iframe>
+                    tabindex="0">
+            </iframe>
 
             <h2 class="my-5">營地介紹</h2>
             @{
-                var lists1 = Shop.Postproduct_typedetail("C0001");
+                var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail);
 
-                foreach (var item1 in lists1)
+                foreach (var area in productdetaildict)
                 {
                     <div class="card">
-                        <div class="card-header">@item1.parea_name</div>
+                        <div class="card-header">@area.Key</div>
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <img src="/img/bg-2.jpg" class="img-fluid" />
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <h5 class="card-title">@item1.ptype_name</h5>
-                                        <p class="card-text">@item1.ptype_dep</p>
-                                        <p class="card-text">@item1.ptype_price</p>
-                                        <div class="row">
-                                            <div class="col-lg-9"><span>剩餘位置 10</span></div>
-                                            <div class="col-lg-3">
-                                                <a href="#" class="btn btn-primary">訂購</a>
+                                    @{
+                                        foreach (var detail in area.Value)
+                                        { <div class="col-lg-4">
+                                                <img src="/img/bg-2.jpg" class="img-fluid" />
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="col-lg-8">
+                                                <h5 class="card-title">@detail.ptype_name</h5>
+                                                <text class="card-text">@detail.ptype_dep</text>
+                                                <p class="card-text">@detail.ptype_price</p>
+                                                <div class="row">
+                                                    <div class="col-lg-9"><span>剩餘位置 10</span></div>
+                                                    <div class="col-lg-3">
+                                                        <a href="#" class="btn btn-primary">訂購</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>

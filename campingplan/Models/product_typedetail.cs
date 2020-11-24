@@ -16,11 +16,13 @@ namespace campingplan.Models
     {
         public int rowid { get; set; }
         public string pno { get; set; }
-        public string parea_no { get; set; }
         public string parea_name { get; set; }
         public string ptype_no { get; set; }
         public string ptype_name { get; set; }
         public Nullable<int> ptype_price { get; set; }
         public string ptype_dep { get; set; }
+        public int productid { get; set; }
+    
+        public virtual product product { get; set; }
     }
 }
