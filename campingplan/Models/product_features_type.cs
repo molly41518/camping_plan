@@ -16,7 +16,7 @@ namespace campingplan.Models
     {
         public int rowid { get; set; }
         public Nullable<int> features_parents_id { get; set; }
-        public string features_name { get; set; }
         public string features_member { get; set; }
+        public string features_name { get; set; }
     }
 }

@@ -9,12 +9,12 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.min.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.print.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.print.css")" />*@
 }
 
 @section scripts{
     <script src="@Url.Content("~/Scripts/camping/fullcalendar.js")"></script>
-    @*<script src="@Url.Content("~/Scripts/camping/moment.min.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/camping/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/zh-tw.js")"></script>
     <script>
 
@@ -29,6 +29,8 @@
                 dayHeaderFormat: { weekday: 'short' },
                 //locale: 'zh-tw',
                 handleWindowResize: true,
+                events: "@Url.Action("GetStockEvent", "Product", new { id = Model.pno })"
+                //events: [{title: 's', start: '2020-12-04'}]
             });
             calendar.render();
         });

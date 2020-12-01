@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="campingplanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carts">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lot_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" />
+          <Property Name="pname" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_spec" Type="nvarchar" MaxLength="250" />
+          <Property Name="ptype_qty" Type="int" />
+          <Property Name="ptype_price" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="crete_time" Type="datetime" />
+        </EntityType>
         <EntityType Name="categorys">
           <Key>
             <PropertyRef Name="rowid" />
@@ -30,13 +47,63 @@
           <Property Name="varify_code" Type="nvarchar" MaxLength="50" />
           <Property Name="isvarify" Type="int" />
         </EntityType>
-        <EntityType Name="product">
+        <EntityType Name="order">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="categoryid" Type="int" />
+          <Property Name="order_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="order_date" Type="datetime" />
+          <Property Name="order_status" Type="nvarchar" MaxLength="50" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="payment_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="payment_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="receive_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="receive_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="receive_address" Type="nvarchar" MaxLength="250" />
+          <Property Name="receive_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="amounts" Type="int" />
+          <Property Name="taxs" Type="int" />
+          <Property Name="totals" Type="int" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="order_guid" Type="nvarchar" MaxLength="50" />
+          <Property Name="order_closed" Type="int" />
+          <Property Name="order_validate" Type="int" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="vendor_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" />
           <Property Name="pno" Type="nvarchar" MaxLength="50" />
+          <Property Name="pname" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_spec" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+          <Property Name="qty" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payment_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="payment" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="pno" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryid" Type="int" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="plocation" Type="nvarchar" MaxLength="50" />
           <Property Name="pname" Type="nvarchar" MaxLength="50" />
           <Property Name="pdescription" Type="nvarchar" MaxLength="250" />
@@ -45,29 +112,124 @@
           <Property Name="pstatus" Type="int" />
           <Property Name="pmapurl" Type="text" />
         </EntityType>
-        <EntityType Name="product_typedetail">
+        <EntityType Name="product_features">
+          <Key>
+            <PropertyRef Name="pno" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="location_type" Type="int" />
+          <Property Name="near_river" Type="int" />
+          <Property Name="near_sea" Type="int" />
+          <Property Name="no_tent" Type="int" />
+          <Property Name="have_canopy" Type="int" />
+          <Property Name="have_clouds" Type="int" />
+          <Property Name="have_firefly" Type="int" />
+          <Property Name="could_book_all" Type="int" />
+          <Property Name="have_rental_equipment" Type="int" />
+          <Property Name="have_game_area" Type="int" />
+          <Property Name="elevation_under_300m" Type="int" />
+          <Property Name="elevation_301m_to_500m" Type="int" />
+          <Property Name="elevation_over_501m" Type="int" />
+        </EntityType>
+        <EntityType Name="product_features_type">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pno" Type="nvarchar" MaxLength="50" />
+          <Property Name="features_parents_id" Type="int" />
+          <Property Name="features_member" Type="nvarchar" MaxLength="50" />
+          <Property Name="features_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="product_typedetail">
+          <Key>
+            <PropertyRef Name="ptype_no" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pno" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="parea_name" Type="nvarchar" MaxLength="50" />
-          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ptype_name" Type="nvarchar" MaxLength="50" />
           <Property Name="ptype_price" Type="int" />
           <Property Name="ptype_dep" Type="nvarchar" MaxLength="250" />
-          <Property Name="productid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product_typedetail_everydaystock">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ptype_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stock_date" Type="date" />
+          <Property Name="stock" Type="int" />
         </EntityType>
         <EntityContainer Name="campingplanModelStoreContainer">
+          <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="categorys" EntityType="Self.categorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_features" EntityType="Self.product_features" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_features_type" EntityType="Self.product_features_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_typedetail" EntityType="Self.product_typedetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_typedetail_everydaystock" EntityType="Self.product_typedetail_everydaystock" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="campingplanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carts" EntityType="campingplanModel.carts" />
+          <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
+          <EntitySet Name="customer" EntityType="campingplanModel.customer" />
+          <EntitySet Name="order" EntityType="campingplanModel.order" />
+          <EntitySet Name="order_detail" EntityType="campingplanModel.order_detail" />
+          <EntitySet Name="payments" EntityType="campingplanModel.payments" />
+          <EntitySet Name="product" EntityType="campingplanModel.product" />
+          <EntitySet Name="product_features" EntityType="campingplanModel.product_features" />
+          <EntitySet Name="product_features_type" EntityType="campingplanModel.product_features_type" />
+          <EntitySet Name="product_typedetail" EntityType="campingplanModel.product_typedetail" />
+          <EntitySet Name="product_typedetail_everydaystock" EntityType="campingplanModel.product_typedetail_everydaystock" />
+          <AssociationSet Name="productproduct_typedetail" Association="campingplanModel.productproduct_typedetail">
+            <End Role="product" EntitySet="product" />
+            <End Role="product_typedetail" EntitySet="product_typedetail" />
+          </AssociationSet>
+          <AssociationSet Name="product_typedetailproduct_typedetail_everydaystock" Association="campingplanModel.product_typedetailproduct_typedetail_everydaystock">
+            <End Role="product_typedetail" EntitySet="product_typedetail" />
+            <End Role="product_typedetail_everydaystock" EntitySet="product_typedetail_everydaystock" />
+          </AssociationSet>
+          <AssociationSet Name="productproduct_features" Association="campingplanModel.productproduct_features">
+            <End Role="product" EntitySet="product" />
+            <End Role="product_features" EntitySet="product_features" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="carts">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lot_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_spec" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_qty" Type="Int32" />
+          <Property Name="ptype_price" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="crete_time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="categorys">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentid" Type="Int32" />
+          <Property Name="category_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="rowid" />
@@ -84,32 +246,63 @@
           <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isvarify" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="customer" EntityType="Self.customer" />
-          <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
-          <EntitySet Name="product" EntityType="campingplanModel.product" />
-          <EntitySet Name="product_typedetail" EntityType="campingplanModel.product_typedetail" />
-          <AssociationSet Name="productproduct_typedetail" Association="campingplanModel.productproduct_typedetail">
-            <End Role="product" EntitySet="product" />
-            <End Role="product_typedetail" EntitySet="product_typedetail" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="categorys">
+        <EntityType Name="order">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="parentid" Type="Int32" />
-          <Property Name="category_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="order_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="order_date" Type="DateTime" Precision="3" />
+          <Property Name="order_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="receive_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amounts" Type="Int32" />
+          <Property Name="taxs" Type="Int32" />
+          <Property Name="totals" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="order_guid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="order_closed" Type="Int32" />
+          <Property Name="order_validate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vendor_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payment_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="product">
           <Key>
-            <PropertyRef Name="rowid" />
+            <PropertyRef Name="pno" />
           </Key>
           <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="categoryid" Type="Int32" />
-          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="plocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pdescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -118,30 +311,95 @@
           <Property Name="pstatus" Type="Int32" />
           <Property Name="pmapurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="product_typedetail" Relationship="campingplanModel.productproduct_typedetail" FromRole="product" ToRole="product_typedetail" />
+          <NavigationProperty Name="product_features" Relationship="campingplanModel.productproduct_features" FromRole="product" ToRole="product_features" />
         </EntityType>
-        <EntityType Name="product_typedetail">
+        <EntityType Name="product_features">
+          <Key>
+            <PropertyRef Name="pno" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location_type" Type="Int32" />
+          <Property Name="near_river" Type="Int32" />
+          <Property Name="near_sea" Type="Int32" />
+          <Property Name="no_tent" Type="Int32" />
+          <Property Name="have_canopy" Type="Int32" />
+          <Property Name="have_clouds" Type="Int32" />
+          <Property Name="have_firefly" Type="Int32" />
+          <Property Name="could_book_all" Type="Int32" />
+          <Property Name="have_rental_equipment" Type="Int32" />
+          <Property Name="have_game_area" Type="Int32" />
+          <Property Name="elevation_under_300m" Type="Int32" />
+          <Property Name="elevation_301m_to_500m" Type="Int32" />
+          <Property Name="elevation_over_501m" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="campingplanModel.productproduct_features" FromRole="product_features" ToRole="product" />
+        </EntityType>
+        <EntityType Name="product_features_type">
           <Key>
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="features_parents_id" Type="Int32" />
+          <Property Name="features_member" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="features_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="product_typedetail">
+          <Key>
+            <PropertyRef Name="ptype_no" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="parea_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ptype_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ptype_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ptype_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ptype_price" Type="Int32" />
           <Property Name="ptype_dep" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="productid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="product" Relationship="campingplanModel.productproduct_typedetail" FromRole="product_typedetail" ToRole="product" />
+          <NavigationProperty Name="product_typedetail_everydaystock" Relationship="campingplanModel.product_typedetailproduct_typedetail_everydaystock" FromRole="product_typedetail" ToRole="product_typedetail_everydaystock" />
+        </EntityType>
+        <EntityType Name="product_typedetail_everydaystock">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ptype_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stock_date" Type="DateTime" Precision="0" />
+          <Property Name="stock" Type="Int32" />
+          <NavigationProperty Name="product_typedetail" Relationship="campingplanModel.product_typedetailproduct_typedetail_everydaystock" FromRole="product_typedetail_everydaystock" ToRole="product_typedetail" />
         </EntityType>
         <Association Name="productproduct_typedetail">
           <End Type="campingplanModel.product" Role="product" Multiplicity="1" />
           <End Type="campingplanModel.product_typedetail" Role="product_typedetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="product">
-              <PropertyRef Name="rowid" />
+              <PropertyRef Name="pno" />
             </Principal>
             <Dependent Role="product_typedetail">
-              <PropertyRef Name="productid" />
+              <PropertyRef Name="pno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="product_typedetailproduct_typedetail_everydaystock">
+          <End Type="campingplanModel.product_typedetail" Role="product_typedetail" Multiplicity="1" />
+          <End Type="campingplanModel.product_typedetail_everydaystock" Role="product_typedetail_everydaystock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_typedetail">
+              <PropertyRef Name="ptype_no" />
+            </Principal>
+            <Dependent Role="product_typedetail_everydaystock">
+              <PropertyRef Name="ptype_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productproduct_features">
+          <End Type="campingplanModel.product" Role="product" Multiplicity="1" />
+          <End Type="campingplanModel.product_features" Role="product_features" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="pno" />
+            </Principal>
+            <Dependent Role="product_features">
+              <PropertyRef Name="pno" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -151,20 +409,21 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="campingplanModelStoreContainer" CdmEntityContainer="dbcon">
-          <EntitySetMapping Name="customer">
-            <EntityTypeMapping TypeName="campingplanModel.customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="isvarify" ColumnName="isvarify" />
-                <ScalarProperty Name="varify_code" ColumnName="varify_code" />
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="mname" ColumnName="mname" />
-                <ScalarProperty Name="rowid" ColumnName="rowid" />
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="campingplanModel.carts">
+              <MappingFragment StoreEntitySet="carts">
+                <ScalarProperty Name="crete_time" ColumnName="crete_time" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="ptype_price" ColumnName="ptype_price" />
+                <ScalarProperty Name="ptype_qty" ColumnName="ptype_qty" />
+                <ScalarProperty Name="ptype_spec" ColumnName="ptype_spec" />
+                <ScalarProperty Name="ptype_name" ColumnName="ptype_name" />
+                <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
                 <ScalarProperty Name="mno" ColumnName="mno" />
-                <ScalarProperty Name="maccount" ColumnName="maccount" />
-                <ScalarProperty Name="mpassword" ColumnName="mpassword" />
-                <ScalarProperty Name="mnickname" ColumnName="mnickname" />
-                <ScalarProperty Name="memail" ColumnName="memail" />
-                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -174,6 +433,76 @@
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="category_no" ColumnName="category_no" />
                 <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="campingplanModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="isvarify" ColumnName="isvarify" />
+                <ScalarProperty Name="varify_code" ColumnName="varify_code" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="memail" ColumnName="memail" />
+                <ScalarProperty Name="mnickname" ColumnName="mnickname" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="mpassword" ColumnName="mpassword" />
+                <ScalarProperty Name="maccount" ColumnName="maccount" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="campingplanModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="order_validate" ColumnName="order_validate" />
+                <ScalarProperty Name="order_closed" ColumnName="order_closed" />
+                <ScalarProperty Name="order_guid" ColumnName="order_guid" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="totals" ColumnName="totals" />
+                <ScalarProperty Name="taxs" ColumnName="taxs" />
+                <ScalarProperty Name="amounts" ColumnName="amounts" />
+                <ScalarProperty Name="receive_email" ColumnName="receive_email" />
+                <ScalarProperty Name="receive_address" ColumnName="receive_address" />
+                <ScalarProperty Name="receive_phone" ColumnName="receive_phone" />
+                <ScalarProperty Name="receive_name" ColumnName="receive_name" />
+                <ScalarProperty Name="payment_name" ColumnName="payment_name" />
+                <ScalarProperty Name="payment_no" ColumnName="payment_no" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail">
+            <EntityTypeMapping TypeName="campingplanModel.order_detail">
+              <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="ptype_spec" ColumnName="ptype_spec" />
+                <ScalarProperty Name="ptype_name" ColumnName="ptype_name" />
+                <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="vendor_no" ColumnName="vendor_no" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="campingplanModel.payments">
+              <MappingFragment StoreEntitySet="payments">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="payment_no" ColumnName="payment_no" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -194,16 +523,56 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="product_features">
+            <EntityTypeMapping TypeName="campingplanModel.product_features">
+              <MappingFragment StoreEntitySet="product_features">
+                <ScalarProperty Name="elevation_over_501m" ColumnName="elevation_over_501m" />
+                <ScalarProperty Name="elevation_301m_to_500m" ColumnName="elevation_301m_to_500m" />
+                <ScalarProperty Name="elevation_under_300m" ColumnName="elevation_under_300m" />
+                <ScalarProperty Name="have_game_area" ColumnName="have_game_area" />
+                <ScalarProperty Name="have_rental_equipment" ColumnName="have_rental_equipment" />
+                <ScalarProperty Name="could_book_all" ColumnName="could_book_all" />
+                <ScalarProperty Name="have_firefly" ColumnName="have_firefly" />
+                <ScalarProperty Name="have_clouds" ColumnName="have_clouds" />
+                <ScalarProperty Name="have_canopy" ColumnName="have_canopy" />
+                <ScalarProperty Name="no_tent" ColumnName="no_tent" />
+                <ScalarProperty Name="near_sea" ColumnName="near_sea" />
+                <ScalarProperty Name="near_river" ColumnName="near_river" />
+                <ScalarProperty Name="location_type" ColumnName="location_type" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_features_type">
+            <EntityTypeMapping TypeName="campingplanModel.product_features_type">
+              <MappingFragment StoreEntitySet="product_features_type">
+                <ScalarProperty Name="features_name" ColumnName="features_name" />
+                <ScalarProperty Name="features_member" ColumnName="features_member" />
+                <ScalarProperty Name="features_parents_id" ColumnName="features_parents_id" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="product_typedetail">
             <EntityTypeMapping TypeName="campingplanModel.product_typedetail">
               <MappingFragment StoreEntitySet="product_typedetail">
-                <ScalarProperty Name="productid" ColumnName="productid" />
                 <ScalarProperty Name="ptype_dep" ColumnName="ptype_dep" />
                 <ScalarProperty Name="ptype_price" ColumnName="ptype_price" />
                 <ScalarProperty Name="ptype_name" ColumnName="ptype_name" />
                 <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
                 <ScalarProperty Name="parea_name" ColumnName="parea_name" />
                 <ScalarProperty Name="pno" ColumnName="pno" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_typedetail_everydaystock">
+            <EntityTypeMapping TypeName="campingplanModel.product_typedetail_everydaystock">
+              <MappingFragment StoreEntitySet="product_typedetail_everydaystock">
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="stock_date" ColumnName="stock_date" />
+                <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>

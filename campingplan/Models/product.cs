@@ -33,5 +33,6 @@ namespace campingplan.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_typedetail> product_typedetail { get; set; }
+        public virtual product_features product_features { get; set; }
     }
 }

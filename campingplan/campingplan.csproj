@@ -147,6 +147,9 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\carts.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\categorys.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
@@ -170,10 +173,28 @@
     </Compile>
     <Compile Include="Models\ModelMetaData\customer.cs" />
     <Compile Include="Models\ModelMetaData\product.cs" />
+    <Compile Include="Models\order.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order_detail.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\payments.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\product.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\product_features.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_features_type.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\product_typedetail.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_typedetail_everydaystock.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\cvmLogin.cs" />
