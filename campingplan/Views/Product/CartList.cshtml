@@ -1,0 +1,129 @@
+﻿@model IEnumerable<campingplan.Models.carts>
+@using campingplan.App_Class;
+
+@{
+    ViewBag.Title = "CartList";
+}
+
+
+<style>
+    body {
+        background-color: #eee;
+    }
+
+    .shoppingcartcon {
+        margin-top: 6rem;
+        margin-bottom: 3rem;
+    }
+
+    .i-act {
+        display: inline-block;
+        font-size: 1.2rem;
+    }
+
+    .add,
+    .del {
+        font-size: 1.1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+</style>
+
+<div class="shoppingcart">
+    <div class="container shoppingcartcon">
+        <div class="row">
+            <div class="col-lg-12 mb-2">
+                <div class="card carditem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <h3>購物車</h3>
+                            </div>
+                            <div class="col-3 align-self-center">
+                                <p class="m-0">商品</p>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <p class="m-0">日期</p>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <p class="m-0">數量</p>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <p class="m-0">單價</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-12 mb-2">
+                    <div class="card carditem">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1 text-center align-self-center">
+                                    <input type="checkbox" style="width: 20px; height: 20px" />
+                                </div>
+                                <div class="col-2 text-center">
+                                    <img class="img-fluid imgproduct" src="/img/bg/bg-2.jpg" />
+                                </div>
+                                <div class="col-3">
+                                    <h5>@Html.DisplayFor(modelItem => item.pname)</h5>
+                                    <p> @Html.DisplayFor(modelItem => item.ptype_name)</p>
+                                </div>
+                                <div class="col-2">
+                                    <p>@Html.DisplayFor(modelItem => item.ptype_spec)</p>
+                                </div>
+                                <div class="col-2">
+                                    <a href="@Url.Action("CartMinus", "Product", new { id = item.rowid })" class="del">
+                                        <i class="fas fa-minus-circle text-info"></i>
+                                    </a>
+                                    @item.ptype_qty
+                                    <a href="@Url.Action("CartPlus", "Product", new { id = item.rowid })" class="add">
+                                        <i class="fas fa-plus-circle text-info"></i>
+                                    </a>
+                                </div>
+                                <div class="col-1">
+                                    <p>@Html.DisplayFor(modelItem => item.ptype_price)</p>
+                                </div>
+                                <div class="col-1">
+                                    <a href="@Url.Action("CartDelete", "Product", new { id = item.rowid })" class="i-act pr-1 text-info">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-lg-12 mb-2">
+                <div class="card carditem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1 align-self-center text-center">
+                                <input type="checkbox"
+                                       value="全選"
+                                       style="width: 20px; height: 20px" />
+                            </div>
+                            <div class="col-5 align-self-center pl-0">
+                                <a href="#" class="pr-3">全選</a>
+                                <a href="#">刪除點選項目</a>
+                            </div>
+                            <div class="col-2 align-self-center text-right p-0">
+                                <p class="m-0">@Cart.CartCount.ToString("#,##0")件商品共合計</p>
+                            </div>
+                            <div class="col-2 align-self-center text-center">
+                                <h3 class="m-0 text-info">@Cart.CartTotal.ToString("#,##0")</h3>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <a href="@Url.Action("Checkout", "Product")" class="btn btn-info btn-lg btn-block">
+                                    結帳
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
