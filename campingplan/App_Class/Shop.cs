@@ -45,6 +45,11 @@ namespace campingplan.App_Class
             }
             return output;
         }
+        public static KeyValuePair<string, string> GetProductFeature(product_features features)
+        {
+            KeyValuePair<string, string> output = new KeyValuePair<string, string>();
+            return output;
+        }
     }
     
 }

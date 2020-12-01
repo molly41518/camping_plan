@@ -9,6 +9,7 @@ namespace campingplan.App_Class
     {
         public static bool IsLogin { get; set; } = false;
         public static string CustomerName { get; set; } = "";
+        public static string CustomerNo { get; set; } = "";
         public static string CustomerInfo 
         {
             get

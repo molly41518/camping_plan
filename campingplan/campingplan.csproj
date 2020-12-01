@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Class\AppEnums.cs" />
+    <Compile Include="App_Class\Cart.cs" />
     <Compile Include="App_Class\Cryptographys.cs" />
     <Compile Include="App_Class\CustomerAccount.cs" />
     <Compile Include="App_Class\GmailService.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\BackProdutController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +174,7 @@
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelMetaData\customer.cs" />
+    <Compile Include="Models\ModelMetaData\payment.cs" />
     <Compile Include="Models\ModelMetaData\product.cs" />
     <Compile Include="Models\order.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
@@ -198,9 +201,12 @@
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\cvmLogin.cs" />
+    <Compile Include="Models\ViewModel\cvmOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\campingplan.dll" />
+    <Content Include="bin\campingplan.pdb" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -211,6 +217,8 @@
     <Content Include="Content\camping\bootstrap-reboot.min.css" />
     <Content Include="Content\camping\bootstrap.css" />
     <Content Include="Content\camping\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Models\dbcustomer.edmx.sql" />
     <Content Include="Scripts\camping\fullcalendar.js" />
     <Content Include="Content\camping\fullcalendar.min.css" />
     <Content Include="Content\camping\fullcalendar.css" />
@@ -258,6 +266,13 @@
     <Content Include="Scripts\camping\bootstrap.js.map" />
     <Content Include="Scripts\camping\bootstrap.min.js.map" />
     <Content Include="Content\images\bg\bg-3.webp" />
+    <Content Include=".vs\campingplan\config\applicationhost.config" />
+    <Content Include=".vs\slnx.sqlite" />
+    <Content Include=".vs\VSWorkspaceState.json" />
+    <Content Include="Areas\Admin\Views\Category\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\camping\bootstrap.bundle.js" />
     <Content Include="Scripts\camping\bootstrap.bundle.min.js" />
@@ -388,7 +403,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
-    <Content Include="Views\Product\Shop.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Customer\VerifyEmail.cshtml" />
     <Content Include="Views\Customer\SendEmailResult.cshtml" />
@@ -399,8 +413,12 @@
     <Content Include="Views\BackProdut\BackProdutInsert.cshtml" />
     <Content Include="Views\BackProdut\BackProductEdit.cshtml" />
     <Content Include="Views\Shared\_Layoutback.cshtml" />
+    <Content Include="Views\Product\CartList.cshtml" />
+    <Content Include="Views\Product\Checkout.cshtml" />
+    <Content Include="Views\Product\CheckoutReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".vs\campingplan\v16\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
