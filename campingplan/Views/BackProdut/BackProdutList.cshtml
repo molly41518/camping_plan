@@ -1,0 +1,103 @@
+﻿@model IEnumerable<campingplan.Models.product>
+@{
+    ViewBag.Title = "BackProdutList";
+    Layout = "~/Views/Shared/_Layoutback.cshtml";
+}
+
+
+<!-- Page Content -->
+<div class="col-10 mg-product">
+    <div class="col-12 mb-2">
+        <div class="row">
+            <div class="col-10 d-flex">
+                <div class="title-item"></div>
+                <h5 class="ml-3">商品列表</h5>
+            </div>
+
+            <div class="col-2 text-right">
+                <button class="btn btn-info">刪除</button>
+                @Html.ActionLink("新增", "BackProdutInsert", "BackProdut", null, new { @class = "btn btn-info" })
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 mb-2">
+        <div class="card carditem">
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-1 align-self-center">
+                        <p class="m-0">勾選</p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p class="m-0">商品編號</p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p class="m-0">商品圖片</p>
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <p class="m-0">商品名稱</p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p class="m-0">狀態</p>
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <p class="m-0">建立日期</p>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <p class="m-0">管理</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        string productimgname = string.Format("{0}.jpeg", @item.pimg);
+        <div class="col-lg-12 mb-2">
+            <div class="card carditem">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-1 text-center align-self-center">
+                            <input type="checkbox" style="width: 20px; height: 20px" />
+                        </div>
+                        <div class="col-1">
+                            <p>@item.pno</p>
+                        </div>
+                        <div class="col-1 text-center">
+                            <img class="img-fluid imgproduct" src="~/Content/images/product/@productimgname" />
+                        </div>
+                        <div class="col-3 align-self-center">
+                            <h5>@item.pname</h5>
+                        </div>
+                        <div class="col-1 align-self-center">
+                            @{
+                                if (item.pstatus == 0)
+                                {
+                                    <p>下架中</p>
+                                }
+                                else
+                                {
+                                    <p>上架中</p>
+                                }
+
+                            }
+
+                        </div>
+                        <div class="col-3 align-self-center">
+                            <p>@item.psetdate</p>
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <a href="@Url.Action("BackProdutDelect","BackProdut",new { pr_rowid = item.rowid })" class="i-act pr-1 text-info">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a href="@Url.Action("BackProductEdit","BackProdut",new { pr_rowid = item.rowid })" class="i-act pr-1 text-info">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

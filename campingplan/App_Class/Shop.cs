@@ -14,8 +14,6 @@ namespace campingplan.App_Class
             dbcon db = new dbcon();
             var lists = db.categorys.Where(m => m.parentid == id).OrderBy(m => m.category_no).ToList();
             return lists;
-
-
         }
 
         public static string GetCategoryName(string cat_no,ref int cat_id)
@@ -32,6 +30,20 @@ namespace campingplan.App_Class
                 }
             }
             return str_name;
+        }
+        public static Dictionary<string, List<product_typedetail>> GetDictProductTypeDetail(ICollection<product_typedetail> product_detail_list)
+        {
+            Dictionary<string, List<product_typedetail>> output = new Dictionary<string, List<product_typedetail>>();
+            foreach (var p in product_detail_list)
+            {
+                bool is_output_has_area = output.ContainsKey(p.parea_name);
+                if (!is_output_has_area) {
+                    List<product_typedetail> newList = new List<product_typedetail>();
+                    output.Add(p.parea_name, newList);
+                }
+                output[p.parea_name].Add(p); // Add p
+            }
+            return output;
         }
     }
     

@@ -12,8 +12,8 @@ namespace campingplan.Controllers
         dbcon db = new dbcon();
         public ActionResult Index()
         {
-            var products = db.product.ToList(); 
-            if(Session["Customer"] == null)
+            //var products = db.product.ToList();
+            if (Session["Customer"] == null)
             {
                 return View("Index", "_Layout");
             }

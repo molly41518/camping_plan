@@ -4,10 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1">
+      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="campingplanModel.customer" Width="1.5" PointX="1.375" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="3.375" PointY="3.25" />
-        <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="3.25" PointY="4.25" />
+        <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="campingplanModel.product_typedetail" Width="1.5" PointX="7.75" PointY="0.875" />
+        <AssociationConnector Association="campingplanModel.productproduct_typedetail" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

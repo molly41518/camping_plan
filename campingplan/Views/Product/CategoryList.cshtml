@@ -5,64 +5,122 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    * {
-        font-family: 微軟正黑體;
-    }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myTab a:first").click(function () {
+                $("#tabmenu1").addClass("fade");
+            });
+        });
+    </script>
+}
+@section styles{
+    <style>
+        * {
+            font-family: 微軟正黑體;
+            list-style: none;
+            text-decoration: none;
+        }
 
-    .masthead {
-        padding-top: 10rem;
-        padding-bottom: calc(18rem - 4.5rem);
-        background-image: url(/Content/images/bg/bg-4.jpg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        background-size: auto;
-        height: 1%;
-    }
+        a:hover {
+            text-decoration: none;
+        }
 
-    .selectdate {
-        padding: 0;
-    }
+        .masthead {
+            padding-top: 10rem;
+            padding-bottom: calc(18rem - 4.5rem);
+            background-image: url(/img/bg/bg-2.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: auto;
+            height: 30vh;
+        }
 
-    .campitem {
-        list-style: none;
-        display: inline-block;
-        width: 6rem;
-        height: 3rem;
-        border: 1px solid black;
-        font-size: 15px;
-        text-align: center;
-    }
+        .navbar {
+            -webkit-box-shadow: 0 8px 6px -6px #444;
+            -moz-box-shadow: 0 8px 6px -6px #555;
+            box-shadow: 0 8px 6px -6px #777;
+        }
+        /* pr 單商品card CSS */
+        .pr_loction_des {
+            color: rgb(110, 109, 109);
+        }
 
-    .camptype {
-        list-style: none;
-        display: inline-block;
-        width: 5rem;
-        height: 1rem;
-        border: 1px solid black;
-        font-size: 13px;
-        text-align: center;
-        padding-bottom: 1rem;
-        transition: all 1s;
-    }
+        .pr_campitem {
+            list-style: none;
+            display: inline-block;
+            width: 6rem;
+            height: 3rem;
+            border: 1px solid black;
+            font-size: 15px;
+            text-align: center;
+        }
 
-    .carditem:hover {
-        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
-        transform: translate3d(0, -1rem, 0);
-        /*transform: scale(1.5,1.5);*/
-        /*transform: skew(30deg,0);*/
-    }
-</style>
+        .pr_camptype {
+            list-style: none;
+            display: inline-block;
+            width: 4rem;
+            height: 1rem;
+            border: 1px solid rgb(110, 109, 109);
+            border-radius: 30px 30px 30px 30px;
+            font-size: 13px;
+            text-align: center;
+            padding-bottom: 1rem;
+            color: rgb(110, 109, 109);
+        }
+
+        .pr_carditem {
+            transition: all 0.5s;
+        }
+
+            .pr_carditem:hover {
+                box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+                transform: translate3d(0, -1rem, 0);
+                /*transform: scale(1.5,1.5);*/
+                /*transform: skew(30deg,0);*/
+            }
+
+        .pr_type_loction {
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        .pr_line {
+            background-image: linear-gradient(#14b9eb, #14b9eb);
+            background-position: left bottom;
+            background-size: 0 2.5px;
+            background-repeat: no-repeat;
+            transition: all 0.15s;
+        }
+
+            .pr_line:hover {
+                background-size: 100% 2.5px;
+                border: none;
+            }
+
+        .nav-tabs .nav-link.active {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .pr_type_sea_boder {
+            border-radius: 5px;
+        }
+
+        .text-uppercase {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+}
 
 
 
-
-<header class="masthead mb-5">
+<header class="masthead mb-3">
     <div class="container">
         <div class="row text-center align-self-center justify-content-center">
             <div class="col-12 col-lg-12">
-                <h3 class="text-uppercase text-white font-weight-bold">露營地</h3>
+                <div class="offset-4 col-4 col-lg-4 mb-2">
+                    <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
+                </div>
             </div>
             <div class="col-8 col-lg-8 bg-white mt-1">
                 @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
@@ -86,48 +144,46 @@
         @foreach (var item in Model)
         {
             string productimgname = string.Format("{0}.jpeg", @item.pimg);
-            <div class="col-lg-4 mt-5">
-                <div class="card carditem" style="width: 22rem">
-                    <img class="card-img-top"
-                         src="~/Content/images/product/@productimgname" ,
-                         alt="Card image cap" />
-                    <div class="card-body">
-                        <span>@item.plocation</span>
-                        <h5 class="card-title">@item.pname</h5>
-                        <ul class="selectdate">
-                            <li class="camptype align-self-center justify-content-center">
-                                <a>高海拔</a>
-                            </li>
-                            <li class="camptype">
-                                <a>中部營區</a>
-                            </li>
-                            <li class="camptype">
-                                <a>近河邊</a>
-                            </li>
-                            <li class="camptype">
-                                <a>兒童遊戲區</a>
-                            </li>
-                        </ul>
-                        <hr />
-                        <span>$@item.pprice</span>
-                        <span>4.5</span>
-                        <ul class="selectdate">
-                            <li class="campitem align-self-center justify-content-center">
-                                <a>10-24(六) <br /><span> 只剩<em>17</em>帳 </span></a>
-                            </li>
-
-                            <li class="campitem">
-                                <a>10-31(六) <br /><span> 只剩<em>34</em>帳 </span></a>
-                            </li>
-
-                            <li class="campitem">
-                                <a>11-07(六) <br /><span> 只剩<em>34</em>帳 </span></a>
-                            </li>
-                        </ul>
-                        <a href="/iproduct_camping_item.html"
-                           class="btn btn-primary col-lg-12">訂購</a>
+            <div class="col-12 col-md-6 col-lg-4 mb-5">
+                <a href="@Url.Action("ProductDetail","Product",new { id = item.pno})">
+                    <div class="card pr_carditem">
+                        <img class="card-img-top"
+                             src="~/Content/images/product/@productimgname"
+                             alt="Card image cap" />
+                        <div class="card-body">
+                            <p class="pr_loction_des small m-0 pb-2">
+                                <i class="fas fa-map-marker-alt text-info pr-2"></i>@item.plocation
+                            </p>
+                            <h5 class="card-title font-weight-bold text-dark">@item.pname</h5>
+                            <ul class="p-0">
+                                <li class="pr_camptype align-self-center justify-content-center">
+                                    <span>高海拔</span>
+                                </li>
+                                <li class="pr_camptype">
+                                    <span>中部營區</span>
+                                </li>
+                                <li class="pr_camptype">
+                                    <span>近河邊</span>
+                                </li>
+                                <li class="pr_camptype">
+                                    <span>遊戲區</span>
+                                </li>
+                            </ul>
+                            <hr />
+                            <div class="row align-items-center">
+                                <p class="col-12 m-0 mb-1 small">
+                                    最早可預定日期：2020年12月31日
+                                </p>
+                                <p class="col-4 text-warning m-0">
+                                    <i class="fas fa-star pr-1"></i>4.5
+                                </p>
+                                <p class="col-8 text-info font-weight-bold h4 text-right">
+                                    $NT @*@item.pprice*@
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     </div>
