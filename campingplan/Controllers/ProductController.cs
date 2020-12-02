@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using campingplan.App_Class;
 using campingplan.Models;
+using PagedList;
 
 namespace campingplan.Controllers
 {
@@ -41,7 +42,7 @@ namespace campingplan.Controllers
         }
 
         // GET: Product
-        public ActionResult CategoryList(string id)
+        public ActionResult CategoryList(string id , int page = 1)
         {
             int int_id = 0;
             ViewBag.CategoryNo = id;
@@ -65,7 +66,11 @@ namespace campingplan.Controllers
                 relayModel = relayModel.Where(m => m.product_typedetail.Any(t => t.product_typedetail_everydaystock.Any(s => s.stock_date == dateDT && s.stock >= num)));
             }
 
-            var model = relayModel.OrderBy(m => m.pno).ToList();
+            //分頁
+            int pagesize = 3;
+            int pagecurrent = page < 1 ? 1 : page;
+            var model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
+            
             return View(model);
         }
 
@@ -75,10 +80,108 @@ namespace campingplan.Controllers
             var typedetail = db.product_typedetail.Where(m => m.pno == id).FirstOrDefault();
             return View(modal);
         }
-        [HttpPost]
-        public ActionResult ProductDetail(string qty, string camptype, string product_no)
+
+        public ActionResult AddToCart(string pno, string ptype_no, DateTime startday, DateTime endday, int qty)
         {
-            string str_data = product_no + "" + qty + "" + camptype;
+            Cart.AddCart(pno, ptype_no, startday, endday, qty);
+            return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductNo});
+        }
+
+        public ActionResult CartList()
+        {
+            using (dbcon db = new dbcon())
+            {
+                if (CustomerAccount.IsLogin)
+                {
+                    var data1 = db.carts
+                        .Where(m => m.mno == CustomerAccount.CustomerNo)
+                        .ToList();
+                    return View(data1);
+                }
+                var data2 = db.carts
+                   .Where(m => m.lot_no == Cart.LotNo)
+                   .ToList();
+                return View(data2);
+            }
+        }
+        public ActionResult CartDelete(int id)
+        {
+            var data = db.carts
+                .Where(m => m.rowid == id)
+                .FirstOrDefault();
+            if (data != null)
+            {
+                db.carts.Remove(data);
+                db.SaveChanges();
+            }
+            return RedirectToAction("CartList");
+        }
+
+        public ActionResult CartPlus(int id)
+        {
+            var data = db.carts
+                .Where(m => m.rowid == id)
+                .FirstOrDefault();
+            if (data != null)
+            {
+                data.ptype_qty += 1;
+                data.amount = data.ptype_qty * data.ptype_price;
+                db.SaveChanges();
+            }
+            return RedirectToAction("CartList");
+        }
+
+        public ActionResult CartMinus(int id)
+        {
+            var data = db.carts
+                .Where(m => m.rowid == id)
+                .FirstOrDefault();
+            if (data != null)
+            {
+                if (data.ptype_qty > 1)
+                {
+                    data.ptype_qty -= 1;
+                    data.amount = data.ptype_qty * data.ptype_price;
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("CartList");
+        }
+
+        public ActionResult Checkout()
+        {
+            cvmOrder models = new cvmOrder()
+            {
+                receive_name = "",
+                receive_email = "",
+                receive_address = "",
+                payment_no = "01",
+                remark = "",
+                PaymentsList = db.payments.OrderBy(m => m.payment_no).ToList(),
+            };
+
+            return View(models);
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(cvmOrder model)
+        {
+            if (!ModelState.IsValid)
+            {
+                if (model.PaymentsList == null)
+                {
+                    model.PaymentsList = db.payments.OrderBy(m => m.payment_no).ToList();
+                }
+                return View(model);
+            }
+
+            Cart.CartPayment(model);
+
+            return RedirectToAction("CheckoutReport");
+        }
+
+        public ActionResult CheckoutReport()
+        {
             return View();
         }
 

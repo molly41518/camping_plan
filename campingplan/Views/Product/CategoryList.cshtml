@@ -1,4 +1,7 @@
-﻿@model IEnumerable<campingplan.Models.product>
+﻿@using PagedList.Mvc
+@using PagedList
+@model IPagedList<campingplan.Models.product>
+@using campingplan.App_Class;
 
 @{
     ViewBag.Title = "CategoryList";
@@ -15,6 +18,7 @@
     </script>
 }
 @section styles{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <style>
         * {
             font-family: 微軟正黑體;
@@ -186,5 +190,10 @@
                 </a>
             </div>
         }
+        <div class="col-12">
+            <div class="text-center">
+                @Html.PagedListPager(Model, page => Url.Action("CategoryList", "Product", new { page }))
+            </div>
+        </div>
     </div>
 </div>

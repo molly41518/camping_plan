@@ -31,6 +31,23 @@ namespace campingplan.App_Class
             }
             return str_name;
         }
+
+        public static string GetCategoryName(string get_pno)
+        {
+            string str_name = "";
+            using (dbcon db = new dbcon())
+            {
+                var model = db.categorys.Where(m => m.category_no == get_pno).FirstOrDefault();
+                if (model != null)
+                {
+                    str_name = model.category_name;
+                }
+            }
+            return str_name;
+        }
+
+
+
         public static Dictionary<string, List<product_typedetail>> GetDictProductTypeDetail(ICollection<product_typedetail> product_detail_list)
         {
             Dictionary<string, List<product_typedetail>> output = new Dictionary<string, List<product_typedetail>>();
@@ -50,6 +67,76 @@ namespace campingplan.App_Class
             KeyValuePair<string, string> output = new KeyValuePair<string, string>();
             return output;
         }
+
+        public static int GetProductPrice(string productNo)
+        {
+            int int_price = 0;
+            using (dbcon db = new dbcon())
+            {
+                var models = db.product_typedetail.Where(m => m.pno == productNo).FirstOrDefault();
+                if (models != null)
+                {
+                    if (models.ptype_price != null)
+                        int.TryParse(models.ptype_price.ToString(), out int_price);
+                }
+            }
+            return int_price;
+        }
+
+        public static string GetProductName(string productNo)
+        {
+            string str_name = "";
+            using (dbcon db = new dbcon())
+            {
+                var models = db.product.Where(m => m.pno == productNo).FirstOrDefault();
+                if (models != null) str_name = models.pname;
+            }
+            return str_name;
+        }
+
+        public static string GetProductTypeName(string get_ptype_no)
+        {
+            string str_name = "";
+            using (dbcon db = new dbcon())
+            {
+                var models = db.product_typedetail.Where(m => m.ptype_no == get_ptype_no).FirstOrDefault();
+                if (models != null) str_name = models.ptype_name;
+            }
+            return str_name;
+        }
+
+        public static string GetPaymentName(string get_payment_no)
+        {
+            string str_name = "";
+            using (dbcon db = new dbcon())
+            {
+                var models = db.payments.Where(m => m.payment_no == get_payment_no).FirstOrDefault();
+                if (models != null) str_name = models.payment;
+            }
+            return str_name;
+        }
+
+
+        public static string GetVendorNoByProduct(string productNo)
+        {
+            string str_no = "";
+            using (dbcon db = new dbcon())
+            {
+                var prod = db.product.Where(m => m.pno == productNo).FirstOrDefault();
+                if (prod != null) str_no = prod.pno;
+            }
+            return str_no;
+        }
+
+
+
+        public static string ProductNo
+        {
+            get { return (HttpContext.Current.Session["ProductNo"] == null) ? "" : HttpContext.Current.Session["ProductNo"].ToString(); }
+            set { HttpContext.Current.Session["ProductNo"] = value; }
+        }
+
+
     }
     
 }
