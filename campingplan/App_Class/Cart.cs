@@ -173,6 +173,25 @@ namespace campingplan.App_Class
                 }
                 NewLotNo();//若有登入會員，將批號改為空，非會員才建立批號
             }
+            ClearCustomerLotNo();
+        }
+
+        private static void ClearCustomerLotNo()
+        {
+            using (dbcon db = new dbcon())
+            {
+                var datas = db.carts
+                    .Where(m => m.mno == CustomerAccount.CustomerNo)
+                    .ToList();
+                if (datas != null)
+                {
+                    foreach (var data in datas)
+                    {
+                        data.lot_no = "";
+                    }
+                    db.SaveChanges();
+                }
+            }
         }
 
 
@@ -224,7 +243,7 @@ namespace campingplan.App_Class
                     models.ptype_qty = buyQty;
                     models.ptype_price = int_price;
                     models.amount = int_amount;
-
+                    
                     db.carts.Add(models);
                     db.SaveChanges();
 
@@ -237,6 +256,8 @@ namespace campingplan.App_Class
                 }
             }
         }
+
+        
 
         public static void CartPayment(cvmOrder model)
         {
@@ -275,7 +296,7 @@ namespace campingplan.App_Class
                         detail.ptype_no = item.ptype_no;
                         detail.ptype_name = item.ptype_name;
                         detail.vendor_no = Shop.GetVendorNoByProduct(item.pno);
-                        detail.category_name = Shop.GetCategoryName(Shop.ProductNo);
+                        detail.category_name = Shop.GetCategoryName(item.pno);
                         detail.ptype_spec = item.ptype_spec;
                         detail.qty = item.ptype_qty;
                         detail.price = item.ptype_price;

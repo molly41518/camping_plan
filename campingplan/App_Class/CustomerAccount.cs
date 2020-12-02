@@ -18,16 +18,20 @@ namespace campingplan.App_Class
             }
         }
 
-        public static void Login(string customerName)
+        public static void Login(string customerName, string customerNo)
         {
             CustomerName = customerName;
+            CustomerNo = customerNo;
             IsLogin = true;
+            Cart.LoginCart();
         }
 
         public static void LogOut()
         {
             CustomerName = "";
+            CustomerNo = " ";
             IsLogin = false;
+            Cart.LoginCart();
         }
     }
 }

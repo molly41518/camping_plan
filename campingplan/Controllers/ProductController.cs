@@ -78,13 +78,14 @@ namespace campingplan.Controllers
         {
             var modal = db.product.Where(m => m.pno == id).FirstOrDefault();
             var typedetail = db.product_typedetail.Where(m => m.pno == id).FirstOrDefault();
+            Shop.ProductTypeNo = id;
             return View(modal);
         }
 
         public ActionResult AddToCart(string pno, string ptype_no, DateTime startday, DateTime endday, int qty)
         {
             Cart.AddCart(pno, ptype_no, startday, endday, qty);
-            return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductNo});
+            return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductTypeNo});
         }
 
         public ActionResult CartList()

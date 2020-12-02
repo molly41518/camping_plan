@@ -44,7 +44,7 @@ namespace campingplan.Controllers
                 return View(model);
             }
 
-            CustomerAccount.Login(customers.mname);
+            CustomerAccount.Login(customers.mname,customers.mno);
             return RedirectToAction("Index", "Home");
         }
 

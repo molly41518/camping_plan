@@ -129,6 +129,18 @@
                     tabindex="0">
             </iframe>
 
+            <h2 class="my-5">預定日期</h2>
+
+            @{
+                DateTime startday = new DateTime(2020, 12, 01);
+                DateTime endday = new DateTime(2020, 12, 01);
+                int qty = 1;
+            }
+        <p>@startday</p>
+        <p>@endday</p>
+        <p>@qty</p>
+
+
             <h2 class="my-5">營地介紹</h2>
             @{
                 var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail);
@@ -152,7 +164,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-9"><span>剩餘位置 10</span></div>
                                                     <div class="col-lg-3">
-                                                        <a href="#" class="btn btn-primary">訂購</a>
+                                                     @Html.ActionLink("訂購", "AddToCart","Product",new{pno = detail.pno , ptype_no = detail.ptype_no ,startday = startday ,endday = endday, qty = qty },new { @class="btn btn-primary"})
                                                     </div>
                                                 </div>
                                             </div>

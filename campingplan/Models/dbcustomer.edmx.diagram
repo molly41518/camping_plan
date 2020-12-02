@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="campingplanModel.carts" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="campingplanModel.customer" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="campingplanModel.order" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="campingplanModel.order_detail" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="campingplanModel.payments" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="6.75" PointY="4.5" />
-        <EntityTypeShape EntityType="campingplanModel.product_features" Width="1.5" PointX="6.75" PointY="8.375" />
-        <EntityTypeShape EntityType="campingplanModel.product_features_type" Width="1.5" PointX="4.75" PointY="9" />
-        <EntityTypeShape EntityType="campingplanModel.product_typedetail" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="campingplanModel.product_typedetail_everydaystock" Width="1.5" PointX="8.75" PointY="7.75" />
+      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="campingplanModel.carts" Width="1.5" PointX="10.375" PointY="5.5" />
+        <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="2.125" PointY="1" />
+        <EntityTypeShape EntityType="campingplanModel.customer" Width="1.5" PointX="0.5" PointY="1" />
+        <EntityTypeShape EntityType="campingplanModel.order" Width="1.5" PointX="6.375" PointY="5.625" />
+        <EntityTypeShape EntityType="campingplanModel.order_detail" Width="1.5" PointX="4.125" PointY="5.75" />
+        <EntityTypeShape EntityType="campingplanModel.payments" Width="1.5" PointX="12.25" PointY="5.625" />
+        <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="8.375" PointY="1.125" />
+        <EntityTypeShape EntityType="campingplanModel.product_features" Width="1.5" PointX="6.25" PointY="1.125" />
+        <EntityTypeShape EntityType="campingplanModel.product_features_type" Width="1.5" PointX="4" PointY="1.125" />
+        <EntityTypeShape EntityType="campingplanModel.product_typedetail" Width="1.5" PointX="10.75" PointY="1.125" />
+        <EntityTypeShape EntityType="campingplanModel.product_typedetail_everydaystock" Width="1.5" PointX="12.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="campingplanModel.productproduct_typedetail" />
         <AssociationConnector Association="campingplanModel.product_typedetailproduct_typedetail_everydaystock" />
         <AssociationConnector Association="campingplanModel.productproduct_features" />

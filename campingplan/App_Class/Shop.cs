@@ -16,14 +16,14 @@ namespace campingplan.App_Class
             return lists;
         }
 
-        public static string GetCategoryName(string cat_no,ref int cat_id)
+        public static string GetCategoryName(string cat_no, ref int cat_id)
         {
             cat_id = 0;
             string str_name = "";
             using (dbcon db = new dbcon())
             {
                 var model = db.categorys.Where(m => m.category_no == cat_no).FirstOrDefault();
-                if(model != null)
+                if (model != null)
                 {
                     str_name = model.category_name;
                     cat_id = model.rowid;
@@ -32,15 +32,19 @@ namespace campingplan.App_Class
             return str_name;
         }
 
-        public static string GetCategoryName(string get_pno)
+        public static string GetCategoryName(string pno)
         {
             string str_name = "";
             using (dbcon db = new dbcon())
             {
-                var model = db.categorys.Where(m => m.category_no == get_pno).FirstOrDefault();
-                if (model != null)
+                var product_model = db.product.Where(q => q.pno == pno).FirstOrDefault();
+                if (product_model != null)
                 {
-                    str_name = model.category_name;
+                    var model = db.categorys.Where(w => w.rowid == product_model.categoryid).FirstOrDefault();
+                    if (model != null)
+                    {
+                        str_name = model.category_name;
+                    }
                 }
             }
             return str_name;
@@ -54,7 +58,8 @@ namespace campingplan.App_Class
             foreach (var p in product_detail_list)
             {
                 bool is_output_has_area = output.ContainsKey(p.parea_name);
-                if (!is_output_has_area) {
+                if (!is_output_has_area)
+                {
                     List<product_typedetail> newList = new List<product_typedetail>();
                     output.Add(p.parea_name, newList);
                 }
@@ -73,7 +78,7 @@ namespace campingplan.App_Class
             int int_price = 0;
             using (dbcon db = new dbcon())
             {
-                var models = db.product_typedetail.Where(m => m.pno == productNo).FirstOrDefault();
+                var models = db.product_typedetail.Where(m => m.ptype_no == productNo).FirstOrDefault();
                 if (models != null)
                 {
                     if (models.ptype_price != null)
@@ -130,7 +135,7 @@ namespace campingplan.App_Class
 
 
 
-        public static string ProductNo
+        public static string ProductTypeNo
         {
             get { return (HttpContext.Current.Session["ProductNo"] == null) ? "" : HttpContext.Current.Session["ProductNo"].ToString(); }
             set { HttpContext.Current.Session["ProductNo"] = value; }
@@ -138,5 +143,5 @@ namespace campingplan.App_Class
 
 
     }
-    
+
 }
