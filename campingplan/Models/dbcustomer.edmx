@@ -31,22 +31,6 @@
           <Property Name="category_no" Type="nvarchar" MaxLength="50" />
           <Property Name="category_name" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="rowid" />
-          </Key>
-          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="mno" Type="nvarchar" MaxLength="50" />
-          <Property Name="maccount" Type="nvarchar" MaxLength="50" />
-          <Property Name="mpassword" Type="nvarchar" MaxLength="50" />
-          <Property Name="mname" Type="nvarchar" MaxLength="50" />
-          <Property Name="mnickname" Type="nvarchar" MaxLength="50" />
-          <Property Name="memail" Type="nvarchar" MaxLength="250" />
-          <Property Name="birth_date" Type="date" />
-          <Property Name="remark" Type="nvarchar" MaxLength="250" />
-          <Property Name="varify_code" Type="nvarchar" MaxLength="50" />
-          <Property Name="isvarify" Type="int" />
-        </EntityType>
         <EntityType Name="order">
           <Key>
             <PropertyRef Name="rowid" />
@@ -162,10 +146,35 @@
           <Property Name="stock_date" Type="date" />
           <Property Name="stock" Type="int" />
         </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_role" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_role_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="role_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="maccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="mpassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="mname" Type="nvarchar" MaxLength="50" />
+          <Property Name="mnickname" Type="nvarchar" MaxLength="50" />
+          <Property Name="memail" Type="nvarchar" MaxLength="250" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="varify_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="isvarify" Type="int" />
+        </EntityType>
         <EntityContainer Name="campingplanModelStoreContainer">
           <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="categorys" EntityType="Self.categorys" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
@@ -174,6 +183,8 @@
           <EntitySet Name="product_features_type" EntityType="Self.product_features_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_typedetail" EntityType="Self.product_typedetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_typedetail_everydaystock" EntityType="Self.product_typedetail_everydaystock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -182,7 +193,6 @@
         <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="carts" EntityType="campingplanModel.carts" />
           <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
-          <EntitySet Name="customer" EntityType="campingplanModel.customer" />
           <EntitySet Name="order" EntityType="campingplanModel.order" />
           <EntitySet Name="order_detail" EntityType="campingplanModel.order_detail" />
           <EntitySet Name="payments" EntityType="campingplanModel.payments" />
@@ -203,6 +213,8 @@
             <End Role="product" EntitySet="product" />
             <End Role="product_features" EntitySet="product_features" />
           </AssociationSet>
+          <EntitySet Name="roles" EntityType="campingplanModel.roles" />
+          <EntitySet Name="users" EntityType="campingplanModel.users" />
         </EntityContainer>
         <EntityType Name="carts">
           <Key>
@@ -229,22 +241,6 @@
           <Property Name="parentid" Type="Int32" />
           <Property Name="category_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="rowid" />
-          </Key>
-          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="maccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mnickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="memail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="birth_date" Type="DateTime" Precision="0" />
-          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="isvarify" Type="Int32" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -403,6 +399,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="maccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mnickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="memail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isvarify" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -433,23 +455,6 @@
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="category_no" ColumnName="category_no" />
                 <ScalarProperty Name="parentid" ColumnName="parentid" />
-                <ScalarProperty Name="rowid" ColumnName="rowid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="customer">
-            <EntityTypeMapping TypeName="campingplanModel.customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="isvarify" ColumnName="isvarify" />
-                <ScalarProperty Name="varify_code" ColumnName="varify_code" />
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
-                <ScalarProperty Name="memail" ColumnName="memail" />
-                <ScalarProperty Name="mnickname" ColumnName="mnickname" />
-                <ScalarProperty Name="mname" ColumnName="mname" />
-                <ScalarProperty Name="mpassword" ColumnName="mpassword" />
-                <ScalarProperty Name="maccount" ColumnName="maccount" />
-                <ScalarProperty Name="mno" ColumnName="mno" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -573,6 +578,34 @@
                 <ScalarProperty Name="stock" ColumnName="stock" />
                 <ScalarProperty Name="stock_date" ColumnName="stock_date" />
                 <ScalarProperty Name="ptype_no" ColumnName="ptype_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="campingplanModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="user_role_name" ColumnName="user_role_name" />
+                <ScalarProperty Name="user_role" ColumnName="user_role" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="campingplanModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="isvarify" ColumnName="isvarify" />
+                <ScalarProperty Name="varify_code" ColumnName="varify_code" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="memail" ColumnName="memail" />
+                <ScalarProperty Name="mnickname" ColumnName="mnickname" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="mpassword" ColumnName="mpassword" />
+                <ScalarProperty Name="maccount" ColumnName="maccount" />
+                <ScalarProperty Name="role_no" ColumnName="role_no" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>

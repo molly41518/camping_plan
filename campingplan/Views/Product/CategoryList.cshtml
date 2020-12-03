@@ -160,7 +160,13 @@
                             </p>
                             <h5 class="card-title font-weight-bold text-dark">@item.pname</h5>
                             <ul class="p-0">
-                                <li class="pr_camptype align-self-center justify-content-center">
+                                @foreach (var f in Shop.GetFeatureList(item.product_features))
+                                {
+                                    <li class="pr_camptype align-self-center justify-content-center">
+                                        <span>@f</span>
+                                    </li>
+                                }
+                                @*<li class="pr_camptype align-self-center justify-content-center">
                                     <span>高海拔</span>
                                 </li>
                                 <li class="pr_camptype">
@@ -171,7 +177,7 @@
                                 </li>
                                 <li class="pr_camptype">
                                     <span>遊戲區</span>
-                                </li>
+                                </li>*@
                             </ul>
                             <hr />
                             <div class="row align-items-center">

@@ -66,6 +66,19 @@ namespace campingplan.Controllers
                 relayModel = relayModel.Where(m => m.product_typedetail.Any(t => t.product_typedetail_everydaystock.Any(s => s.stock_date == dateDT && s.stock >= num)));
             }
 
+            // 特徵搜索
+            string featureSearch = Request.Form["featureSearch"];
+            if (featureSearch != null)
+            {
+                foreach (var kv in Shop.product_feature_to_string)
+                {
+                    if (Request.Form[kv.Value] == "true")
+                    {
+                        relayModel = relayModel.Where(m => kv.Key(m.product_features));
+                    }
+                }
+            }
+
             //分頁
             int pagesize = 3;
             int pagecurrent = page < 1 ? 1 : page;
@@ -92,10 +105,10 @@ namespace campingplan.Controllers
         {
             using (dbcon db = new dbcon())
             {
-                if (CustomerAccount.IsLogin)
+                if (UserAccount.IsLogin)
                 {
                     var data1 = db.carts
-                        .Where(m => m.mno == CustomerAccount.CustomerNo)
+                        .Where(m => m.mno == UserAccount.UserNo)
                         .ToList();
                     return View(data1);
                 }

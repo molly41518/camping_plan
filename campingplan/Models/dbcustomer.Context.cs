@@ -27,7 +27,6 @@ namespace campingplan.Models
     
         public virtual DbSet<carts> carts { get; set; }
         public virtual DbSet<categorys> categorys { get; set; }
-        public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<order> order { get; set; }
         public virtual DbSet<order_detail> order_detail { get; set; }
         public virtual DbSet<payments> payments { get; set; }
@@ -36,5 +35,7 @@ namespace campingplan.Models
         public virtual DbSet<product_features_type> product_features_type { get; set; }
         public virtual DbSet<product_typedetail> product_typedetail { get; set; }
         public virtual DbSet<product_typedetail_everydaystock> product_typedetail_everydaystock { get; set; }
+        public virtual DbSet<roles> roles { get; set; }
+        public virtual DbSet<users> users { get; set; }
     }
 }

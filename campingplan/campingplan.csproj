@@ -134,13 +134,15 @@
     <Compile Include="App_Class\AppEnums.cs" />
     <Compile Include="App_Class\Cart.cs" />
     <Compile Include="App_Class\Cryptographys.cs" />
-    <Compile Include="App_Class\CustomerAccount.cs" />
     <Compile Include="App_Class\GmailService.cs" />
+    <Compile Include="App_Class\LoginAuthorize.cs" />
     <Compile Include="App_Class\Shop.cs" />
+    <Compile Include="App_Class\UserAccount.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Controllers\BackProdutController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -159,9 +161,6 @@
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\categorys.cs">
-      <DependentUpon>dbcustomer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\customer.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dbcustomer.Context.cs">
@@ -204,6 +203,12 @@
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\product_typedetail_everydaystock.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\roles.cs">
+      <DependentUpon>dbcustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\users.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\cvmLogin.cs" />

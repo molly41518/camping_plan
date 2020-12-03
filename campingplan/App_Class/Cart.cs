@@ -66,10 +66,10 @@ namespace campingplan.App_Class
             int int_count = 0;
             using (dbcon db = new dbcon())
             {
-                if (CustomerAccount.IsLogin)
+                if (UserAccount.IsLogin)
                 {
                     var data1 = db.carts
-                        .Where(m => m.mno == CustomerAccount.CustomerNo)
+                        .Where(m => m.mno == UserAccount.UserNo)
                         .ToList();
                     if (data1 != null) int_count = data1.Count;
                 }
@@ -98,10 +98,10 @@ namespace campingplan.App_Class
             int? int_totals = 0;
             using (dbcon db = new dbcon())
             {
-                if (CustomerAccount.IsLogin)
+                if (UserAccount.IsLogin)
                 {
                     var data1 = db.carts
-                        .Where(m => m.mno == CustomerAccount.CustomerNo)
+                        .Where(m => m.mno == UserAccount.UserNo)
                         .ToList();
                     if (data1 != null) int_totals = data1.Sum(m => m.amount);
                 }
@@ -141,7 +141,7 @@ namespace campingplan.App_Class
         public static string NewLotNo()
         {
             string str_lot_no = "";//已登入會員批號設為空
-            if (!CustomerAccount.IsLogin)//沒有登入才新增批號
+            if (!UserAccount.IsLogin)//沒有登入才新增批號
                 str_lot_no = Guid.NewGuid().ToString().Substring(0, 15).ToUpper();
             LotNo = str_lot_no;
             LotCreateTime = DateTime.Now;
@@ -181,7 +181,7 @@ namespace campingplan.App_Class
             using (dbcon db = new dbcon())
             {
                 var datas = db.carts
-                    .Where(m => m.mno == CustomerAccount.CustomerNo)
+                    .Where(m => m.mno == UserAccount.UserNo)
                     .ToList();
                 if (datas != null)
                 {
@@ -221,7 +221,7 @@ namespace campingplan.App_Class
 
                 //先在購物車搜尋，看有沒有加入過購物車
                 var datas = db.carts.Where(m => m.lot_no == LotNo)
-                    .Where(m => m.mno == CustomerAccount.CustomerNo)
+                    .Where(m => m.mno == UserAccount.UserNo)
                     .Where(m => m.pno == pno)
                     .Where(m => m.ptype_no == ptype_no)
                     .Where(m => m.ptype_spec == day_spec)
@@ -233,7 +233,7 @@ namespace campingplan.App_Class
                 {
                     carts models = new carts();
                     models.lot_no = LotNo;
-                    models.mno = CustomerAccount.CustomerNo;
+                    models.mno = UserAccount.UserNo;
                     models.crete_time = LotCreateTime;
                     models.pno = pno;
                     models.pname = Shop.GetProductName(pno);
@@ -265,7 +265,7 @@ namespace campingplan.App_Class
             using (dbcon db = new dbcon())
             {
                 var datas = db.carts
-                   .Where(m => m.mno == CustomerAccount.CustomerNo)
+                   .Where(m => m.mno == UserAccount.UserNo)
                    .ToList();
                 if (datas != null)
                 {
@@ -322,7 +322,7 @@ namespace campingplan.App_Class
                 orders.order_validate = 0;
                 orders.order_no = "";
                 orders.order_date = DateTime.Now;
-                orders.mno = CustomerAccount.CustomerNo;
+                orders.mno = UserAccount.UserNo;
                 orders.order_status = "ON";
                 orders.order_guid = str_guid;
                 orders.payment_no = model.payment_no;
