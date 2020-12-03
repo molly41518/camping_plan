@@ -4133,7 +4133,7 @@ function clipArc(ctx, arc) {
 	var y = arc.y;
 
 	// Draw an inner border by cliping the arc and drawing a double-width border
-	// Enlarge the clipping arc by 0.33 pixels to eliminate glitches between borders
+	// Enlarge the clipping arc by 0.33 pixels to eliminate glitches between border
 	ctx.beginPath();
 	ctx.arc(x, y, arc.outerRadius, startAngle - angleMargin, endAngle + angleMargin);
 	if (arc.innerRadius > pixelMargin) {
@@ -4146,7 +4146,7 @@ function clipArc(ctx, arc) {
 	ctx.clip();
 }
 
-function drawFullCircleBorders(ctx, vm, arc, inner) {
+function drawFullCircleBorder(ctx, vm, arc, inner) {
 	var endAngle = arc.endAngle;
 	var i;
 
@@ -4185,7 +4185,7 @@ function drawBorder(ctx, vm, arc) {
 	}
 
 	if (arc.fullCircles) {
-		drawFullCircleBorders(ctx, vm, arc, inner);
+		drawFullCircleBorder(ctx, vm, arc, inner);
 	}
 
 	if (inner) {
@@ -4515,7 +4515,7 @@ core_defaults._set('global', {
 		rectangle: {
 			backgroundColor: defaultColor$2,
 			borderColor: defaultColor$2,
-			borderSkipped: 'bottom',
+			borderkipped: 'bottom',
 			borderWidth: 0
 		}
 	}
@@ -4560,8 +4560,8 @@ function swap(orig, v1, v2) {
 	return orig === v1 ? v2 : orig === v2 ? v1 : orig;
 }
 
-function parseBorderSkipped(vm) {
-	var edge = vm.borderSkipped;
+function parseBorderkipped(vm) {
+	var edge = vm.borderkipped;
 	var res = {};
 
 	if (!edge) {
@@ -4582,7 +4582,7 @@ function parseBorderSkipped(vm) {
 
 function parseBorderWidth(vm, maxW, maxH) {
 	var value = vm.borderWidth;
-	var skip = parseBorderSkipped(vm);
+	var skip = parseBorderkipped(vm);
 	var t, r, b, l;
 
 	if (helpers$1.isObject(value)) {
@@ -4857,7 +4857,7 @@ var controller_bar = core_datasetController.extend({
 	_dataElementOptions: [
 		'backgroundColor',
 		'borderColor',
-		'borderSkipped',
+		'borderkipped',
 		'borderWidth',
 		'barPercentage',
 		'barThickness',
@@ -4909,14 +4909,14 @@ var controller_bar = core_datasetController.extend({
 		rectangle._model = {
 			backgroundColor: options.backgroundColor,
 			borderColor: options.borderColor,
-			borderSkipped: options.borderSkipped,
+			borderkipped: options.borderkipped,
 			borderWidth: options.borderWidth,
 			datasetLabel: dataset.label,
 			label: me.chart.data.labels[index]
 		};
 
 		if (helpers$1.isArray(dataset.data[index])) {
-			rectangle._model.borderSkipped = null;
+			rectangle._model.borderkipped = null;
 		}
 
 		me._updateElementGeometry(rectangle, index, reset, options);
@@ -5725,7 +5725,7 @@ core_defaults._set('horizontalBar', {
 
 	elements: {
 		rectangle: {
-			borderSkipped: 'left'
+			borderkipped: 'left'
 		}
 	},
 

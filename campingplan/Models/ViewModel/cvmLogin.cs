@@ -12,12 +12,12 @@ namespace campingplan.Models
         [Key]
         [Required(ErrorMessage = "請輸入帳號")]
         [DisplayName("帳號")]
-        public string CustomerAccount { get; set; }
+        public string UserAccount { get; set; }
 
         [Required(ErrorMessage = "請輸入密碼")]
         [DisplayName("密碼")]
         [DataType(DataType.Password)]
-        public string CustomerPassword { get; set; }
+        public string UserPassword { get; set; }
 
         [DisplayName("記住我")]
         public bool Remember { get; set; }

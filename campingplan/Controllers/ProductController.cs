@@ -167,7 +167,7 @@ namespace campingplan.Controllers
             cvmOrder models = new cvmOrder()
             {
                 receive_name = "",
-                receive_email = "",
+                receive_memail = "",
                 receive_address = "",
                 payment_no = "01",
                 remark = "",

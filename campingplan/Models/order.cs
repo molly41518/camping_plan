@@ -32,5 +32,7 @@ namespace campingplan.Models
         public string order_guid { get; set; }
         public Nullable<int> order_closed { get; set; }
         public Nullable<int> order_validate { get; set; }
+        public string shipping_no { get; set; }
+        public string shipping_name { get; set; }
     }
 }

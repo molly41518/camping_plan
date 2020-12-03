@@ -196,10 +196,96 @@ namespace campingplan.App_Class
 
         public static string ProductTypeNo
         {
+            get { return (HttpContext.Current.Session["ProductTypeNo"] == null) ? "" : HttpContext.Current.Session["ProductTypeNo"].ToString(); }
+            set { HttpContext.Current.Session["ProductTypeNo"] = value; }
+        }
+
+        public static string ProductNo
+        {
             get { return (HttpContext.Current.Session["ProductNo"] == null) ? "" : HttpContext.Current.Session["ProductNo"].ToString(); }
             set { HttpContext.Current.Session["ProductNo"] = value; }
         }
 
+
+        /// <summary>
+        /// 布林值轉整數
+        /// </summary>
+        /// <param name="boolValue">布林值</param>
+        /// <returns></returns>
+        public static int BoolToInteger(bool boolValue)
+        {
+            return (boolValue) ? 1 : 0;
+        }
+
+        /// <summary>
+        /// 整數轉布林值
+        /// </summary>
+        /// <param name="integerValue">整數</param>
+        /// <returns></returns>
+        public static bool IntegerToBool(int? integerValue)
+        {
+            return !(integerValue == null || integerValue != 1);
+        }
+
+        /// <summary>
+        /// 檢查訂單狀態是否為未結案
+        /// </summary>
+        /// <param name="orderStatus">訂單狀態</param>
+        /// <returns></returns>
+        public static bool IsUnCloseOrder(string orderStatus)
+        {
+            bool bln_value = false;
+            if (orderStatus == "CP") bln_value = true;
+            if (orderStatus == "OR") bln_value = true;
+            if (orderStatus == "RT") bln_value = true;
+            return bln_value;
+        }
+
+        /// <summary>
+        /// 取得訂單結案狀態
+        /// </summary>
+        /// <param name="orderStatus">訂單狀態代碼</param>
+        /// <returns></returns>
+        public static int? GetOrderClosed(string orderStatus)
+        {
+            int? int_value = 0;
+            //已領取已付款
+            if (orderStatus == "CP") int_value = 1;
+            //取消訂單
+            if (orderStatus == "OR") int_value = 1;
+            //已退貨
+            if (orderStatus == "RT") int_value = 1;
+            return int_value;
+        }
+
+        /// <summary>
+        /// 取得訂單已付款已領貨狀態
+        /// </summary>
+        /// <param name="orderStatus">訂單狀態代碼</param>
+        /// <returns></returns>
+        public static int? GetOrderValidate(string orderStatus)
+        {
+            int? int_value = 0;
+            //已領取已付款
+            if (orderStatus == "CP") int_value = 1;
+            return int_value;
+        }
+
+        public static List<status> GetStatusList()
+        {
+            using (dbcon db = new dbcon())
+            {
+                return db.status.OrderBy(m => m.ststus_no).ToList();
+            }
+        }
+
+        public static List<users> GetVendorsList()
+        {
+            using (dbcon db = new dbcon())
+            {
+                return db.users.Where(m => m.role_no == "Vendor").OrderBy(m => m.mno).ToList();
+            }
+        }
 
     }
 

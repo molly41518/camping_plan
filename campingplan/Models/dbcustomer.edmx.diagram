@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1" ZoomLevel="68">
+      <Diagram DiagramId="d53947a838aa4c909cabee8b0975200d" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="campingplanModel.carts" Width="1.5" PointX="10.375" PointY="5.5" />
         <EntityTypeShape EntityType="campingplanModel.categorys" Width="1.5" PointX="2.125" PointY="1" />
-        <EntityTypeShape EntityType="campingplanModel.order" Width="1.5" PointX="6.375" PointY="5.625" />
         <EntityTypeShape EntityType="campingplanModel.order_detail" Width="1.5" PointX="4.125" PointY="5.75" />
         <EntityTypeShape EntityType="campingplanModel.payments" Width="1.5" PointX="12.25" PointY="5.625" />
         <EntityTypeShape EntityType="campingplanModel.product" Width="1.5" PointX="8.375" PointY="1.125" />
@@ -20,6 +19,10 @@
         <AssociationConnector Association="campingplanModel.productproduct_features" />
         <EntityTypeShape EntityType="campingplanModel.roles" Width="1.5" PointX="0.5" PointY="4.5" />
         <EntityTypeShape EntityType="campingplanModel.users" Width="1.5" PointX="0.5" PointY="1" />
+        <EntityTypeShape EntityType="campingplanModel.status" Width="1.5" PointX="2.125" PointY="4.625" />
+        <EntityTypeShape EntityType="campingplanModel.shippings" Width="1.5" PointX="2.125" PointY="6.625" />
+        <EntityTypeShape EntityType="campingplanModel.order" Width="1.5" PointX="6" PointY="5.75" />
+        <EntityTypeShape EntityType="campingplanModel.companys" Width="1.5" PointX="0.5" PointY="6.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

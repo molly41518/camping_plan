@@ -111,10 +111,10 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                @if (CustomerAccount.IsLogin)
+                @if (UserAccount.IsLogin)
                 {
                     <li class="nav-item">
-                        <span class="nav-link">@CustomerAccount.CustomerInfo</span>
+                        <span class="nav-link">@UserAccount.UserInfo</span>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("登出", "Logout", "Customer", null, new { @class = "nav-link" })

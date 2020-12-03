@@ -30,6 +30,17 @@ namespace campingplan.Models
         public string pimg { get; set; }
         public Nullable<int> pstatus { get; set; }
         public string pmapurl { get; set; }
+        public string vendor_no { get; set; }
+        public Nullable<int> issale { get; set; }
+        public Nullable<int> istop { get; set; }
+        public Nullable<int> iscolor { get; set; }
+        public Nullable<int> issize { get; set; }
+        public string size_name { get; set; }
+        public string color_name { get; set; }
+        public Nullable<int> browse_count { get; set; }
+        public Nullable<int> start_count { get; set; }
+        public string remark { get; set; }
+        public string category_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_typedetail> product_typedetail { get; set; }

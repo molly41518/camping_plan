@@ -317,22 +317,22 @@ namespace campingplan.App_Class
             string str_guid = Guid.NewGuid().ToString().Substring(0, 25).ToUpper();
             using (dbcon db = new dbcon())
             {
-                order orders = new order();
-                orders.order_closed = 0;
-                orders.order_validate = 0;
-                orders.order_no = "";
-                orders.order_date = DateTime.Now;
-                orders.mno = UserAccount.UserNo;
-                orders.order_status = "ON";
-                orders.order_guid = str_guid;
-                orders.payment_no = model.payment_no;
-                orders.payment_name = Shop.GetPaymentName(model.payment_no);
-                orders.receive_name = model.receive_name;
-                orders.receive_phone = model.receive_phone;
-                orders.receive_email = model.receive_email;
-                orders.receive_address = model.receive_address;
-                orders.remark = model.remark;
-                db.order.Add(orders);
+                order order = new order();
+                order.order_closed = 0;
+                order.order_validate = 0;
+                order.order_no = "";
+                order.order_date = DateTime.Now;
+                order.mno = UserAccount.UserNo;
+                order.order_status = "ON";
+                order.order_guid = str_guid;
+                order.payment_no = model.payment_no;
+                order.payment_name = Shop.GetPaymentName(model.payment_no);
+                order.receive_name = model.receive_name;
+                order.receive_phone = model.receive_phone;
+                order.receive_email = model.receive_memail;
+                order.receive_address = model.receive_address;
+                order.remark = model.remark;
+                db.order.Add(order);
                 db.SaveChanges();
 
 

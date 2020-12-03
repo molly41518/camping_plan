@@ -31,6 +31,25 @@
           <Property Name="category_no" Type="nvarchar" MaxLength="50" />
           <Property Name="category_name" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="companys">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mno" Type="nvarchar" MaxLength="50" />
+          <Property Name="msname" Type="nvarchar" MaxLength="50" />
+          <Property Name="mname" Type="nvarchar" MaxLength="250" />
+          <Property Name="date_register" Type="date" />
+          <Property Name="tel_company" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax_company" Type="nvarchar" MaxLength="50" />
+          <Property Name="name_charge" Type="nvarchar" MaxLength="50" />
+          <Property Name="name_contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="tel_contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="adr_company" Type="nvarchar" MaxLength="250" />
+          <Property Name="email_company" Type="nvarchar" MaxLength="250" />
+          <Property Name="url_company" Type="nvarchar" MaxLength="250" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="order">
           <Key>
             <PropertyRef Name="rowid" />
@@ -42,6 +61,8 @@
           <Property Name="mno" Type="nvarchar" MaxLength="50" />
           <Property Name="payment_no" Type="nvarchar" MaxLength="50" />
           <Property Name="payment_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="shipping_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="shipping_name" Type="nvarchar" MaxLength="250" />
           <Property Name="receive_name" Type="nvarchar" MaxLength="50" />
           <Property Name="receive_phone" Type="nvarchar" MaxLength="50" />
           <Property Name="receive_address" Type="nvarchar" MaxLength="250" />
@@ -86,6 +107,7 @@
             <PropertyRef Name="pno" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="250" />
           <Property Name="categoryid" Type="int" />
           <Property Name="pno" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="plocation" Type="nvarchar" MaxLength="50" />
@@ -95,6 +117,16 @@
           <Property Name="pimg" Type="nvarchar" MaxLength="250" />
           <Property Name="pstatus" Type="int" />
           <Property Name="pmapurl" Type="text" />
+          <Property Name="vendor_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="issale" Type="int" />
+          <Property Name="istop" Type="int" />
+          <Property Name="iscolor" Type="int" />
+          <Property Name="issize" Type="int" />
+          <Property Name="size_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="color_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="browse_count" Type="int" />
+          <Property Name="start_count" Type="int" />
+          <Property Name="remark" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="product_features">
           <Key>
@@ -155,6 +187,24 @@
           <Property Name="user_role_name" Type="nvarchar" MaxLength="50" />
           <Property Name="remark" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="shippings">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shipping_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="shipping_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ststus_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ststus_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="rowid" />
@@ -175,6 +225,7 @@
         <EntityContainer Name="campingplanModelStoreContainer">
           <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="categorys" EntityType="Self.categorys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="companys" EntityType="Self.companys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
@@ -184,6 +235,8 @@
           <EntitySet Name="product_typedetail" EntityType="Self.product_typedetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_typedetail_everydaystock" EntityType="Self.product_typedetail_everydaystock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shippings" EntityType="Self.shippings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -193,7 +246,6 @@
         <EntityContainer Name="dbcon" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="carts" EntityType="campingplanModel.carts" />
           <EntitySet Name="categorys" EntityType="campingplanModel.categorys" />
-          <EntitySet Name="order" EntityType="campingplanModel.order" />
           <EntitySet Name="order_detail" EntityType="campingplanModel.order_detail" />
           <EntitySet Name="payments" EntityType="campingplanModel.payments" />
           <EntitySet Name="product" EntityType="campingplanModel.product" />
@@ -215,6 +267,10 @@
           </AssociationSet>
           <EntitySet Name="roles" EntityType="campingplanModel.roles" />
           <EntitySet Name="users" EntityType="campingplanModel.users" />
+          <EntitySet Name="status" EntityType="campingplanModel.status" />
+          <EntitySet Name="shippings" EntityType="campingplanModel.shippings" />
+          <EntitySet Name="order" EntityType="campingplanModel.order" />
+          <EntitySet Name="companys" EntityType="campingplanModel.companys" />
         </EntityContainer>
         <EntityType Name="carts">
           <Key>
@@ -241,29 +297,6 @@
           <Property Name="parentid" Type="Int32" />
           <Property Name="category_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="order">
-          <Key>
-            <PropertyRef Name="rowid" />
-          </Key>
-          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="order_date" Type="DateTime" Precision="3" />
-          <Property Name="order_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="payment_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="payment_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="receive_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="receive_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="receive_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="receive_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="amounts" Type="Int32" />
-          <Property Name="taxs" Type="Int32" />
-          <Property Name="totals" Type="Int32" />
-          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="order_guid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="order_closed" Type="Int32" />
-          <Property Name="order_validate" Type="Int32" />
         </EntityType>
         <EntityType Name="order_detail">
           <Key>
@@ -308,6 +341,17 @@
           <Property Name="pmapurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="product_typedetail" Relationship="campingplanModel.productproduct_typedetail" FromRole="product" ToRole="product_typedetail" />
           <NavigationProperty Name="product_features" Relationship="campingplanModel.productproduct_features" FromRole="product" ToRole="product_features" />
+          <Property Name="vendor_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="issale" Type="Int32" />
+          <Property Name="istop" Type="Int32" />
+          <Property Name="iscolor" Type="Int32" />
+          <Property Name="issize" Type="Int32" />
+          <Property Name="size_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="color_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="browse_count" Type="Int32" />
+          <Property Name="start_count" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="category_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="product_features">
           <Key>
@@ -425,6 +469,68 @@
           <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isvarify" Type="Int32" />
         </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ststus_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ststus_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="shippings">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shipping_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shipping_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="order_date" Type="DateTime" Precision="3" />
+          <Property Name="order_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payment_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="receive_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="receive_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amounts" Type="Int32" />
+          <Property Name="taxs" Type="Int32" />
+          <Property Name="totals" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="order_guid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="order_closed" Type="Int32" />
+          <Property Name="order_validate" Type="Int32" />
+          <Property Name="shipping_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shipping_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="companys">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="msname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="date_register" Type="DateTime" Precision="0" />
+          <Property Name="tel_company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax_company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_charge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tel_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adr_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="url_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -455,30 +561,6 @@
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="category_no" ColumnName="category_no" />
                 <ScalarProperty Name="parentid" ColumnName="parentid" />
-                <ScalarProperty Name="rowid" ColumnName="rowid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="order">
-            <EntityTypeMapping TypeName="campingplanModel.order">
-              <MappingFragment StoreEntitySet="order">
-                <ScalarProperty Name="order_validate" ColumnName="order_validate" />
-                <ScalarProperty Name="order_closed" ColumnName="order_closed" />
-                <ScalarProperty Name="order_guid" ColumnName="order_guid" />
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="totals" ColumnName="totals" />
-                <ScalarProperty Name="taxs" ColumnName="taxs" />
-                <ScalarProperty Name="amounts" ColumnName="amounts" />
-                <ScalarProperty Name="receive_email" ColumnName="receive_email" />
-                <ScalarProperty Name="receive_address" ColumnName="receive_address" />
-                <ScalarProperty Name="receive_phone" ColumnName="receive_phone" />
-                <ScalarProperty Name="receive_name" ColumnName="receive_name" />
-                <ScalarProperty Name="payment_name" ColumnName="payment_name" />
-                <ScalarProperty Name="payment_no" ColumnName="payment_no" />
-                <ScalarProperty Name="mno" ColumnName="mno" />
-                <ScalarProperty Name="order_status" ColumnName="order_status" />
-                <ScalarProperty Name="order_date" ColumnName="order_date" />
-                <ScalarProperty Name="order_no" ColumnName="order_no" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -515,6 +597,17 @@
           <EntitySetMapping Name="product">
             <EntityTypeMapping TypeName="campingplanModel.product">
               <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="start_count" ColumnName="start_count" />
+                <ScalarProperty Name="browse_count" ColumnName="browse_count" />
+                <ScalarProperty Name="color_name" ColumnName="color_name" />
+                <ScalarProperty Name="size_name" ColumnName="size_name" />
+                <ScalarProperty Name="issize" ColumnName="issize" />
+                <ScalarProperty Name="iscolor" ColumnName="iscolor" />
+                <ScalarProperty Name="istop" ColumnName="istop" />
+                <ScalarProperty Name="issale" ColumnName="issale" />
+                <ScalarProperty Name="vendor_no" ColumnName="vendor_no" />
                 <ScalarProperty Name="pmapurl" ColumnName="pmapurl" />
                 <ScalarProperty Name="pstatus" ColumnName="pstatus" />
                 <ScalarProperty Name="pimg" ColumnName="pimg" />
@@ -605,6 +698,72 @@
                 <ScalarProperty Name="mpassword" ColumnName="mpassword" />
                 <ScalarProperty Name="maccount" ColumnName="maccount" />
                 <ScalarProperty Name="role_no" ColumnName="role_no" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="campingplanModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="ststus_name" ColumnName="ststus_name" />
+                <ScalarProperty Name="ststus_no" ColumnName="ststus_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shippings">
+            <EntityTypeMapping TypeName="campingplanModel.shippings">
+              <MappingFragment StoreEntitySet="shippings">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="shipping_name" ColumnName="shipping_name" />
+                <ScalarProperty Name="shipping_no" ColumnName="shipping_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="campingplanModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="shipping_name" ColumnName="shipping_name" />
+                <ScalarProperty Name="shipping_no" ColumnName="shipping_no" />
+                <ScalarProperty Name="order_validate" ColumnName="order_validate" />
+                <ScalarProperty Name="order_closed" ColumnName="order_closed" />
+                <ScalarProperty Name="order_guid" ColumnName="order_guid" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="totals" ColumnName="totals" />
+                <ScalarProperty Name="taxs" ColumnName="taxs" />
+                <ScalarProperty Name="amounts" ColumnName="amounts" />
+                <ScalarProperty Name="receive_email" ColumnName="receive_email" />
+                <ScalarProperty Name="receive_address" ColumnName="receive_address" />
+                <ScalarProperty Name="receive_phone" ColumnName="receive_phone" />
+                <ScalarProperty Name="receive_name" ColumnName="receive_name" />
+                <ScalarProperty Name="payment_name" ColumnName="payment_name" />
+                <ScalarProperty Name="payment_no" ColumnName="payment_no" />
+                <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companys">
+            <EntityTypeMapping TypeName="campingplanModel.companys">
+              <MappingFragment StoreEntitySet="companys">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="url_company" ColumnName="url_company" />
+                <ScalarProperty Name="email_company" ColumnName="email_company" />
+                <ScalarProperty Name="adr_company" ColumnName="adr_company" />
+                <ScalarProperty Name="tel_contact" ColumnName="tel_contact" />
+                <ScalarProperty Name="name_contact" ColumnName="name_contact" />
+                <ScalarProperty Name="name_charge" ColumnName="name_charge" />
+                <ScalarProperty Name="fax_company" ColumnName="fax_company" />
+                <ScalarProperty Name="tel_company" ColumnName="tel_company" />
+                <ScalarProperty Name="date_register" ColumnName="date_register" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="msname" ColumnName="msname" />
                 <ScalarProperty Name="mno" ColumnName="mno" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>

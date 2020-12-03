@@ -16,7 +16,7 @@ namespace campingplan.Models
         public string receive_phone { get; set; }
         [Display(Name = "訂購人信箱")]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true, NullDisplayText = "請輸入電子信箱")]
-        public string receive_email { get; set; }
+        public string receive_memail { get; set; }
         [Display(Name = "訂購人地址")]
         [Required(ErrorMessage = "訂購人地址不可空白")]
         public string receive_address { get; set; }

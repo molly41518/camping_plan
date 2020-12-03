@@ -11,9 +11,9 @@ namespace campingplan.App_Class
     {
         public string MessageText { get; set; }
         public string SenderName { get; set; }
-        public string SenderEmail { get; set; }
+        public string Sendermemail { get; set; }
         public string AppPassword { get; set; }
-        public string ReceiveEmail { get; set; }
+        public string Receivememail { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
 
@@ -21,9 +21,9 @@ namespace campingplan.App_Class
         {
             MessageText = "";
             SenderName = "網站管理員";
-            SenderEmail = "candy41518@gmail.com";
+            Sendermemail = "candy41518@gmail.com";
             AppPassword = "kuxvvwzhsezrbvey";
-            ReceiveEmail = "";
+            Receivememail = "";
             Subject = "";
             Body = "";
 
@@ -31,8 +31,8 @@ namespace campingplan.App_Class
 
         public void Send()
         {
-            var fromEmail = new MailAddress(SenderEmail, SenderName);
-            var toEmail = new MailAddress(ReceiveEmail);
+            var fromemail = new MailAddress(Sendermemail, SenderName);
+            var tomemail = new MailAddress(Receivememail);
 
             var smtp = new SmtpClient
             {
@@ -41,10 +41,10 @@ namespace campingplan.App_Class
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address,AppPassword)
+                Credentials = new NetworkCredential(fromemail.Address,AppPassword)
             };
 
-            using (var message = new MailMessage(fromEmail, toEmail)
+            using (var message = new MailMessage(fromemail, tomemail)
             {
                 Subject = Subject,
                 Body = Body,

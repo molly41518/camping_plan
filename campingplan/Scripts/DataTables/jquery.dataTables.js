@@ -1850,7 +1850,7 @@
 	{
 		_fnCompatMap( init, 'orderable',     'bSortable' );
 		_fnCompatMap( init, 'orderData',     'aDataSort' );
-		_fnCompatMap( init, 'orderSequence', 'asSorting' );
+		_fnCompatMap( init, 'orderequence', 'asSorting' );
 		_fnCompatMap( init, 'orderDataType', 'sortDataType' );
 	
 		// orderData can be given as an integer
@@ -5327,7 +5327,7 @@
 			sanityWidth = table.outerWidth();
 		}
 	
-		// Hidden header should have zero height, so remove padding and borders. Then
+		// Hidden header should have zero height, so remove padding and border. Then
 		// set the width based on the real headers
 	
 		// Apply all styles in one pass
@@ -12109,7 +12109,7 @@
 		 *  @type array
 		 *  @default [ 'asc', 'desc' ]
 		 *
-		 *  @name DataTable.defaults.column.orderSequence
+		 *  @name DataTable.defaults.column.orderequence
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12117,9 +12117,9 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "columnDefs": [
-		 *          { "orderSequence": [ "asc" ], "targets": [ 1 ] },
-		 *          { "orderSequence": [ "desc", "asc", "asc" ], "targets": [ 2 ] },
-		 *          { "orderSequence": [ "desc" ], "targets": [ 3 ] }
+		 *          { "orderequence": [ "asc" ], "targets": [ 1 ] },
+		 *          { "orderequence": [ "desc", "asc", "asc" ], "targets": [ 2 ] },
+		 *          { "orderequence": [ "desc" ], "targets": [ 3 ] }
 		 *        ]
 		 *      } );
 		 *    } );
@@ -12130,9 +12130,9 @@
 		 *      $('#example').dataTable( {
 		 *        "columns": [
 		 *          null,
-		 *          { "orderSequence": [ "asc" ] },
-		 *          { "orderSequence": [ "desc", "asc", "asc" ] },
-		 *          { "orderSequence": [ "desc" ] },
+		 *          { "orderequence": [ "asc" ] },
+		 *          { "orderequence": [ "desc", "asc", "asc" ] },
+		 *          { "orderequence": [ "desc" ] },
 		 *          null
 		 *        ]
 		 *      } );

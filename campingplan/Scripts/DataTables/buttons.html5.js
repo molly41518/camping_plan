@@ -674,7 +674,7 @@ var excelStrings = {
 					'</patternFill>'+
 				'</fill>'+
 			'</fills>'+
-			'<borders count="2">'+
+			'<border count="2">'+
 				'<border>'+
 					'<left />'+
 					'<right />'+
@@ -697,7 +697,7 @@ var excelStrings = {
 					'</bottom>'+
 					'<diagonal />'+
 				'</border>'+
-			'</borders>'+
+			'</border>'+
 			'<cellStyleXfs count="1">'+
 				'<xf numFmtId="0" fontId="0" fillId="0" borderId="0" />'+
 			'</cellStyleXfs>'+
@@ -1274,7 +1274,7 @@ DataTable.ext.buttons.pdfHtml5 = {
 						headerRows: 1,
 						body: rows
 					},
-					layout: 'noBorders'
+					layout: 'noBorder'
 				}
 			],
 			styles: {

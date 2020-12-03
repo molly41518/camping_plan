@@ -58,11 +58,11 @@ namespace campingplan.Areas.Admin.Controllers
                     if (models.rowid > 0)
                     {
                         //Edit 
-                        var Categorys = db.categorys.Where(m => m.rowid == models.rowid).FirstOrDefault();
-                        if (Categorys != null)
+                        var categorys = db.categorys.Where(m => m.rowid == models.rowid).FirstOrDefault();
+                        if (categorys != null)
                         {
-                            Categorys.category_no = models.category_no;
-                            Categorys.category_name = models.category_name;
+                            categorys.category_no = models.category_no;
+                            categorys.category_name = models.category_name;
                         }
                     }
                     else

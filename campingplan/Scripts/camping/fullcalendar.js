@@ -2367,9 +2367,9 @@ var FullCalendar = (function (exports) {
         uis.push(eventDef.ui);
         return combineEventUis(uis);
     }
-    function sortEventSegs(segs, eventOrderSpecs) {
+    function sortEventSegs(segs, eventorderpecs) {
         var objs = segs.map(buildSegCompareObj);
-        objs.sort(function (obj0, obj1) { return compareByFieldSpecs(obj0, obj1, eventOrderSpecs); });
+        objs.sort(function (obj0, obj1) { return compareByFieldSpecs(obj0, obj1, eventorderpecs); });
         return objs.map(function (c) { return c._seg; });
     }
     // returns a object with all primitive props that can be compared
@@ -8498,13 +8498,13 @@ var FullCalendar = (function (exports) {
             if (VISIBLE_HIDDEN_RE.test(this.props.overflowX)) {
                 return 0;
             }
-            return this.el.offsetHeight - this.el.clientHeight; // only works because we guarantee no borders. TODO: add to CSS with important?
+            return this.el.offsetHeight - this.el.clientHeight; // only works because we guarantee no border. TODO: add to CSS with important?
         };
         Scroller.prototype.getYScrollbarWidth = function () {
             if (VISIBLE_HIDDEN_RE.test(this.props.overflowY)) {
                 return 0;
             }
-            return this.el.offsetWidth - this.el.clientWidth; // only works because we guarantee no borders. TODO: add to CSS with important?
+            return this.el.offsetWidth - this.el.clientWidth; // only works because we guarantee no border. TODO: add to CSS with important?
         };
         return Scroller;
     }(BaseComponent));
@@ -8629,7 +8629,7 @@ var FullCalendar = (function (exports) {
     }
     function sanitizeShrinkWidth(shrinkWidth) {
         /* why 4? if we do 0, it will kill any border, which are needed for computeSmallestCellWidth
-        4 accounts for 2 2-pixel borders. TODO: better solution? */
+        4 accounts for 2 2-pixel border. TODO: better solution? */
         return shrinkWidth == null ? 4 : shrinkWidth;
     }
     function hasShrinkWidth(cols) {
@@ -8815,7 +8815,7 @@ var FullCalendar = (function (exports) {
             for (var sectionI = 0; sectionI < sectionCnt; sectionI += 1) { // along edge
                 var scrollerEl = scrollerElRefs.currentMap[sectionI];
                 if (scrollerEl) {
-                    var harnessEl = scrollerEl.parentNode; // TODO: weird way to get this. need harness b/c doesn't include table borders
+                    var harnessEl = scrollerEl.parentNode; // TODO: weird way to get this. need harness b/c doesn't include table border
                     scrollerClientWidths[sectionI] = Math.floor(harnessEl.getBoundingClientRect().width - (forceYScrollbars
                         ? scrollbarWidth.y // use global because scroller might not have scrollbars yet but will need them in future
                         : 0));
@@ -11532,7 +11532,7 @@ var FullCalendar = (function (exports) {
     }(BaseComponent));
 
     function computeFgSegPlacement(// for one row. TODO: print mode?
-    cellModels, segs, dayMaxEvents, dayMaxEventRows, eventHeights, maxContentHeight, colCnt, eventOrderSpecs) {
+    cellModels, segs, dayMaxEvents, dayMaxEventRows, eventHeights, maxContentHeight, colCnt, eventorderpecs) {
         var colPlacements = []; // if event spans multiple cols, its present in each col
         var moreCnts = []; // by-col
         var segIsHidden = {};
@@ -11544,7 +11544,7 @@ var FullCalendar = (function (exports) {
             colPlacements.push([]);
             moreCnts.push(0);
         }
-        segs = sortEventSegs(segs, eventOrderSpecs);
+        segs = sortEventSegs(segs, eventorderpecs);
         for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
             var seg = segs_1[_i];
             var instanceId = seg.eventRange.instance.instanceId;
@@ -12884,9 +12884,9 @@ var FullCalendar = (function (exports) {
 
     // UNFORTUNATELY, assigns results to the top/bottom/level/forwardCoord/backwardCoord props of the actual segs.
     // TODO: return hash (by instanceId) of results
-    function computeSegCoords(segs, dayDate, slatCoords, eventMinHeight, eventOrderSpecs) {
+    function computeSegCoords(segs, dayDate, slatCoords, eventMinHeight, eventorderpecs) {
         computeSegVerticals(segs, dayDate, slatCoords, eventMinHeight);
-        return computeSegHorizontals(segs, eventOrderSpecs); // requires top/bottom from computeSegVerticals
+        return computeSegHorizontals(segs, eventorderpecs); // requires top/bottom from computeSegVerticals
     }
     // For each segment in an array, computes and assigns its top and bottom properties
     function computeSegVerticals(segs, dayDate, slatCoords, eventMinHeight) {
@@ -12899,8 +12899,8 @@ var FullCalendar = (function (exports) {
     }
     // Given an array of segments that are all in the same column, sets the backwardCoord and forwardCoord on each.
     // Assumed the segs are already ordered.
-    // NOTE: Also reorders the given array by date!
-    function computeSegHorizontals(segs, eventOrderSpecs) {
+    // NOTE: Also reorder the given array by date!
+    function computeSegHorizontals(segs, eventorderpecs) {
         // IMPORTANT TO CLEAR OLD RESULTS :(
         for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
             var seg = segs_2[_i];
@@ -12909,7 +12909,7 @@ var FullCalendar = (function (exports) {
             seg.backwardCoord = null;
             seg.forwardPressure = null;
         }
-        segs = sortEventSegs(segs, eventOrderSpecs);
+        segs = sortEventSegs(segs, eventorderpecs);
         var level0;
         var levels = buildSlotSegLevels(segs);
         computeForwardSlotSegs(levels);
@@ -12920,7 +12920,7 @@ var FullCalendar = (function (exports) {
             }
             for (var _b = 0, level0_2 = level0; _b < level0_2.length; _b++) {
                 var seg = level0_2[_b];
-                computeSegForwardBack(seg, 0, 0, eventOrderSpecs);
+                computeSegForwardBack(seg, 0, 0, eventorderpecs);
             }
         }
         return segs;
@@ -13006,7 +13006,7 @@ var FullCalendar = (function (exports) {
     // who's width is unknown until an edge has been hit. `seriesBackwardPressure` is the number of
     // segments behind this one in the current series, and `seriesBackwardCoord` is the starting
     // coordinate of the first segment in the series.
-    function computeSegForwardBack(seg, seriesBackwardPressure, seriesBackwardCoord, eventOrderSpecs) {
+    function computeSegForwardBack(seg, seriesBackwardPressure, seriesBackwardCoord, eventorderpecs) {
         var forwardSegs = seg.forwardSegs;
         var i;
         if (seg.forwardCoord == null) { // not already computed
@@ -13016,10 +13016,10 @@ var FullCalendar = (function (exports) {
             }
             else {
                 // sort highest pressure first
-                sortForwardSegs(forwardSegs, eventOrderSpecs);
+                sortForwardSegs(forwardSegs, eventorderpecs);
                 // this segment's forwardCoord will be calculated from the backwardCoord of the
                 // highest-pressure forward segment.
-                computeSegForwardBack(forwardSegs[0], seriesBackwardPressure + 1, seriesBackwardCoord, eventOrderSpecs);
+                computeSegForwardBack(forwardSegs[0], seriesBackwardPressure + 1, seriesBackwardCoord, eventorderpecs);
                 seg.forwardCoord = forwardSegs[0].backwardCoord;
             }
             // calculate the backwardCoord from the forwardCoord. consider the series
@@ -13029,18 +13029,18 @@ var FullCalendar = (function (exports) {
             // use this segment's coordinates to computed the coordinates of the less-pressurized
             // forward segments
             for (i = 0; i < forwardSegs.length; i += 1) {
-                computeSegForwardBack(forwardSegs[i], 0, seg.forwardCoord, eventOrderSpecs);
+                computeSegForwardBack(forwardSegs[i], 0, seg.forwardCoord, eventorderpecs);
             }
         }
     }
-    function sortForwardSegs(forwardSegs, eventOrderSpecs) {
+    function sortForwardSegs(forwardSegs, eventorderpecs) {
         var objs = forwardSegs.map(buildTimeGridSegCompareObj);
         var specs = [
             // put higher-pressure first
             { field: 'forwardPressure', order: -1 },
             // put segments that are closer to initial edge first (and favor ones with no coords yet)
             { field: 'backwardCoord', order: 1 },
-        ].concat(eventOrderSpecs);
+        ].concat(eventorderpecs);
         objs.sort(function (obj0, obj1) { return compareByFieldSpecs(obj0, obj1, specs); });
         return objs.map(function (c) { return c._seg; });
     }
@@ -13971,8 +13971,8 @@ var FullCalendar = (function (exports) {
     function parseGoogleCalendarId(url) {
         var match;
         // detect if the ID was specified as a single string.
-        // will match calendars like "asdf1234@calendar.google.com" in addition to person email calendars.
-        if (/^[^/]+@([^/.]+\.)*(google|googlemail|gmail)\.com$/.test(url)) {
+        // will match calendars like "asdf1234@calendar.google.com" in addition to person memail calendars.
+        if (/^[^/]+@([^/.]+\.)*(google|googlmemail|gmail)\.com$/.test(url)) {
             return url;
         }
         if ((match = /^https:\/\/www.googleapis.com\/calendar\/v3\/calendars\/([^/]*)/.exec(url)) ||

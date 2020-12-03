@@ -1,0 +1,68 @@
+﻿@model IEnumerable<campingplan.Models.order_detail>
+
+@{
+    //ViewBag.Title = "訂單明細";
+    //Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+    string str_image_url = "";
+    string str_qty_name = "";
+    int index = 0;
+}
+
+<section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row w-100">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h3 class="display-5 mb-2 text-center">訂單：@ViewBag.OrderNo</h3>
+                <p class="mb-5 text-center">
+                    <i class="text-info font-weight-bold">@Model.Count()</i> 項商品
+                </p>
+                <table id="shoppingCart" class="table table-condensed table-responsive">
+                    <thead>
+                        <tr>
+                            <th style="width:70%">購買商品</th>
+                            <th style="width:10%">單價</th>
+                            <th style="width:10%">數量</th>
+                            <th style="width:10%">小計</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            index += 1;
+                            str_qty_name = "Carts[" + index + "].qty";
+                            str_image_url = string.Format("~/Images/product/{0}/{1}.jpg", item.product_no, item.product_no);
+                            <tr>
+                                <td data-th="Product">
+                                    <div class="row">
+                                        <div class="col-md-3 text-left">
+                                            <img src="@Url.Content(str_image_url)" alt="@item.product_no" class="img-fluid d-none d-md-block rounded mb-2 shadow">
+                                        </div>
+                                        <div class="col-md-9 text-left mt-sm-2">
+                                            <h6>@item.product_name</h6>
+                                            <p class="font-weight-light">@item.product_spec</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Price">$@item.price</td>
+                                <td data-th="Price">@item.qty</td>
+                                <td data-th="Price">@item.amount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="float-right text-right">
+                    <h4 style="font-weight:bold;">
+                        合計金額:<span style="color:red;">$@Model.Sum(m => m.amount)</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 d-flex align-items-center">
+            <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                <a href="/Member/UnClose/Index" class="btn btn-primary">
+                    <i class="fas fa-arrow-left mr-2"></i> 返回
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
