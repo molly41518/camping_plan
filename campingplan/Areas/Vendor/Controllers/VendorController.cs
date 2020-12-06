@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using campingplan.App_Class;
 using campingplan.Models;
 
-namespace goshopping.Areas.Vendor.Controllers
+namespace campingplan.Areas.Vendor.Controllers
 {
     public class VendorController : Controller
     {

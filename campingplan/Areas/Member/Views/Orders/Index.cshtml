@@ -53,16 +53,16 @@
                             <tbody>
                                 @foreach (var item in models)
                                 {
-                                    str_image_url = string.Format("~/Images/product/{0}/{1}.jpg", item.product_no, item.product_no);
+                                    str_image_url = string.Format("~/Images/product/{0}/{1}.jpg", item.pno, item.pno);
                                     <tr>
                                         <td data-th="Product">
                                             <div class="row">
                                                 <div class="col-md-3 text-left">
-                                                    <img src="@Url.Content(str_image_url)" alt="@item.product_no" class="img-fluid d-none d-md-block rounded mb-2 shadow">
+                                                    <img src="@Url.Content(str_image_url)" alt="@item.pno" class="img-fluid d-none d-md-block rounded mb-2 shadow">
                                                 </div>
                                                 <div class="col-md-9 text-left mt-sm-2">
-                                                    <h6>@item.product_name</h6>
-                                                    <p class="font-weight-light">@item.product_spec</p>
+                                                    <h6>@item.pname</h6>
+                                                    <p class="font-weight-light">@item.ptype_spec</p>
                                                 </div>
                                             </div>
                                         </td>

@@ -7,9 +7,9 @@ using System.Web.Mvc;
 using campingplan.App_Class;
 using campingplan.Models;
 
-namespace goshopping.Areas.Vendor.Controllers
+namespace campingplan.Areas.Vendor.Controllers
 {
-    public class orderController : Controller
+    public class OrdersController : Controller
     {
         [LoginAuthorize(RoleNo = "Vendor")]
         public ActionResult Index(int id = 0)
@@ -72,7 +72,7 @@ namespace goshopping.Areas.Vendor.Controllers
                         order_closed = d1.order_closed,
                         user_no = d1.mno
                        })
-                        .Join(db.status , p => p.order_status , d => d.ststus_no ,
+                        .Join(db.status , p => p.order_status , d => d.status_no ,
                         (p2 , d2) => new {
                             order_no = p2.p1.order_no,
                             order_date = p2.order_date,
@@ -80,14 +80,14 @@ namespace goshopping.Areas.Vendor.Controllers
                             order_closed = p2.order_closed,
                             user_no = p2.user_no,
                             vendor_no = p2.p1.vendor_no,
-                            product_no = p2.p1.pno,//有疑慮
-                            product_name = p2.p1.pname,//有疑慮
-                            product_spec = p2.p1.ptype_name,
+                            product_no = p2.p1.pno,
+                            product_name = p2.p1.pname,
+                            product_spec = p2.p1.ptype_spec,
                             price = p2.p1.price,
                             qty = p2.p1.qty,
                             amount = p2.p1.amount,
                             remark = p2.p1.remark,
-                            status_name = d2.ststus_name})
+                            status_name = d2.status_name})
                         .Where(m => m.vendor_no == UserAccount.UserNo)
                         .Where(m => m.order_closed == UserAccount.UserCode)
                         .OrderByDescending(m => m.order_no)

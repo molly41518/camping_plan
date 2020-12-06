@@ -72,6 +72,17 @@ namespace campingplan.App_Class
             return str_name;
         }
 
+        public static string GetUserName(string userNo)
+        {
+            string str_name = "";
+            using (dbcon db = new dbcon())
+            {
+                var models = db.users.Where(m => m.mno == userNo).FirstOrDefault();
+                if (models != null) str_name = models.mname;
+            }
+            return str_name;
+        }
+
 
 
         public static Dictionary<string, List<product_typedetail>> GetDictProductTypeDetail(ICollection<product_typedetail> product_detail_list)
@@ -275,7 +286,7 @@ namespace campingplan.App_Class
         {
             using (dbcon db = new dbcon())
             {
-                return db.status.OrderBy(m => m.ststus_no).ToList();
+                return db.status.OrderBy(m => m.status_no).ToList();
             }
         }
 

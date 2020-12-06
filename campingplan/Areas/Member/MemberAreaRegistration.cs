@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
 
-namespace goshopping.Areas.Member
+namespace campingplan.Areas.Member
 {
     public class MemberAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
-            get 
+            get     
             {
                 return "Member";
             }

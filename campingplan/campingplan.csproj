@@ -201,6 +201,11 @@
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelMetaData\categorys.cs" />
+    <Compile Include="Models\ModelMetaData\status.cs" />
+    <Compile Include="Models\ModelMetaData\companys.cs" />
+    <Compile Include="Models\ModelMetaData\order.cs" />
+    <Compile Include="Models\ModelMetaData\order_detail.cs" />
+    <Compile Include="Models\ModelMetaData\shippings.cs" />
     <Compile Include="Models\ModelMetaData\users.cs" />
     <Compile Include="Models\ModelMetaData\payment.cs" />
     <Compile Include="Models\ModelMetaData\product.cs" />
@@ -243,6 +248,8 @@
     </Compile>
     <Compile Include="Models\ViewModel\cvmLogin.cs" />
     <Compile Include="Models\ViewModel\cvmOrder.cs" />
+    <Compile Include="Models\ViewModel\cvmOrderDetail.cs" />
+    <Compile Include="Models\ViewModel\cvmRegister.cs" />
     <Compile Include="Models\ViewModel\cvmResetPassword.cs" />
     <Compile Include="Models\ViewModel\cvmSaleRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -553,7 +560,6 @@
     <Content Include="Areas\Member\Views\UnClose\Index.cshtml" />
     <Content Include="Areas\Member\Views\UnClose\OrderDetail.cshtml" />
     <Content Include="Areas\Member\Views\web.config" />
-    <Content Include="Areas\Vendor\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Vendor\Views\Products\Delete.cshtml" />
     <Content Include="Areas\Vendor\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Vendor\Views\Products\Index.cshtml" />
@@ -1103,6 +1109,13 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Areas\Admin\Views\Shipping\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipping\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipping\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Status\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Status\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Status\Index.cshtml" />
+    <Content Include="Areas\Vendor\Views\Orders\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

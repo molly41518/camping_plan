@@ -34,10 +34,10 @@
                 "render": function (data) { return moment(data).format("YYYY/MM/DD"); }
             },
             { "data": "status_name", "width": "60px" },
-            { "data": "user_no", "width": "60px" },
+            { "data": "mno", "width": "60px" },
             { "data": "user_name", "width": "60px" },
             { "data": "payment_name", "width": "60px" },
-            { "data": "shipping_name", "width": "60px" },
+            //{ "data": "shipping_name", "width": "60px" },
             { "data": "receive_name", "width": "60px" },
             { "data": "receive_address", "width": "100px" },
             { "data": "remark", "autoWidth": true }

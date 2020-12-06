@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace campingplan.Areas.Admin.Controllers
 {
-    public class orderController : Controller
+    public class OrdersController : Controller
     {
         [LoginAuthorize(RoleNo = "Admin")]
         public ActionResult Index(int id = 0, int code = -1)
@@ -43,28 +43,22 @@ namespace campingplan.Areas.Admin.Controllers
             using (dbcon db = new dbcon())
             {
                 var models = db.order
-                    .Join(db.payments, p => p.payment_no, d => d.payment_no,
-                    (p1, d1) => new { p1, payment_name = d1.payment })
-                    .Join(db.status, p => p.p1.order_status, d => d.ststus_no,
-                    (p2, d2) => new { p2, status_name = d2.ststus_name })
-                    .Join(db.users , p => p.p2.p1.mno , d => d.mno,
-                    (p3 , d3) => new { p3 , user_name = d3.mname})
-                    .Join(db.shippings, p => p.p3.p2.p1.shipping_no, d => d.shipping_no,
-                    (p4, d4) => new
+                    .Join(db.payments, p => p.payment_no, d => d.payment_no,(p1, d1) => new { p1, payment_name = d1.payment })
+                    .Join(db.status, p => p.p1.order_status, d => d.status_no,(p2, d2) => new { p2, status_name = d2.status_name })
+                    .Join(db.users , p => p.p2.p1.mno , d => d.mno,(p3 , d3) => new 
                     {
-                        rowid = p4.p3.p2.p1.rowid,
-                        order_closed = p4.p3.p2.p1.order_closed,
-                        user_no = p4.p3.p2.p1.mno,
-                        user_name = p4.user_name,
-                        order_no = p4.p3.p2.p1.order_no,
-                        order_date = p4.p3.p2.p1.order_date,
-                        status_no = p4.p3.p2.p1.order_status,
-                        status_name = p4.p3.status_name,
-                        shipping_name = d4.shipping_name,
-                        payment_name = p4.p3.p2.payment_name,
-                        receive_name = p4.p3.p2.p1.receive_name,
-                        receive_address = p4.p3.p2.p1.receive_address,
-                        remark = p4.p3.p2.p1.remark
+                        rowid = p3.p2.p1.rowid,
+                        order_closed = p3.p2.p1.order_closed,
+                        mno = p3.p2.p1.mno,
+                        user_name = d3.mname,
+                        order_no = p3.p2.p1.order_no,
+                        order_date = p3.p2.p1.order_date,
+                        order_status = p3.p2.p1.order_status,
+                        status_name = p3.status_name,
+                        payment_name = p3.p2.payment_name,
+                        receive_name = p3.p2.p1.receive_name,
+                        receive_address = p3.p2.p1.receive_address,
+                        remark = p3.p2.p1.remark
                     })
                      .Where(m => m.order_closed == UserAccount.UserCode)
                      .OrderByDescending(m => m.order_no).ToList();
@@ -88,8 +82,8 @@ namespace campingplan.Areas.Admin.Controllers
                 foreach (var item in lists)
                 {
                     SelectListItem list = new SelectListItem();
-                    list.Value = item.ststus_no;
-                    list.Text = item.ststus_name;
+                    list.Value = item.status_no;
+                    list.Text = item.status_name;
                     selectList.Add(list);
                 }
                 //預設選擇哪一筆

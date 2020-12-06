@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace goshopping.Areas.Vendor
+namespace campingplan.Areas.Vendor
 {
     public class VendorAreaRegistration : AreaRegistration 
     {

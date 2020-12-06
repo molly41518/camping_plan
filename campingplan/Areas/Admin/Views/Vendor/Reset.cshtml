@@ -1,4 +1,4 @@
-﻿@model goshopping.Models.Users
+﻿@model campingplan.Models.users
 
 @{
     ViewBag.Title = "廠商重設密碼";
@@ -37,17 +37,17 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.LabelFor(model => model.memail, htmlAttributes: new { @class = "control-label control-header" })
         @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
-        @if (Model.email != null)
-        {<span class="control-label control-value">@Model.email</span>}
+        @if (Model.memail != null)
+        {<span class="control-label control-value">@Model.memail</span>}
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label control-header" })
         @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
-        @if (Model.email != null)
-        {<span class="control-label control-value">@Model.email</span>}
+        @if (Model.remark != null)
+        {<span class="control-label control-value">@Model.remark</span>}
     </div>
 
     <div>

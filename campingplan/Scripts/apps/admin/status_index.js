@@ -28,8 +28,8 @@
                     return '<a class="popup"  title="修改記錄" href="/Admin/Status/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a><a class="popup" title="刪除記錄" href="/Admin/Status/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>';
                 }
             },
-            { "data": "mno", "width": "50px" },
-            { "data": "mname", "width": "200px" },
+            { "data": "status_no", "width": "50px" },
+            { "data": "status_name", "width": "200px" },
             { "data": "remark", "autoWidth": true }
         ]
     })

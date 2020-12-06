@@ -28,8 +28,8 @@
                     return '<a class="popup"  title="修改記錄" href="/Admin/Shipping/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a><a class="popup" title="刪除記錄" href="/Admin/Shipping/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>';
                 }
             },
-            { "data": "mno", "width": "30px" },
-            { "data": "mname", "width": "200px" },
+            { "data": "shipping_no", "width": "30px" },
+            { "data": "shipping_name", "width": "200px" },
             { "data": "remark", "autoWidth": true }
         ]
     })

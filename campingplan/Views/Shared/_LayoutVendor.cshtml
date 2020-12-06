@@ -3,11 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Page.Title</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/Content/camping/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/DataTables/css/jquery.dataTables.min.css")" rel="stylesheet" />
@@ -16,18 +18,18 @@
     <link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet" />
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src=@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/umd/popper.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
     <script src="@Url.Content("~/Scripts/locales/bootstrap-datepicker.zh-TW.min.js")"></script>
     <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment-with-locales.min.js")">55</script>
     <script src="@Url.Content("~/easion/js/easion.js")"></script>
     <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
-    <script src="@Url.Content("~/easion/js/chart-js-config.js")"></script>
+    <script src="@Url.Content("~/easion/js/chart-js-config.js")">55</script>
 
     @RenderSection("styles", required: false)
     @RenderSection("scripts", required: false)

@@ -41,7 +41,7 @@
         "data": "birthday", "width": "70px", "title": "出生日期",
                     "render": function (data) { return moment(data).format("YYYY/MM/DD"); }
 },
-                {"data": "email", "width": "200px", "title": "電子郵件" },
+                {"data": "memail", "width": "200px", "title": "電子郵件" },
                 {"data": "remark", "autoWidth": true, "title": "備註" }
 ],
 })

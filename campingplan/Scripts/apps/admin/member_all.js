@@ -36,6 +36,7 @@
                 }
             },
             { "data": "mno", "width": "30px", "title": "編號" },
+            { "data": "maccount", "width": "60px", "title": "帳號" },
             { "data": "mname", "width": "60px", "title": "姓名" },
             {
                 "data": "birthday", "width": "70px", "title": "出生日期",

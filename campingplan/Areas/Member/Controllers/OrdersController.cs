@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace campingplan.Areas.Member.Controllers
 {
-    public class orderController : Controller
+    public class OrdersController : Controller
     {
         [LoginAuthorize(RoleNo = "Member")]
         public ActionResult Index(int id = 0, int code = -1)
@@ -46,8 +46,8 @@ namespace campingplan.Areas.Member.Controllers
                 var models = db.order
                     .Join(db.payments , p => p.payment_no , d => d.payment_no ,
                     (p1 , d1) => new { p1 , payment_name = d1.payment })
-                    .Join(db.status , p => p.p1.order_status , d => d.ststus_no ,
-                    (p2 , d2) => new { p2 , status_name = d2.ststus_name })
+                    .Join(db.status , p => p.p1.order_status , d => d.status_no ,
+                    (p2 , d2) => new { p2 , status_name = d2.status_name })
                     .Join(db.shippings , p => p.p2.p1.shipping_no , d => d.shipping_no,
                     (p3 , d3) => new
                     { 

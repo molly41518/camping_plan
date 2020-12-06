@@ -84,6 +84,8 @@ namespace campingplan.Areas.Admin.Controllers
                         {
                             users.isvarify = Shop.BoolToInteger(models.bool_isvarify);
                             users.mno = models.mno;
+                            users.maccount = models.maccount;
+                            users.mnickname = models.mnickname;
                             users.mname = models.mname;
                             users.memail = models.memail;
                             users.birthday = models.birthday;

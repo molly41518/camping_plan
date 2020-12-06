@@ -4,13 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using campingplan.App_Class;
 using campingplan.Models;
 
 namespace campingplan.Areas.Vendor.Controllers
 {
-    public class productsController : Controller
+    public class ProductsController : Controller
     {
         [LoginAuthorize(RoleNo = "Vendor")]
         public ActionResult Index()

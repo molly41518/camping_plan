@@ -8,7 +8,7 @@ using campingplan.Models;
 
 namespace campingplan.Areas.Admin.Controllers
 {
-    public class statusController : Controller
+    public class StatusController : Controller
     {
         [LoginAuthorize(RoleNo = "Admin")]
         public ActionResult Index()
@@ -20,7 +20,7 @@ namespace campingplan.Areas.Admin.Controllers
         {
             using (dbcon db = new dbcon())
             {
-                var models = db.status.OrderBy(m => m.ststus_no).ToList();
+                var models = db.status.OrderBy(m => m.status_no).ToList();
                 return Json(new { data = models }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -56,8 +56,8 @@ namespace campingplan.Areas.Admin.Controllers
                         var Status = db.status.Where(m => m.rowid == models.rowid).FirstOrDefault();
                         if (Status != null)
                         {
-                            Status.ststus_no = models.ststus_no;
-                            Status.ststus_name = models.ststus_name;
+                            Status.status_no = models.status_no;
+                            Status.status_name = models.status_name;
                             Status.remark = models.remark;
                         }
                     }

@@ -201,8 +201,8 @@
             <PropertyRef Name="rowid" />
           </Key>
           <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ststus_no" Type="nvarchar" MaxLength="50" />
-          <Property Name="ststus_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="status_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="status_name" Type="nvarchar" MaxLength="50" />
           <Property Name="remark" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="users">
@@ -267,10 +267,10 @@
           </AssociationSet>
           <EntitySet Name="roles" EntityType="campingplanModel.roles" />
           <EntitySet Name="users" EntityType="campingplanModel.users" />
-          <EntitySet Name="status" EntityType="campingplanModel.status" />
           <EntitySet Name="shippings" EntityType="campingplanModel.shippings" />
           <EntitySet Name="order" EntityType="campingplanModel.order" />
           <EntitySet Name="companys" EntityType="campingplanModel.companys" />
+          <EntitySet Name="status" EntityType="campingplanModel.status" />
         </EntityContainer>
         <EntityType Name="carts">
           <Key>
@@ -469,15 +469,6 @@
           <Property Name="varify_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isvarify" Type="Int32" />
         </EntityType>
-        <EntityType Name="status">
-          <Key>
-            <PropertyRef Name="rowid" />
-          </Key>
-          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ststus_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ststus_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="shippings">
           <Key>
             <PropertyRef Name="rowid" />
@@ -529,6 +520,15 @@
           <Property Name="adr_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="email_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="url_company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="rowid" />
+          </Key>
+          <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
@@ -703,16 +703,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="status">
-            <EntityTypeMapping TypeName="campingplanModel.status">
-              <MappingFragment StoreEntitySet="status">
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="ststus_name" ColumnName="ststus_name" />
-                <ScalarProperty Name="ststus_no" ColumnName="ststus_no" />
-                <ScalarProperty Name="rowid" ColumnName="rowid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="shippings">
             <EntityTypeMapping TypeName="campingplanModel.shippings">
               <MappingFragment StoreEntitySet="shippings">
@@ -765,6 +755,16 @@
                 <ScalarProperty Name="mname" ColumnName="mname" />
                 <ScalarProperty Name="msname" ColumnName="msname" />
                 <ScalarProperty Name="mno" ColumnName="mno" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="campingplanModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="status_no" ColumnName="status_no" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
               </MappingFragment>
             </EntityTypeMapping>

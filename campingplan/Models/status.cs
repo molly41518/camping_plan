@@ -15,8 +15,8 @@ namespace campingplan.Models
     public partial class status
     {
         public int rowid { get; set; }
-        public string ststus_no { get; set; }
-        public string ststus_name { get; set; }
+        public string status_no { get; set; }
+        public string status_name { get; set; }
         public string remark { get; set; }
     }
 }
