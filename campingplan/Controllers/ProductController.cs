@@ -61,9 +61,22 @@ namespace campingplan.Controllers
             string dateSearch = Request.Form["dateSearch"];
             if (dateSearch != null)
             {
-                DateTime dateDT = Convert.ToDateTime(dateSearch);
-                int num = 2;
-                relayModel = relayModel.Where(m => m.product_typedetail.Any(t => t.product_typedetail_everydaystock.Any(s => s.stock_date == dateDT && s.stock >= num)));
+                int qty = 2;
+                //DateTime startday = Convert.ToDateTime(Request.Form["startday"]);
+                //DateTime endday = Convert.ToDateTime(Request.Form["endday"]);
+                DateTime startday = new DateTime(2020, 12, 2);
+                DateTime endday = new DateTime(2020, 12, 3);
+                int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
+                for (int i = 0; i < days; i++)
+                {
+                    DateTime tmpDay = startday.AddDays(i);
+                    relayModel = relayModel.Where(m => m.product_typedetail
+                        .Any(t => t.product_typedetail_everydaystock
+                            .Any(s => s.stock_date == tmpDay && s.stock >= qty)));
+                }
+                ViewBag.startday = startday.Date;
+                ViewBag.endday = endday.Date;
+                ViewBag.qty = qty;
             }
 
             // 特徵搜索
@@ -87,10 +100,12 @@ namespace campingplan.Controllers
             return View(model);
         }
 
-        public ActionResult ProductDetail(string id)
+        public ActionResult ProductDetail(string id, DateTime? startday, DateTime? endday, int? qty)
         {
             var modal = db.product.Where(m => m.pno == id).FirstOrDefault();
-            var typedetail = db.product_typedetail.Where(m => m.pno == id).FirstOrDefault();
+            if (endday != null) ViewBag.endday = endday;
+            if (startday != null) ViewBag.startday = startday;
+            if (qty != null) ViewBag.qty = qty;
             Shop.ProductTypeNo = id;
             return View(modal);
         }

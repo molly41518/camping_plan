@@ -132,9 +132,14 @@
             <h2 class="my-5">預定日期</h2>
 
             @{
-                DateTime startday = new DateTime(2020, 12, 01);
-                DateTime endday = new DateTime(2020, 12, 01);
-                int qty = 1;
+                DateTime startday = DateTime.Today;
+                DateTime endday = startday.AddDays(1);
+                int qty = ViewBag.qty == null ? 1 : ViewBag.qty;
+                if (ViewBag.startday != null && ViewBag.endday != null)
+                {
+                    startday = ViewBag.startday;
+                    endday = ViewBag.endday;
+                }
             }
         <p>@startday</p>
         <p>@endday</p>
@@ -143,7 +148,7 @@
 
             <h2 class="my-5">營地介紹</h2>
             @{
-                var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail);
+                var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail, qty, startday, endday);
 
                 foreach (var area in productdetaildict)
                 {

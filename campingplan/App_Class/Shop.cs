@@ -83,13 +83,28 @@ namespace campingplan.App_Class
             return str_name;
         }
 
+        public static bool IsHasStock(product_typedetail pTD, int num, DateTime startday, DateTime endday)
+        {
+            int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
+            for (int i = 0; i < days; i++)
+            {
+                DateTime tmpDay = startday.AddDays(i);
+                if (!pTD.product_typedetail_everydaystock.Any(s => s.stock_date == tmpDay && s.stock >= num))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-
-        public static Dictionary<string, List<product_typedetail>> GetDictProductTypeDetail(ICollection<product_typedetail> product_detail_list)
+        public static Dictionary<string, List<product_typedetail>> GetDictProductTypeDetail(ICollection<product_typedetail> product_detail_list, int qty, DateTime startday, DateTime endday)
         {
             Dictionary<string, List<product_typedetail>> output = new Dictionary<string, List<product_typedetail>>();
             foreach (var p in product_detail_list)
             {
+                if (!IsHasStock(p, qty, startday, endday)) {
+                    continue;
+                }
                 bool is_output_has_area = output.ContainsKey(p.parea_name);
                 if (!is_output_has_area)
                 {

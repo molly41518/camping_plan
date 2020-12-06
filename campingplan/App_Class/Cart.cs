@@ -202,7 +202,9 @@ namespace campingplan.App_Class
         {
             using (dbcon db = new dbcon())
             {
-                int days = new TimeSpan(startday.Ticks - endday.Ticks).Days;
+                System.Diagnostics.Debug.WriteLine(startday.ToString());
+                System.Diagnostics.Debug.WriteLine(endday.ToString());
+                int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
                 string day_spec = "";
                 for (int i = 0; i < days; i++)
                 {
