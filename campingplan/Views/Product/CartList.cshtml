@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "CartList";
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 
 
@@ -60,6 +61,7 @@
             </div>
             @foreach (var item in Model)
             {
+                string productimgname = string.Format("{0}.jpeg", @item.pno);
                 <div class="col-lg-12 mb-2">
                     <div class="card carditem">
                         <div class="card-body">
@@ -68,7 +70,7 @@
                                     <input type="checkbox" style="width: 20px; height: 20px" />
                                 </div>
                                 <div class="col-2 text-center">
-                                    <img class="img-fluid imgproduct" src="/img/bg/bg-2.jpg" />
+                                    <img class="img-fluid imgproduct" src="~/Content/images/product/@productimgname" />
                                 </div>
                                 <div class="col-3">
                                     <h5>@Html.DisplayFor(modelItem => item.pname)</h5>

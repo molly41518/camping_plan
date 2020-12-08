@@ -1,7 +1,146 @@
 ﻿@{
     ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 
-<p>Use this area to provide additional information.</p>
+}
+
+<style type="text/css">
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-family: "微軟正黑體";
+    }
+    .navbar {
+        -webkit-box-shadow: 0 8px 6px -6px #444;
+        -moz-box-shadow: 0 8px 6px -6px #555;
+        box-shadow: 0 8px 6px -6px #777;
+    }
+
+    #qaContent h3 {
+        width: 500px;
+        height: 22px;
+        text-indent: 50px;
+        color: #639;
+        font-size: 24px;
+    }
+
+    #qaContent ul .accordionPart {
+        margin: 10px 10px 50px 30px;
+    }
+
+        #qaContent ul .accordionPart li {
+            border-bottom: solid 1px #e3e3e3;
+            padding-bottom: 12px;
+            margin-top: 12px;
+        }
+
+            #qaContent ul.accordionPart li .qa_title {
+                background: url(icon_q_a.gif) no-repeat 0px 3px;
+                padding-left: 28px;
+                color: #1186ec;
+                cursor: pointer;
+                margin: 20px 0 0 0;
+            }
+
+            #qaContent ul.accordionPart li .qa_content {
+                margin: 5px 0 0 0;
+                background: url(icon_q_a.gif) no-repeat 0px -24px;
+                padding-left: 28px;
+                color: #666;
+            }
+</style>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".qa_content").hide()
+        var judge = 0;
+        $("#btn1").click(function () {
+            if (judge == 0) {
+                $(".qa_content").slideDown()
+                judge = 1
+            } else {
+                $(".qa_content").slideUp()
+                judge = 0
+            }
+
+        })
+        $(".qa_title").click(function () {
+            $(this).next().slideToggle()
+        })
+    })
+
+</script>
+
+
+<body>
+    <div class="row py-5" id="about">
+        <div class="col-12 col-sm-8 offset-sm-2 mt-5 mb-2">
+            <h1 class="h3 border-bottom font-weight-bold text-warning txtShadow">關於我們</h1>
+        </div>
+        <div class="col-12 col-sm-4 offset-sm-2 ">
+            <p class="text-justify p-2 txtFormat">營火計畫有限公司創立於民國105年。 ... 本公司擁有優秀的經營團隊，秉持著『營火計畫』的經營理念，追求企業整體營運穩定及永續經營及成長，追求企業整體營運穩定及永續經營及成長。由於囊括歐式麵包烘焙技術，稟承中點製作技藝精華，產品相繼為國內五星級飯店及航空公司所選用。歷經半世紀的歲月變遷，烘焙技藝代代相傳，產品種類迭有創新。唯一不變的是：對每一份產品的用心及尊重。2018年Debby麵包將帶給大家全新的產品規劃與滿足大家味蕾的精緻糕餅點心，請大家拭目以待。</p>
+        </div>
+        <div class="col-12 col-sm-4">
+            <img src="~/Content/images/logo-03.png" alt="logo" class="img-fluid" />
+        </div>
+    </div>
+    @*<div class="row py-5" id="about">
+        <h1>客戶服務</h1><input type="button" value="全部顯示/隱藏" id="btn1">
+        <hr>
+        <div id="qaContent">
+            <h3>【訂購相關問題】</h3>
+            <ul class="accordionPart">
+                <li>
+                    <div class="qa_title" id="q1">是否有提供送貨到離島的服務？</div>
+                    <div class="qa_content">
+                        因航運成本較高，本站提供免運費服務的範圍只限台灣本島。<br />
+                        若送貨地點是在離島等地時，目前暫不提供寄送服務。
+                    </div>
+                </li>
+            </ul>
+            <h3>【退貨相關問題】</h3>
+            <ul class="accordionPart">
+                <li>
+                    <div class="qa_title" id="q2">最多試用幾天內才能退貨呢？</div>
+                    <div class="qa_content">
+                        依照消保法規定，消費者均享有商品到貨七天猶豫期之權益。<br />
+                        但退回商品必須是全新狀態且完整包裝，否則恕不接受退貨。
+                    </div>
+                </li>
+                <li>
+                    <div class="qa_title" id="q3">退貨時是否需要負擔運費？</div>
+                    <div class="qa_content">
+                        只要消費者是在七天的猶豫期或是保固期限之內退貨的話，<br />
+                        其運費均由本站全額負責。
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+    <div class="row py-5" id="contact">
+        <div class="col-12 col-sm-8 offset-sm-2 mt-5 mb-2">
+            <h1 class="h3 border-bottom font-weight-bold text-warning txtShadow">聯絡資訊</h1>
+        </div>
+        <div class="col-12 col-sm-4 offset-sm-2">
+            <form action="">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="請輸入真實姓名 必填" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="請輸入連絡電話 必填" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" style="resize: none" placeholder="請輸入留言內容 必填 最多200個字" required maxlength="200"></textarea>
+                </div>
+                <input type="submit" value="填好送出" class="btn btn-info">
+            </form>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1yLw-8HmS61XB0qRJy1qbKHOeLd_TCpZ2" width="640" height="480"></iframe>
+            </div>
+        </div>
+    </div>
+</body>

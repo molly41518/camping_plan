@@ -5,7 +5,7 @@
 
 @{
     ViewBag.Title = "CategoryList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 
 @section scripts{
@@ -15,10 +15,10 @@
             $("#myTab a:first").click(function () {
                 $("#tabmenu1").addClass("fade");
             });
-            $("#checkDate").flatpickr(function () {
-                minDate = "today",
-                maxDate = new Date().fp_incr(90),
-                mode= "range";
+            $("#checkDate").flatpickr({
+                    minDate : "today",
+                    maxDate : new Date().fp_incr(90),
+                    mode : "range"
             })
         });
     </script>
@@ -40,7 +40,7 @@
         .masthead {
             padding-top: 10rem;
             padding-bottom: calc(18rem - 4.5rem);
-            background-image: url(/img/bg/bg-2.jpg);
+            background-image: url(../../Content/images/bg/bg-2.jpg);
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: scroll;
@@ -53,6 +53,7 @@
             -moz-box-shadow: 0 8px 6px -6px #555;
             box-shadow: 0 8px 6px -6px #777;
         }
+
         /* pr 單商品card CSS */
         .pr_loction_des {
             color: rgb(110, 109, 109);
@@ -120,6 +121,18 @@
         .text-uppercase {
             background-color: rgba(0, 0, 0, 0.1);
         }
+
+        @@media screen and (max-width: 572px) {
+            .pr_type_loction_lg {
+                display: none;
+            }
+        }
+
+        @@media screen and (min-width: 572px) {
+            .pr_type_loction_sm {
+                display: none;
+            }
+        }
     </style>
 }
 
@@ -132,9 +145,7 @@
                     <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
                 </div>
             </div>
-            <div class="col-8 col-lg-8">
-                <input id="checkDate" />
-            </div>
+
             <div class="col-8 col-lg-8">
                 <ul id="myTab" class="nav nav-tabs border-0">
                     <li class="nav-item offset-3 col-3 p-0">
@@ -148,7 +159,7 @@
                            href="#tabmenu2">分類搜尋</a>
                     </li>
                 </ul>
-                @Html.TextBox("dateSearch", null, new { @class = "form-control col-lg-8" })
+
                 <div class="tab-content">
                     <div id="tabmenu1" class="tab-pane active">
                         <div class="col-12 col-lg-12 p-0">
@@ -158,6 +169,10 @@
                                 <div class="input-group my-2">
 
                                     @Html.TextBox("searchString", null, new { @class = "form-control col-lg-8" })
+                                    @*<div class="col-8 col-lg-8">
+                                            <input id="checkDate" />
+                                        </div>*@
+                                    @Html.TextBox("dateSearch", null, new { @class = "form-control col-lg-8", @id = "checkDate" })
                                     <input type="submit" class="col-lg-4 btn btn-info btn-block m-0" value="搜尋" />
 
                                 </div>
@@ -176,8 +191,6 @@
                                     }
                                 </ul>
                             }
-                            @Html.TextBox("featureSearch", null, new { @class = "form-control col-lg-8" })
-
                             <input type="submit" class="col-12 col-lg-12 btn btn-info btn-block m-0" value="搜尋" />
                         </div>
                     </div>
@@ -186,6 +199,43 @@
         </div>
     </div>
 </header>
+<div class="pr_type_loction_lg mb-4 text-center">
+    <ul class="p-0">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            全部
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            大台北
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            桃園
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            新竹
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            苗栗
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            中彰投
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            雲嘉南
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            高屏
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            宜蘭
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            花東
+        </li>
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+            離島
+        </li>
+    </ul>
+</div>
 
 <div class="container">
     <div class="row">

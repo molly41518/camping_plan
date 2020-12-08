@@ -434,6 +434,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\bg\bg-4.jpeg" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -444,6 +445,7 @@
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\video\campingvideo.mp4" />
     <Content Include="easion\css\demo.css" />
     <Content Include="easion\css\demo.min.css" />
     <Content Include="easion\css\easion.css" />
@@ -498,7 +500,6 @@
     <Content Include="Content\images\bg\bg-1.jpeg" />
     <Content Include="Content\images\bg\bg-2.jpg" />
     <Content Include="Content\images\bg\bg-4.jpg" />
-    <Content Include="Content\images\index-photo.jpeg" />
     <Content Include="Content\images\logo-03.png" />
     <Content Include="Content\images\logo\logo-04.png" />
     <Content Include="Content\images\product\C0001.jpeg" />
@@ -1426,6 +1427,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_LayoutProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\campingplan\v16\" />

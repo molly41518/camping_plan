@@ -3,13 +3,38 @@
 
 @{
     ViewBag.Title = "ProductDetail";
-
-
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.min.css")" />
     @*<link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.print.css")" />*@
+    <style>
+        .masthead {
+            padding-top: 10rem;
+            padding-bottom: calc(18rem - 4.5rem);
+            background-image: url(/img/bg-4.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-size: auto;
+            height: 1%;
+        }
+
+        .navbar {
+            -webkit-box-shadow: 0 8px 6px -6px #444;
+            -moz-box-shadow: 0 8px 6px -6px #555;
+            box-shadow: 0 8px 6px -6px #777;
+        }
+
+        .camptype {
+            list-style: none;
+            display: inline-block;
+            font-size: 1rem;
+            text-align: center;
+        }
+    </style>
+
 }
 
 @section scripts{
@@ -156,7 +181,7 @@
 
                 foreach (var area in productdetaildict)
                 {
-                    <div class="card">
+                    <div class="card mt-3">
                         <div class="card-header">@area.Key</div>
                         <div class="card-body">
                             <div class="container">
@@ -164,7 +189,7 @@
                                     @{
                                         foreach (var detail in area.Value)
                                         { <div class="col-lg-4">
-                                                <img src="/img/bg-2.jpg" class="img-fluid" />
+                                                <img src="~/Content/images/bg/bg-1.jpeg" class="img-fluid" />
                                             </div>
                                             <div class="col-lg-8">
                                                 <h5 class="card-title">@detail.ptype_name</h5>

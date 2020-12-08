@@ -93,7 +93,7 @@ namespace campingplan.Controllers
             }
 
             //分頁
-            int pagesize = 3;
+            int pagesize = 6;
             int pagecurrent = page < 1 ? 1 : page;
             var model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
 
