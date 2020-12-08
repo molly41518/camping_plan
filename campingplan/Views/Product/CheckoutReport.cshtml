@@ -4,14 +4,35 @@
     Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 
-<h2>訂單建立完成!!</h2>
-<h5>
-    您的訂單編號：@Cart.OrderNo
-</h5>
-<h5>
-    請留意您的 memail 信箱，訂單狀態有變動時會即時通知!! <br />
-    如您未付款請於期限內支付款項，收到款項後會立即辦理出貨事宜！！
-</h5>
+<style>
+    a:hover {
+        text-decoration: none;
+    }
 
-@Html.ActionLink("繼續購物", "Index", "Home", null, new { @class = "btn btn-primary" })
+    body {
+        background-color: #eee;
+    }
+
+    .report {
+        margin-top: 7rem;
+        margin-bottom: 3rem;
+    }
+
+</style>
+
+<div class="container report vh-100">
+    <div class="jumbotron bg-white">
+        <h1 class="display-4">訂單建立完成!!</h1>
+        <p class="lead">您的訂單編號：@Cart.OrderNo</p>
+        <hr class="my-4">
+        <p>
+            請留意您的 email 信箱，訂單狀態有變動時會即時通知!! <br />
+            如您未付款請於期限內支付款項，收到款項後會立即辦理出貨事宜！！
+        </p>
+        <p class="lead">
+            @Html.ActionLink("繼續購物", "Index", "Home", null, new { @class = "btn btn-info" })
+        </p>
+    </div>
+</div>
+
 

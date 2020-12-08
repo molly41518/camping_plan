@@ -5,72 +5,127 @@
     Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
 
-<div class="form-horizontal mt-5">
-    <h4 class="mt-5">結帳</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.Hidden("order_no")
-    @Html.Hidden("order_date")
-    @Html.Hidden("user_no")
+<style>
+    a:hover {
+        text-decoration: none;
+    }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.receive_name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.receive_name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.receive_name, "", new { @class = "text-danger" })
+    body {
+        background-color: #eee;
+    }
+    .checkout {
+        margin-top: 7rem;
+        margin-bottom: 3rem;
+    }
+    .line {
+        margin-top: 0.2rem;
+        height: 1.5rem;
+        width: 4px;
+    }
+</style>
+
+
+<div class="container checkout vh-100">
+    <div class="row">
+        <div class="col-12 d-flex">
+            <div class="line bg-info mr-2"></div>
+            <h4>結帳</h4>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.receive_memail, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.receive_memail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.receive_memail, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="col-lg-12 mb-2">
+            <div class="card carditem">
+                <div class="card-body">
+                    <div class="row">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.receive_phone, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.receive_phone, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.receive_phone, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                            <div class="form-horizontal mt-4 row">
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.Hidden("order_no")
+                                @Html.Hidden("order_date")
+                                @Html.Hidden("user_no")
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.receive_address, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.receive_address, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.receive_address, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.receive_name, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.EditorFor(model => model.receive_name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.receive_name, "", new { @class = "text-danger" })
+                                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.payment_no, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.payment_no, new SelectList(Model.PaymentsList, "payment_no", "payment", Model.payment_no), null, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.payment_no, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.receive_memail, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.EditorFor(model => model.receive_memail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.receive_memail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.receive_phone, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.EditorFor(model => model.receive_phone, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.receive_phone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.receive_address, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.EditorFor(model => model.receive_address, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.receive_address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.payment_no, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.DropDownListFor(model => model.payment_no, new SelectList(Model.PaymentsList, "payment_no", "payment", Model.payment_no), null, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.payment_no, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.remark, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.remark, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label col-2 offset-1 mb-0 mt-2" })
+                                        <div class="col-8">
+                                            @Html.EditorFor(model => model.remark, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.remark, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="確認付款" class="btn btn-success" />
-            @Html.ActionLink("繼續購物", "Index", "Home", null, new { @class = "btn btn-primary" })
+                                <div class="form-group col-12">
+                                    <div class="row">
+                                        <div class="col-2 offset-4 text-center">
+                                            <input type="submit" value="確認付款" class="btn btn-success" />
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            @Html.ActionLink("繼續購物", "Index", "Home", null, new { @class = "btn btn-info" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-}
+
