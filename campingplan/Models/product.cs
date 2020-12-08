@@ -11,7 +11,7 @@ namespace campingplan.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace campingplan.Models
         {
             this.product_typedetail = new HashSet<product_typedetail>();
         }
-    
+
         public int rowid { get; set; }
         public Nullable<int> categoryid { get; set; }
         public string pno { get; set; }
@@ -41,7 +41,7 @@ namespace campingplan.Models
         public Nullable<int> start_count { get; set; }
         public string remark { get; set; }
         public string category_name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_typedetail> product_typedetail { get; set; }
         public virtual product_features product_features { get; set; }

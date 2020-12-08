@@ -232,6 +232,11 @@ namespace campingplan.App_Class
             set { HttpContext.Current.Session["ProductNo"] = value; }
         }
 
+        public static string ParentNo
+        {
+            get { return (HttpContext.Current.Session["ParentNo"] == null) ? "" : HttpContext.Current.Session["ParentNo"].ToString(); }
+            set { HttpContext.Current.Session["ParentNo"] = value; }
+        }
 
         /// <summary>
         /// 布林值轉整數

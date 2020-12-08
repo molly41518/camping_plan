@@ -160,8 +160,8 @@
     <Compile Include="Areas\Member\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Areas\Vendor\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\Vendor\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Vendor\Controllers\ProductTypeDetailController.cs" />
     <Compile Include="Areas\Vendor\Controllers\VendorController.cs" />
     <Compile Include="Areas\Vendor\VendorAreaRegistration.cs" />
     <Compile Include="Controllers\BackProdutController.cs" />
@@ -1114,8 +1114,11 @@
     <Content Include="Areas\Vendor\Views\Orders\Index.cshtml" />
     <Content Include="package.json" />
     <Content Include="package-lock.json" />
+    <Content Include="Areas\Vendor\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Vendor\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Vendor\Views\Products\Index.cshtml" />
-    <Content Include="Areas\Vendor\Views\ProductData\Index.cshtml" />
+    <Content Include="Areas\Vendor\Views\Products\Remark.cshtml" />
+    <Content Include="Areas\Vendor\Views\Products\Upload.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1429,6 +1432,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Vendor\Models\" />
+    <Folder Include="Areas\Vendor\Views\ProductTypeDetail\" />
     <Folder Include="Areas\Vendor\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

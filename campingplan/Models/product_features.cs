@@ -11,7 +11,7 @@ namespace campingplan.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class product_features
     {
         public int rowid { get; set; }
@@ -29,7 +29,7 @@ namespace campingplan.Models
         public Nullable<int> elevation_under_300m { get; set; }
         public Nullable<int> elevation_301m_to_500m { get; set; }
         public Nullable<int> elevation_over_501m { get; set; }
-    
+
         public virtual product product { get; set; }
     }
 }

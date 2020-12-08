@@ -42,7 +42,7 @@ namespace campingplan.Controllers
         }
 
         // GET: Product
-        public ActionResult CategoryList(string id , int page = 1)
+        public ActionResult CategoryList(string id, int page = 1)
         {
             int int_id = 0;
             ViewBag.CategoryNo = id;
@@ -96,7 +96,7 @@ namespace campingplan.Controllers
             int pagesize = 3;
             int pagecurrent = page < 1 ? 1 : page;
             var model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
-            
+
             return View(model);
         }
 
@@ -113,7 +113,7 @@ namespace campingplan.Controllers
         public ActionResult AddToCart(string pno, string ptype_no, DateTime startday, DateTime endday, int qty)
         {
             Cart.AddCart(pno, ptype_no, startday, endday, qty);
-            return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductTypeNo});
+            return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductTypeNo });
         }
 
         public ActionResult CartList()
