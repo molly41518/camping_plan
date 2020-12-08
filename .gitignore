@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/campingplan/Areas/Vendor/Controllers/ProductDataController.cs
+/campingplan/Areas/Vendor/Views/ProductData/Index.cshtml
+/campingplan/Scripts/apps/vendor/products_index.js

@@ -21,6 +21,8 @@ namespace campingplan.Models
         public string mno { get; set; }
         public string payment_no { get; set; }
         public string payment_name { get; set; }
+        public string shipping_no { get; set; }
+        public string shipping_name { get; set; }
         public string receive_name { get; set; }
         public string receive_phone { get; set; }
         public string receive_address { get; set; }
@@ -32,7 +34,5 @@ namespace campingplan.Models
         public string order_guid { get; set; }
         public Nullable<int> order_closed { get; set; }
         public Nullable<int> order_validate { get; set; }
-        public string shipping_no { get; set; }
-        public string shipping_name { get; set; }
     }
 }

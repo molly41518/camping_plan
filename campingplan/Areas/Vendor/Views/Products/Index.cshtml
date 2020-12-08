@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "商品資料管理 / 商品資料維護";
-    Layout = "~/Views/Shared/_LayoutVendor.cshtml";
+    ViewBag.Title = "基本資料管理 / 訂單狀態設定";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div style="width:100%; margin:0 auto" class="tablecontainer">
@@ -9,25 +9,14 @@
         <thead>
             <tr>
                 <th>
-                    <a class="popup" title="新增記錄" href="/Vendor/product/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                    <a class="popup" title="新增記錄" href="/Vendor/Products/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
                 </th>
-                <th>圖片</th>
-                <th>商品編號</th>
-                <th>商品名稱</th>
-                <th>商品分類</th>
-                <th>銷售單價</th>
-                <th>自定尺寸</th>
-                <th>自定顏色</th>
-                <th>首頁</th>
-                <th>熱門</th>
-                <th>上架</th>
-                <th>顏色</th>
-                <th>尺寸</th>
-                <th>星數</th>
-                <th>瀏覽次數</th>
+                <th>編號</th>
+                <th>名稱</th>
+                <th>備註</th>
             </tr>
         </thead>
     </table>
 </div>
 
-<script src="@Url.Content("~/Scripts/apps/vendor/product_index.js")"></script>
+<script src="@Url.Content("~/Scripts/apps/vendor/products_index.js")"></script>

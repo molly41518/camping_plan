@@ -53,13 +53,14 @@ namespace campingplan.Models
             [Display(Name = "廠商編號")]
             public string vendor_no { get; set; }
             [Display(Name = "商品編號")]
-            public string product_no { get; set; }
+            public string pno { get; set; }
             [Display(Name = "商品名稱")]
-            public string product_name { get; set; }
-            [Display(Name = "商品規格")]
-            public string product_spec { get; set; }
-            [Display(Name = "銷售單價")]
-            public Nullable<int> price { get; set; }
+            public string pname { get; set; }
+            [Display(Name = "商品地點")]
+            public string plocation { get; set; }
+            [Display(Name = "商品敘述")]
+            public string pdescription { get; set; }
+
             [Display(Name = "推薦星數")]
             public Nullable<int> start_count { get; set; }
             [Display(Name = "備註")]

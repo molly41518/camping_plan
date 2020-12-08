@@ -51,7 +51,7 @@ namespace campingplan.Controllers
                 return View(model);
             }
 
-            UserAccount.Login(users.mname, users.mno, UserAccount.GetRoleNo(users.role_no));
+            UserAccount.Login(users.mname, users.mno, users.maccount, UserAccount.GetRoleNo(users.role_no));
             return RedirectToAction("RedirectToUserPage");
         }
 

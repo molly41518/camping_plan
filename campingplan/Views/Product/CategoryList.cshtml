@@ -9,16 +9,23 @@
 }
 
 @section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         $(document).ready(function () {
             $("#myTab a:first").click(function () {
                 $("#tabmenu1").addClass("fade");
             });
+            $("#checkDate").flatpickr(function () {
+                minDate = "today",
+                maxDate = new Date().fp_incr(90),
+                mode= "range";
+            })
         });
     </script>
 }
 @section styles{
     <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         * {
             font-family: 微軟正黑體;
@@ -117,7 +124,6 @@
 }
 
 
-
 <header class="masthead mb-3">
     <div class="container">
         <div class="row text-center align-self-center justify-content-center">
@@ -126,19 +132,56 @@
                     <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
                 </div>
             </div>
-            <div class="col-8 col-lg-8 bg-white mt-1">
-                @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
-                {
+            <div class="col-8 col-lg-8">
+                <input id="checkDate" />
+            </div>
+            <div class="col-8 col-lg-8">
+                <ul id="myTab" class="nav nav-tabs border-0">
+                    <li class="nav-item offset-3 col-3 p-0">
+                        <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
+                           data-toggle="tab"
+                           href="#tabmenu1">關鍵字搜尋</a>
+                    </li>
+                    <li class="nav-item col-3 p-0">
+                        <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
+                           data-toggle="tab"
+                           href="#tabmenu2">分類搜尋</a>
+                    </li>
+                </ul>
+                @Html.TextBox("dateSearch", null, new { @class = "form-control col-lg-8" })
+                <div class="tab-content">
+                    <div id="tabmenu1" class="tab-pane active">
+                        <div class="col-12 col-lg-12 p-0">
+                            @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
+                            {
 
-                    <div class="input-group my-2">
+                                <div class="input-group my-2">
 
-<!--                        @Html.TextBox("searchString", null, new { @class = "form-control col-lg-8" })-->
-                        @Html.TextBox("dateSearch", null, new { @class = "form-control col-lg-8" })
-                        <input type="submit" class="col-lg-4 btn btn-info btn-block m-0" value="搜尋" />
+                                    @Html.TextBox("searchString", null, new { @class = "form-control col-lg-8" })
+                                    <input type="submit" class="col-lg-4 btn btn-info btn-block m-0" value="搜尋" />
 
+                                </div>
+
+                            }
+                        </div>
                     </div>
+                    <div id="tabmenu2" class="tab-pane fade">
+                        <div class="col-12 col-lg-12 bg-white pt-2">
+                            @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
+                            {
+                                <ul class="row">
+                                    @foreach (var f in Shop.GetFeatureDict())
+                                    {
+                                        <li class="col-3 col-lg-3 small text-left">@Html.CheckBox(@f.Value, true) @f.Value</li>
+                                    }
+                                </ul>
+                            }
+                            @Html.TextBox("featureSearch", null, new { @class = "form-control col-lg-8" })
 
-                }
+                            <input type="submit" class="col-12 col-lg-12 btn btn-info btn-block m-0" value="搜尋" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -167,18 +210,6 @@
                                         <span>@f</span>
                                     </li>
                                 }
-                                @*<li class="pr_camptype align-self-center justify-content-center">
-                                    <span>高海拔</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>中部營區</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>近河邊</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>遊戲區</span>
-                                </li>*@
                             </ul>
                             <hr />
                             <div class="row align-items-center">

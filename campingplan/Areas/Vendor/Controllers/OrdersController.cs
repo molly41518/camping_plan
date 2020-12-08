@@ -88,7 +88,7 @@ namespace campingplan.Areas.Vendor.Controllers
                             amount = p2.p1.amount,
                             remark = p2.p1.remark,
                             status_name = d2.status_name})
-                        .Where(m => m.vendor_no == UserAccount.UserNo)
+                        .Where(m => m.vendor_no == UserAccount.UserOfAccount)
                         .Where(m => m.order_closed == UserAccount.UserCode)
                         .OrderByDescending(m => m.order_no)
                         .OrderBy(m => m.product_no)

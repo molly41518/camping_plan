@@ -9,6 +9,7 @@ namespace campingplan.App_Class
     public static class UserAccount
     {
         public static bool IsLogin { get; set; } = false;
+        public static string UserOfAccount { get; set; } = "";
         public static string UserNo { get; set; } = "";
 
         public static AppEnums.enUserRole RoleNo { get; set; } = AppEnums.enUserRole.Guest;
@@ -88,7 +89,7 @@ namespace campingplan.App_Class
             get
             {
                 string str_url = "~/Images/user/guest.jpg";
-                string str_file = string.Format("~/Images/user/{0}.jpg", UserNo);
+                string str_file = string.Format("~/Images/user/{0}.jpg", UserOfAccount);
                 //Server.MapPath轉型為絕對路徑，網頁只吃絕對路徑
                 if (File.Exists(HttpContext.Current.Server.MapPath(str_file))) str_url = str_file;
                 str_url += string.Format("?{0}", DateTime.Now.ToString("yyyyMMddHHmmssfff"));
@@ -102,9 +103,10 @@ namespace campingplan.App_Class
             set { HttpContext.Current.Session["UserRoleNo"] = value; }
         }
 
-        public static void Login(string userNo, string userName, AppEnums.enUserRole roleNo)
+        public static void Login(string userName, string userNo, string userAccount, AppEnums.enUserRole roleNo)
         {
             UserNo = userNo;
+            UserOfAccount = userAccount;
             UserName = userName;
             RoleNo = roleNo;
             IsLogin = true;
@@ -114,6 +116,7 @@ namespace campingplan.App_Class
         public static void LogOut()
         {
             UserNo = "";
+            UserOfAccount = "";
             UserName = "";
             RoleNo = AppEnums.enUserRole.Guest;
             IsLogin = false;

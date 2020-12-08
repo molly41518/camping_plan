@@ -202,11 +202,9 @@ namespace campingplan.App_Class
         {
             using (dbcon db = new dbcon())
             {
-                System.Diagnostics.Debug.WriteLine(startday.ToString());
-                System.Diagnostics.Debug.WriteLine(endday.ToString());
                 int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
                 string day_spec = "";
-                for (int i = 0; i < days; i++)
+                for (int i = 0; i <= days; i++)
                 {
                     day_spec += startday.AddDays(i).ToString("yyyy/MM/dd");
                     day_spec += " ";
@@ -293,7 +291,7 @@ namespace campingplan.App_Class
                     {
                         order_detail detail = new order_detail();
                         detail.order_no = OrderNo;
-                        detail.pno = item.mno;
+                        detail.pno = item.pno;
                         detail.pname = item.pname;
                         detail.ptype_no = item.ptype_no;
                         detail.ptype_name = item.ptype_name;

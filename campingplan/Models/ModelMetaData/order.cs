@@ -25,7 +25,6 @@ namespace campingplan.Models
             [Required(ErrorMessage = "付款方式不可空白")]
             public string payment_no { get; set; }
             [Display(Name = "運送方式")]
-            [Required(ErrorMessage = "運送方式不可空白")]
             public string shipping_no { get; set; }
             [Display(Name = "收件人姓名")]
             [Required(ErrorMessage = "收件人姓名不可空白")]

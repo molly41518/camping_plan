@@ -71,14 +71,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("登出", "Logout", "Customer", null, new { @class = "nav-link" })
+                        @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
                     </li>
 
                 }
                 else
                 {
                     <li class="nav-item">
-                        @Ajax.ActionLink("登入", "Login", "Customer", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
+                        @Ajax.ActionLink("登入", "Login", "User", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
                     </li>
 
                 }

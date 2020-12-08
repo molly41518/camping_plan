@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\FlatpickrBlazor.5.0.0\build\FlatpickrBlazor.props" Condition="Exists('..\packages\FlatpickrBlazor.5.0.0\build\FlatpickrBlazor.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -159,6 +160,7 @@
     <Compile Include="Areas\Member\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Areas\Vendor\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Vendor\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Vendor\Controllers\VendorController.cs" />
     <Compile Include="Areas\Vendor\VendorAreaRegistration.cs" />
@@ -209,7 +211,6 @@
     <Compile Include="Models\ModelMetaData\users.cs" />
     <Compile Include="Models\ModelMetaData\payment.cs" />
     <Compile Include="Models\ModelMetaData\product.cs" />
-    <Compile Include="Models\ModelMetaData\product_me.cs" />
     <Compile Include="Models\order.cs">
       <DependentUpon>dbcustomer.tt</DependentUpon>
     </Compile>
@@ -485,7 +486,7 @@
     <Content Include="Scripts\apps\easyzoom.js" />
     <Content Include="Scripts\apps\member\history_order.js" />
     <Content Include="Scripts\apps\member\unclose_order.js" />
-    <Content Include="Scripts\apps\vendor\product_index.js" />
+    <Content Include="Scripts\apps\vendor\products_index.js" />
     <Content Include="Scripts\apps\vendor\vendor_order.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -560,11 +561,6 @@
     <Content Include="Areas\Member\Views\UnClose\Index.cshtml" />
     <Content Include="Areas\Member\Views\UnClose\OrderDetail.cshtml" />
     <Content Include="Areas\Member\Views\web.config" />
-    <Content Include="Areas\Vendor\Views\Products\Delete.cshtml" />
-    <Content Include="Areas\Vendor\Views\Products\Edit.cshtml" />
-    <Content Include="Areas\Vendor\Views\Products\Index.cshtml" />
-    <Content Include="Areas\Vendor\Views\Products\Remark.cshtml" />
-    <Content Include="Areas\Vendor\Views\Products\Upload.cshtml" />
     <Content Include="Areas\Vendor\Views\Vendor\EditProfile.cshtml" />
     <Content Include="Areas\Vendor\Views\Vendor\Index.cshtml" />
     <Content Include="Areas\Vendor\Views\Vendor\VendorProfile.cshtml" />
@@ -1116,6 +1112,10 @@
     <Content Include="Areas\Admin\Views\Status\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Status\Index.cshtml" />
     <Content Include="Areas\Vendor\Views\Orders\Index.cshtml" />
+    <Content Include="package.json" />
+    <Content Include="package-lock.json" />
+    <Content Include="Areas\Vendor\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Vendor\Views\ProductData\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1483,6 +1483,7 @@
       <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\FlatpickrBlazor.5.0.0\build\FlatpickrBlazor.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FlatpickrBlazor.5.0.0\build\FlatpickrBlazor.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

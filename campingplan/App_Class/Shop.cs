@@ -213,7 +213,7 @@ namespace campingplan.App_Class
             using (dbcon db = new dbcon())
             {
                 var prod = db.product.Where(m => m.pno == productNo).FirstOrDefault();
-                if (prod != null) str_no = prod.pno;
+                if (prod != null) str_no = prod.vendor_no;
             }
             return str_no;
         }
