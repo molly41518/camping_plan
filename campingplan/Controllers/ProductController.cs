@@ -51,7 +51,7 @@ namespace campingplan.Controllers
 
             //關鍵字搜尋
             string searchwords = Request.Form["searchString"];
-            if (searchwords != null)
+            if (!string.IsNullOrEmpty(searchwords))
             {
                 ViewBag.SearchKeywordProductList = Shop.GetCategoryName(id, ref int_id);
                 relayModel = relayModel.Where(m => m.pname.Contains(searchwords));
@@ -59,13 +59,12 @@ namespace campingplan.Controllers
 
             // 日期搜索
             string dateSearch = Request.Form["dateSearch"];
-            if (dateSearch != null)
+            if (!string.IsNullOrEmpty(dateSearch))
             {
-                int qty = 2;
-                //DateTime startday = Convert.ToDateTime(Request.Form["startday"]);
-                //DateTime endday = Convert.ToDateTime(Request.Form["endday"]);
-                DateTime startday = new DateTime(2020, 12, 2);
-                DateTime endday = new DateTime(2020, 12, 3);
+                var dateList = dateSearch.Split(new string[] { " to " }, StringSplitOptions.None);
+                int qty = 1;
+                DateTime startday = Convert.ToDateTime(dateList[0]);
+                DateTime endday = Convert.ToDateTime(dateList[1]);
                 int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
                 for (int i = 0; i < days; i++)
                 {
@@ -80,15 +79,13 @@ namespace campingplan.Controllers
             }
 
             // 特徵搜索
-            string featureSearch = Request.Form["featureSearch"];
-            if (featureSearch != null)
+            var featureEnToCHT = Shop.GetFeatureDict();
+            foreach (var kv in Shop.product_feature_exp_to_string)
             {
-                foreach (var kv in Shop.product_feature_to_string)
+                var result = Request.Form[featureEnToCHT[kv.Value]];
+                if (!string.IsNullOrEmpty(result) && result != "false")
                 {
-                    if (Request.Form[kv.Value] == "true")
-                    {
-                        relayModel = relayModel.Where(m => kv.Key(m.product_features));
-                    }
+                    relayModel = relayModel.Where(kv.Key);
                 }
             }
 

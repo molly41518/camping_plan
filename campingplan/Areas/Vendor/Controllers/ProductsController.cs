@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using campingplan.App_Class;
 using campingplan.Models;
+using System.Web.Script.Serialization;
+using System.Net.Http.Formatting;
 
 namespace campingplan.Areas.Vendor.Controllers
 {
@@ -36,7 +38,7 @@ namespace campingplan.Areas.Vendor.Controllers
                         models[i].bool_issize = (models[i].issize == 1);
                     }
                 }
-                return Json(new { data = models }, JsonRequestBehavior.AllowGet);
+                return Content(Newtonsoft.Json.JsonConvert.SerializeObject(new { data = models }), "application/json");
             }
         }
 
