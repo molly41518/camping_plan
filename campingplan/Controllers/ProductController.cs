@@ -79,15 +79,13 @@ namespace campingplan.Controllers
             }
 
             // 特徵搜索
-            string featureSearch = Request.Form["featureSearch"];
-            if (featureSearch != null)
+            var featureEnToCHT = Shop.GetFeatureDict();
+            foreach (var kv in Shop.product_feature_exp_to_string)
             {
-                foreach (var kv in Shop.product_feature_to_string)
+                var result = Request.Form[featureEnToCHT[kv.Value]];
+                if (!string.IsNullOrEmpty(result) && result != "false")
                 {
-                    if (Request.Form[kv.Value] == "true")
-                    {
-                        relayModel = relayModel.Where(m => kv.Key(m.product_features));
-                    }
+                    relayModel = relayModel.Where(kv.Key);
                 }
             }
 

@@ -131,6 +131,20 @@ namespace campingplan.App_Class
             return ref product_feature_dict;
         }
 
+        public static List<KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>> product_feature_exp_to_string = new List<KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>>() {
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.near_river == 1 , "near_river"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.near_sea == 1 , "near_sea"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.no_tent == 1 , "no_tent"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.have_canopy == 1 , "have_canopy"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.have_clouds == 1 , "have_clouds"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.have_firefly == 1 , "have_firefly"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.could_book_all == 1 , "could_book_all"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.have_rental_equipment == 1 , "have_rental_equipment"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.have_game_area == 1 , "have_game_area"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.elevation_under_300m == 1 , "elevation_under_300m"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.elevation_301m_to_500m == 1 , "elevation_301m_to_500m"),
+            new KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>(m => m.product_features.elevation_over_501m == 1 , "elevation_over_501m")
+        };
         public static List<KeyValuePair<Func<product_features, bool>, string>> product_feature_to_string = new List<KeyValuePair<Func<product_features, bool>, string>>() {
             new KeyValuePair<Func<product_features, bool>, string>(f => f.near_river == 1 , "near_river"),
             new KeyValuePair<Func<product_features, bool>, string>(f => f.near_sea == 1 , "near_sea"),
