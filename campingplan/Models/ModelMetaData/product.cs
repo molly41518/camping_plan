@@ -28,6 +28,29 @@ namespace campingplan.Models
         public bool bool_iscolor { get; set; }
         [Display(Name = "尺寸")]
         public bool bool_issize { get; set; }
+        [Display(Name = "最低價錢")]
+        public int min_price
+        {
+            get
+            {
+                if (min_price_ != null)
+                {
+                    return min_price_.GetValueOrDefault();
+                }
+                int output = 99999999;
+                foreach (var ptd in product_typedetail)
+                {
+                    output = Math.Min(output, ptd.ptype_price.GetValueOrDefault());
+                }
+                min_price_ = output;
+                return output;
+            }
+            set
+            {
+                min_price_ = value;
+            }
+        }
+        private int? min_price_ { get; set; }
         private class ProductsMetaData
         {
             [Key]

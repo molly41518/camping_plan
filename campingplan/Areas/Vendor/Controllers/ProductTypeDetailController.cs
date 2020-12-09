@@ -11,21 +11,25 @@ namespace campingplan.Areas.Vendor.Controllers
     public class ProductTypeDetailController : Controller
     {
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Index(string pno)
+        public ActionResult Index(int id)
         {
-            Session["Pno"] = pno;
-            return View();
+            using (dbcon db = new dbcon())
+            {
+                Shop.Pno = db.product.Where(p => p.rowid == id).FirstOrDefault().pno;
+                return View();
+            }
+
         }
 
         public ActionResult GetDataList()
         {
             using (dbcon db = new dbcon())
             {
-                string str_pno = Session["Pno"].ToString();
+                string str_pno = Shop.Pno.ToString();
                 var models = db.product_typedetail
                     .Where(m => m.pno == str_pno)
                     .OrderBy(m => m.pno).ToList();
-                return Json(new { data = models }, JsonRequestBehavior.AllowGet);
+                return Content(Newtonsoft.Json.JsonConvert.SerializeObject(new { data = models }), "application/json");
             }
         }
 
