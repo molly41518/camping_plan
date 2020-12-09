@@ -3,7 +3,7 @@
 @{Layout = null;}
 
 
-@using (Ajax.BeginForm("Login", "User",new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "POST" }, new { @class = "modal-dialog modal-dialog-centered modal-lg" }))
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "modal-dialog modal-dialog-centered modal-lg" }))
 {
     @Html.AntiForgeryToken()
     @*<div class="modal fade" id="modal-id">*@

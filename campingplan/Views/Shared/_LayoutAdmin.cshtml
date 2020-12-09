@@ -71,14 +71,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
+                        @Html.ActionLink("登出", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
                     </li>
 
                 }
                 else
                 {
                     <li class="nav-item">
-                        @Ajax.ActionLink("登入", "Login", "User", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
+                        @Ajax.ActionLink("登入", "Login", "User", new { area = "" }, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
                     </li>
 
                 }
@@ -151,9 +151,6 @@
                         </div>
                     </div>
                 </div>
-                <a href="/User/Login" class="dash-nav-item side-menu">
-                    <i class="fas fa-sign-out-alt"></i> 退出後台專區
-                </a>
             </nav>
         </div>
         <div class="dash-app bg-white">
