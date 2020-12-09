@@ -24,6 +24,7 @@ namespace campingplan.Areas.Vendor.Controllers
         {
             using (dbcon db = new dbcon())
             {
+                
                 var models = db.product
                    .Where(m => m.vendor_no == UserAccount.UserOfAccount)
                    .OrderBy(m => m.pno)
@@ -38,6 +39,8 @@ namespace campingplan.Areas.Vendor.Controllers
                         models[i].bool_issize = (models[i].issize == 1);
                     }
                 }
+
+
                 return Content(Newtonsoft.Json.JsonConvert.SerializeObject(new { data = models }), "application/json");
             }
         }
@@ -222,7 +225,7 @@ namespace campingplan.Areas.Vendor.Controllers
         }
 
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Remark(int id = 0)
+        public ActionResult Pdescription(int id = 0)
         {
             using (dbcon db = new dbcon())
             {
@@ -242,7 +245,7 @@ namespace campingplan.Areas.Vendor.Controllers
         [HttpPost]
         [LoginAuthorize(RoleNo = "Vendor")]
         [ValidateInput(false)]
-        public ActionResult Remark(product product)
+        public ActionResult Pdescription(product product)
         {
             bool status = false;
             using (dbcon db = new dbcon())
@@ -250,7 +253,7 @@ namespace campingplan.Areas.Vendor.Controllers
                 var model = db.product.Where(m => m.rowid == product.rowid).FirstOrDefault();
                 if (model != null)
                 {
-                    model.remark = product.remark;
+                    model.pdescription = product.pdescription;
                     db.SaveChanges();
                     status = true;
                 }

@@ -10,17 +10,17 @@
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <script>
         var editor = CKEDITOR.editor.replace(
-            'remark' ,
+            'pdescription' ,
             {
                 skin: 'kama',
                 width: '750px',
-                filebrowserImageUploadUrl: '/Vendor/product/UploadImage'
+                filebrowserImageUploadUrl: '/Vendor/Products/UploadImage'
             }
         );
     </script>
 }
 
-@using (Html.BeginForm("Remark", "product", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("Pdescription", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.rowid)
@@ -39,9 +39,9 @@
         {<span class="control-label control-value">@Model.pname</span>}
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.TextArea("remark", new { id = "remark", @name = "remark" })
-        @Html.ValidationMessageFor(model => model.remark)
+        @Html.LabelFor(model => model.pdescription, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextArea("pdescription", new { id = "pdescription", @name = "pdescription" })
+        @Html.ValidationMessageFor(model => model.pdescription)
     </div>
     <div>
         <input type="submit" value="存檔" class="btn btn-success form-button" />
