@@ -92,7 +92,31 @@ namespace campingplan.Controllers
             //分頁
             int pagesize = 6;
             int pagecurrent = page < 1 ? 1 : page;
-            var model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
+            IPagedList<product> model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
+
+            if (!string.IsNullOrEmpty(dateSearch))
+            {
+                int qty = 1;
+                foreach (var p in model)
+                {
+                    int price = 9999999;
+                    foreach (var ptd in p.product_typedetail)
+                    {
+                        bool hasStock = true;
+                        int days = new TimeSpan(ViewBag.endday.Ticks - ViewBag.startday.Ticks).Days;
+                        for (int i = 0; i < days; i++)
+                        {
+                            DateTime tmpDay = ViewBag.startday.AddDays(i);
+                            hasStock &= ptd.product_typedetail_everydaystock.Any(s => s.stock_date == tmpDay && s.stock >= qty);
+                        }
+                        if (hasStock)
+                        {
+                            price = Math.Min(price, ptd.ptype_price.GetValueOrDefault());
+                        }
+                    }
+                    p.min_price = price;
+                }
+            }
 
             return View(model);
         }
