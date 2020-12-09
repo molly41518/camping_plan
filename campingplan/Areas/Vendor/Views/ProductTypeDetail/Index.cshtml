@@ -1,0 +1,53 @@
+﻿@using campingplan.App_Class;
+
+@{
+    ViewBag.Title = "商品資料管理 / 商品資料維護";
+    Layout = "~/Views/Shared/_LayoutVendor.cshtml";
+    string str_pno = Session["Pno"].ToString();
+    string str_pnames = Session["Pname"].ToString();
+    string str_space = "＞";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    @if (str_pno != null)
+    {
+        <div>
+            <h3>
+                <b>
+                    上層類別：
+                    @if (!string.IsNullOrEmpty(str_pno))
+                    {
+                        List<string> ids = str_pno.Split(',').ToList();
+                        List<string> names = str_pnames.Split(',').ToList();
+                        for (int i = 0; i < ids.Count; i++)
+                        {
+                            if (i == (ids.Count - 1))
+                            {
+                                <a href="#" class="btn btn-default" style="font-size:large;font-weight:bold;">@names[i] </a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Category/Index/@ids[i]" class="btn btn-primary" style="font-size:large;font-weight:bold;">@names[i] </a>
+                                <span style="font-size:large;font-weight:bold;">@str_space</span>
+                            }
+                        }
+                    }
+                </b>
+                @Html.ActionLink("回上一層", "ReturnToParent", "ProductTypeDetail", new { Area = "Vendor" }, new { @class = "btn btn-primary form-button" })
+            </h3>
+        </div>
+        <hr />
+    }
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    <a class="popup" title="新增記錄" href="/Vendor/ProductTypeDetail/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                </th>
+                <th>區域名稱</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="@Url.Content("~/Scripts/apps/vendor/products_type_detail_index.js")"></script>

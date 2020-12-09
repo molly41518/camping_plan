@@ -11,9 +11,9 @@ namespace campingplan.Areas.Vendor.Controllers
     public class ProductTypeDetailController : Controller
     {
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Index(string id)
+        public ActionResult Index(string pno)
         {
-            Shop.ParentNo = id;
+            Session["Pno"] = pno;
             return View();
         }
 
@@ -21,51 +21,53 @@ namespace campingplan.Areas.Vendor.Controllers
         {
             using (dbcon db = new dbcon())
             {
-                var models = db.shippings.OrderBy(m => m.shipping_no).ToList();
+                string str_pno = Session["Pno"].ToString();
+                var models = db.product_typedetail
+                    .Where(m => m.pno == str_pno)
+                    .OrderBy(m => m.pno).ToList();
                 return Json(new { data = models }, JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpGet]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(string pno )
         {
             using (dbcon db = new dbcon())
             {
-                if (id == 0)
+                if (pno == null)
                 {
-                    shippings new_model = new shippings();
+                    product_typedetail new_model = new product_typedetail();
                     return View(new_model);
                 }
-                var models = db.shippings.Where(m => m.rowid == id).FirstOrDefault();
+                var models = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
                 return View(models);
             }
         }
 
         [HttpPost]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Edit(shippings models)
+        public ActionResult Edit(product_typedetail models)
         {
             bool status = false;
             if (ModelState.IsValid)
             {
                 using (dbcon db = new dbcon())
                 {
-                    if (models.rowid > 0)
+                    if (models.pno != null)
                     {
                         //Edit 
-                        var shippings = db.shippings.Where(m => m.rowid == models.rowid).FirstOrDefault();
-                        if (shippings != null)
+                        var product_typedetail = db.product_typedetail.Where(m => m.pno == models.pno).FirstOrDefault();
+                        if (product_typedetail != null)
                         {
-                            shippings.shipping_no = models.shipping_no;
-                            shippings.shipping_name = models.shipping_name;
-                            shippings.remark = models.remark;
+                            product_typedetail.pno = models.pno;
+                            product_typedetail.parea_name = models.parea_name;
                         }
                     }
                     else
                     {
                         //Save
-                        db.shippings.Add(models);
+                        db.product_typedetail.Add(models);
                     }
                     db.SaveChanges();
                     status = true;
@@ -76,11 +78,11 @@ namespace campingplan.Areas.Vendor.Controllers
 
         [HttpGet]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string pno)
         {
             using (dbcon db = new dbcon())
             {
-                var model = db.shippings.Where(m => m.rowid == id).FirstOrDefault();
+                var model = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
                 if (model != null)
                 {
                     return View(model);
@@ -95,20 +97,34 @@ namespace campingplan.Areas.Vendor.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult DeleteData(int id)
+        public ActionResult DeleteData(string pno)
         {
             bool status = false;
             using (dbcon db = new dbcon())
             {
-                var model = db.shippings.Where(m => m.rowid == id).FirstOrDefault();
+                var model = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
                 if (model != null)
                 {
-                    db.shippings.Remove(model);
+                    db.product_typedetail.Remove(model);
                     db.SaveChanges();
                     status = true;
                 }
             }
             return new JsonResult { Data = new { status = status } };
+        }
+
+        public ActionResult ReturnToParent()
+        {
+            using (dbcon db = new dbcon())
+            {
+                string str_pno = Session["Pno"].ToString();
+                var model = db.product.Where(m => m.pno == str_pno).FirstOrDefault();
+                if (model != null)
+                {
+                    str_pno = model.pno.FirstOrDefault().ToString();
+                }
+                return RedirectToAction("Index", "Category", new { id = str_pno });
+            }
         }
     }
 }
