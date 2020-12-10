@@ -48,7 +48,7 @@ namespace campingplan.Controllers
             ViewBag.CategoryNo = id;
             ViewBag.CategoryName = Shop.GetCategoryName(id, ref int_id);
             var relayModel = db.product.Where(m => m.categoryid == int_id);
-
+            int qty = Convert.ToInt32(Request.Form["stock_qty"]);
             //關鍵字搜尋
             string searchwords = Request.Form["searchString"];
             if (!string.IsNullOrEmpty(searchwords))
@@ -62,7 +62,6 @@ namespace campingplan.Controllers
             if (!string.IsNullOrEmpty(dateSearch))
             {
                 var dateList = dateSearch.Split(new string[] { " to " }, StringSplitOptions.None);
-                int qty = 1;
                 DateTime startday = Convert.ToDateTime(dateList[0]);
                 DateTime endday = Convert.ToDateTime(dateList[1]);
                 int days = new TimeSpan(endday.Ticks - startday.Ticks).Days;
@@ -96,7 +95,6 @@ namespace campingplan.Controllers
 
             if (!string.IsNullOrEmpty(dateSearch))
             {
-                int qty = 1;
                 foreach (var p in model)
                 {
                     int price = 9999999;
