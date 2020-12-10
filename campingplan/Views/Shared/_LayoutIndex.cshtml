@@ -21,6 +21,40 @@
             $('#Vermodal').modal();
         })
     </script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                // check if scroll event happened
+                if ($(document).scrollTop() > 10) {
+                    // check if user scrolled more than 50 from top of the browser window
+                    $(".navbar-fixed-top").css("background-color", "#f8f8f8");
+                    $("nav").addClass("navbarshadow");
+                    $("a").addClass("text-info");
+                    $("#dropdown").removeClass("bg-dark");
+                    // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+                } else {
+                    $(".navbar-fixed-top").css("background-color", "transparent");
+                    $("nav").removeClass("navbarshadow");
+                    $("a").removeClass("text-info");
+                    $("#dropdown").addClass("bg-dark");
+                    // if not, change it back to transparent
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function showDialogLogin(data) {
+            $("#showLogin").html(data);
+            $("#showLogin").modal('show');
+        }
+        function showDialogRegister(data) {
+            $("#showRegister").html(data);
+            $("#showLogin").modal('hide');
+            $("#showRegister").modal('show');
+        }
+    </script>
+
     <style>
         * {
             font-family: 微軟正黑體;
@@ -83,9 +117,10 @@
 </head>
 <body>
     <!-- navbar-expand-lg 是指在 lg 範圍以上才會直接展開選項 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
-        <a class="navbar-brand js-scroll-trigger p-0" href="#">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px;" />
+    <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
+         id="navsr">
+        <a class="navbar-brand js-scroll-trigger p-0" href="/Home/Index" id="navbr">
+            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -98,19 +133,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto my-2 my-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link js-scroll-trigger text-info" href="#">購物商城</a>
+                <li class="dropdown nav-item">
+                    <a href="#"
+                       data-toggle="dropdown"
+                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">購物商城</a>
+                    <ul id="dropdown"
+                        class="dropdown-menu bg-dark"
+                        role="menu"
+                        aria-labelledby="tutorial">
+                        @{
+                            var lists1 = Shop.Getategorys(0);
+                            foreach (var item1 in lists1)
+                            {
+                                <li role="presentation">
+                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger atextcolor" })
+
+                                </li>
+
+                            }
+                        }
+                    </ul>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger text-info" href="#">營火傳遞</a>
+                    <a class="nav-link js-scroll-trigger atextcolor" href="#">營火傳遞</a>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger text-info"
-                       href="#"
+                    <a class="nav-link js-scroll-trigger atextcolor"
+                       href="~/Home/About"
                        aria-disabled="true">關於我們</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("CartList","Product")">購物車(@Cart.CartCount)</a>
+                </li>
                 @if (UserAccount.IsLogin)
                 {
                     <li class="nav-item">
@@ -132,6 +188,9 @@
             </ul>
         </div>
     </nav>
+
+    <div class="modal fade mt-5" id="showLogin"></div>
+    <div class="modal fade" id="showRegister"></div>
 
     <header class="masthead">
         <div class="container">
@@ -189,9 +248,7 @@
                 家裡人群包裝前來成本主題幾乎官方庫存最快適應力道清楚，總部很熱簡體主動，渠道小。
             </div>
         </div>
-
     </div>
-    @RenderBody()
 
     <footer class="bg-light py-5">
         <div class="container">
@@ -201,7 +258,7 @@
         </div>
     </footer>
 
-
+    @RenderBody()
 
     <script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>

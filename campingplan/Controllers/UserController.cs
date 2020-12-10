@@ -80,10 +80,10 @@ namespace campingplan.Controllers
 
             //自定義檢查
             bool bln_error = false;
-            var customer = db.users.Where(m => m.maccount == model.maccount).FirstOrDefault();
-            if (customer != null) { ModelState.AddModelError("", "帳號重複註冊！"); bln_error = true; }
-            customer = db.users.Where(m => m.memail == model.memail).FirstOrDefault();
-            if (customer != null) { ModelState.AddModelError("", "電子信箱重複註冊！"); bln_error = true; }
+            var user = db.users.Where(m => m.maccount == model.maccount).FirstOrDefault();
+            if (user != null) { ModelState.AddModelError("", "帳號重複註冊！"); bln_error = true; }
+            user = db.users.Where(m => m.memail == model.memail).FirstOrDefault();
+            if (user != null) { ModelState.AddModelError("", "電子信箱重複註冊！"); bln_error = true; }
             if (bln_error) return View(model);
 
             //密碼加密
@@ -97,6 +97,8 @@ namespace campingplan.Controllers
             model.varify_code = Guid.NewGuid().ToString().ToUpper();
             model.isvarify = 0;
 
+            model.role_no = "Member";
+
             //寫入資料庫
             db.Configuration.ValidateOnSaveEnabled = false;
             db.users.Add(model);
@@ -104,14 +106,14 @@ namespace campingplan.Controllers
 
             //寄出驗證信
             SendVerifyMail(model.memail, model.varify_code);
-            return RedirectToAction("SendmemailResult");
+            return RedirectToAction("SendEmailResult");
 
         }
 
         private string SendVerifyMail(string usermemail, string varifyCode)
         {
             string str_app_name = "營火計畫";
-            var str_url = string.Format("/Customer/Verifymemail/{0}", varifyCode);
+            var str_url = string.Format("/User/VerifyEmail/{0}", varifyCode);
             var str_link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, str_url);
             string str_subject = str_app_name + " - 帳號成功建立通知!!";
             string str_body = "<br/><br/>";
@@ -123,19 +125,19 @@ namespace campingplan.Controllers
             str_body += string.Format("{0} 系統開發團隊敬上", str_app_name);
 
             GmailService gmail = new GmailService();
-            gmail.Receivememail = usermemail;
+            gmail.ReceiveEmail = usermemail;
             gmail.Subject = str_subject;
             gmail.Body = str_body;
             gmail.Send();
             return gmail.MessageText;
         }
 
-        public ActionResult SendmemailResult()
+        public ActionResult SendEmailResult()
         {
             return View();
         }
 
-        public ActionResult Verifymemail(string id)
+        public ActionResult VerifyEmail(string id)
         {
             bool status = false;
             db.Configuration.ValidateOnSaveEnabled = false;
@@ -202,5 +204,6 @@ namespace campingplan.Controllers
             if (UserAccount.RoleNo == AppEnums.enUserRole.Vendor) return RedirectToAction("Index", "Vendor", new { area = "Vendor" });
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

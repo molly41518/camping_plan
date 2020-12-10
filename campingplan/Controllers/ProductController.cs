@@ -223,17 +223,20 @@ namespace campingplan.Controllers
         [LoginAuthorize(RoleNo = "Member")]
         public ActionResult Checkout()
         {
-            cvmOrder models = new cvmOrder()
-            {
-                receive_name = "",
-                receive_memail = "",
-                receive_address = "",
-                payment_no = "01",
-                remark = "",
-                PaymentsList = db.payments.OrderBy(m => m.payment_no).ToList(),
-            };
+           
+                cvmOrder models = new cvmOrder()
+                {
+                    receive_name = "",
+                    receive_memail = "",
+                    receive_address = "",
+                    payment_no = "01",
+                    remark = "",
+                    PaymentsList = db.payments.OrderBy(m => m.payment_no).ToList(),
+                };
 
-            return View(models);
+                return View(models);
+           
+
         }
 
         [HttpPost]

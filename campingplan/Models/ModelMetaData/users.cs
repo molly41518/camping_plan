@@ -33,7 +33,7 @@ namespace campingplan.Models
         public bool bool_isvarify { get; set; }
 
 
-        //由於customer內的東西不能重複定義，因此多包一層CustomerMetaData
+        //由於user內的東西不能重複定義，因此多包一層UserMetaData
         private class UserMetaData
         {
             [Key]
@@ -42,7 +42,7 @@ namespace campingplan.Models
             [DisplayName("會員編號")]
             public string mno { get; set; }
 
-            [Required(ErrorMessage = "角色不可空白")]
+            //[Required(ErrorMessage = "角色不可空白")]
             [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
             [Display(Name = "角色")]
             public string role_no { get; set; }
