@@ -129,12 +129,15 @@ namespace campingplan.Controllers
             return View(modal);
         }
 
+        [LoginAuthorize(RoleNo = "Guest,Member")]
         public ActionResult AddToCart(string pno, string ptype_no, DateTime startday, DateTime endday, int qty)
         {
             Cart.AddCart(pno, ptype_no, startday, endday, qty);
             return RedirectToAction("ProductDetail", "Product", new { id = Shop.ProductTypeNo });
         }
 
+
+        [LoginAuthorize(RoleNo = "Guest,Member")]
         public ActionResult CartList()
         {
             using (dbcon db = new dbcon())
@@ -152,6 +155,8 @@ namespace campingplan.Controllers
                 return View(data2);
             }
         }
+
+        [LoginAuthorize(RoleNo = "Guest,Member")]
         public ActionResult CartDelete(int id)
         {
             var data = db.carts
@@ -165,6 +170,7 @@ namespace campingplan.Controllers
             return RedirectToAction("CartList");
         }
 
+        [LoginAuthorize(RoleNo = "Guest,Member")]
         public ActionResult CartPlus(int id)
         {
             var data = db.carts
@@ -179,6 +185,7 @@ namespace campingplan.Controllers
             return RedirectToAction("CartList");
         }
 
+        [LoginAuthorize(RoleNo = "Guest,Member")]
         public ActionResult CartMinus(int id)
         {
             var data = db.carts
@@ -196,6 +203,7 @@ namespace campingplan.Controllers
             return RedirectToAction("CartList");
         }
 
+        [LoginAuthorize(RoleNo = "Member")]
         public ActionResult Checkout()
         {
             cvmOrder models = new cvmOrder()
@@ -212,6 +220,7 @@ namespace campingplan.Controllers
         }
 
         [HttpPost]
+        [LoginAuthorize(RoleNo = "Member")]
         public ActionResult Checkout(cvmOrder model)
         {
             if (!ModelState.IsValid)
