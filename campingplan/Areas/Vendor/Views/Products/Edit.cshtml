@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_LayoutEdit.cshtml";
 }
 
-@using (Html.BeginForm("Edit", "product", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("Edit", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
 {
     if (Model != null && Model.rowid > 0)
     {

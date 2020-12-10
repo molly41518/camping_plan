@@ -30,21 +30,23 @@ namespace campingplan.Areas.Vendor.Controllers
                     .Where(m => m.pno == str_pno)
                     .OrderBy(m => m.pno).ToList();
                 return Content(Newtonsoft.Json.JsonConvert.SerializeObject(new { data = models }), "application/json");
+
             }
         }
 
         [HttpGet]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Edit(string pno )
+        public ActionResult Edit(int id)
         {
             using (dbcon db = new dbcon())
             {
-                if (pno == null)
+                var ptype_models = db.product_typedetail.Where(p => p.rowid == id).FirstOrDefault();
+                if (ptype_models == null)
                 {
                     product_typedetail new_model = new product_typedetail();
                     return View(new_model);
                 }
-                var models = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
+                var models = db.product_typedetail.Where(m => m.ptype_no == ptype_models.ptype_no).FirstOrDefault();
                 return View(models);
             }
         }
@@ -58,21 +60,27 @@ namespace campingplan.Areas.Vendor.Controllers
             {
                 using (dbcon db = new dbcon())
                 {
-                    if (models.pno != null)
+                    if (models.rowid > 0)
                     {
                         //Edit 
-                        var product_typedetail = db.product_typedetail.Where(m => m.pno == models.pno).FirstOrDefault();
+                        var product_typedetail = db.product_typedetail.Where(m => m.ptype_no == models.ptype_no).FirstOrDefault();
                         if (product_typedetail != null)
                         {
-                            product_typedetail.pno = models.pno;
+                            product_typedetail.pno = Shop.Pno;
                             product_typedetail.parea_name = models.parea_name;
+                            product_typedetail.ptype_no = models.ptype_no;
+                            product_typedetail.ptype_name = models.ptype_name;
+                            product_typedetail.ptype_price = models.ptype_price;
+                            product_typedetail.remark = models.remark;
                         }
                     }
                     else
                     {
                         //Save
+                        models.pno = Shop.Pno;
                         db.product_typedetail.Add(models);
                     }
+                    
                     db.SaveChanges();
                     status = true;
                 }
@@ -82,11 +90,11 @@ namespace campingplan.Areas.Vendor.Controllers
 
         [HttpGet]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult Delete(string pno)
+        public ActionResult Delete(int id)
         {
             using (dbcon db = new dbcon())
             {
-                var model = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
+                var model = db.product_typedetail.Where(m => m.rowid == id).FirstOrDefault();
                 if (model != null)
                 {
                     return View(model);
@@ -101,12 +109,12 @@ namespace campingplan.Areas.Vendor.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [LoginAuthorize(RoleNo = "Vendor")]
-        public ActionResult DeleteData(string pno)
+        public ActionResult DeleteData(int id)
         {
             bool status = false;
             using (dbcon db = new dbcon())
             {
-                var model = db.product_typedetail.Where(m => m.pno == pno).FirstOrDefault();
+                var model = db.product_typedetail.Where(m => m.rowid == id).FirstOrDefault();
                 if (model != null)
                 {
                     db.product_typedetail.Remove(model);
@@ -121,14 +129,50 @@ namespace campingplan.Areas.Vendor.Controllers
         {
             using (dbcon db = new dbcon())
             {
-                string str_pno = Session["Pno"].ToString();
+                string str_pno = Shop.Pno;
                 var model = db.product.Where(m => m.pno == str_pno).FirstOrDefault();
                 if (model != null)
                 {
                     str_pno = model.pno.FirstOrDefault().ToString();
                 }
-                return RedirectToAction("Index", "Category", new { id = str_pno });
+                return RedirectToAction("Index", "Product", new { id = model.rowid });
             }
+        }
+
+        [LoginAuthorize(RoleNo = "Vendor")]
+        public ActionResult Pdescription(int id)
+        {
+            using (dbcon db = new dbcon())
+            {
+                var model = db.product_typedetail.Where(m => m.rowid == id).FirstOrDefault();
+                if (model != null)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+
+        [HttpPost]
+        [LoginAuthorize(RoleNo = "Vendor")]
+        [ValidateInput(false)]
+        public ActionResult Pdescription(product_typedetail product_Typedetail)
+        {
+            bool status = false;
+            using (dbcon db = new dbcon())
+            {
+                var model = db.product_typedetail.Where(m => m.rowid == product_Typedetail.rowid).FirstOrDefault();
+                if (model != null)
+                {
+                    model.ptype_dep = product_Typedetail.ptype_dep;
+                    db.SaveChanges();
+                    status = true;
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
         }
     }
 }

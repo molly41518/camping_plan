@@ -8,7 +8,7 @@
 <div>
     <h3>帳號圖像上傳</h3>
     <hr />
-    @using (Html.BeginForm("Upload", "product", new { area = "Vendor" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Upload", "ProductTypeDetail", new { area = "Vendor" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <input type="file" name="file" id="file" class="form-control" />

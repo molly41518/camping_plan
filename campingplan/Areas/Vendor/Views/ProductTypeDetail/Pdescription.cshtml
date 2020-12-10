@@ -1,5 +1,5 @@
 ﻿@using campingplan.Models;
-@model campingplan.Models.product
+@model campingplan.Models.product_typedetail
 
 @{
     ViewBag.Title = "商品描述";
@@ -10,38 +10,38 @@
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <script>
         var editor = CKEDITOR.editor.replace(
-            'pdescription' ,
+            'ptype_dep' ,
             {
                 skin: 'kama',
                 width: '750px',
-                filebrowserImageUploadUrl: '/Vendor/Products/UploadImage'
+                filebrowserImageUploadUrl: '/Vendor/ProductTypeDetail/UploadImage'
             }
         );
     </script>
 }
 
-@using (Html.BeginForm("Pdescription", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("Pdescription", "ProductTypeDetail", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.rowid)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.pno, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.LabelFor(model => model.ptype_no, htmlAttributes: new { @class = "control-label control-header" })
         @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
         @if (Model.pno != null)
-        {<span class="control-label control-value">@Model.pno</span>}
+        {<span class="control-label control-value">@Model.ptype_no</span>}
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.pname, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.LabelFor(model => model.ptype_name, htmlAttributes: new { @class = "control-label control-header" })
         @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
-        @if (Model.pname != null)
-        {<span class="control-label control-value">@Model.pname</span>}
+        @if (Model.ptype_name != null)
+        {<span class="control-label control-value">@Model.ptype_name</span>}
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.pdescription, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.TextArea("pdescription", new { id = "pdescription", @name = "pdescription" })
-        @Html.ValidationMessageFor(model => model.pdescription)
+        @Html.LabelFor(model => model.ptype_dep, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextArea("ptype_dep", new { id = "ptype_dep", @name = "ptype_dep" })
+        @Html.ValidationMessageFor(model => model.ptype_dep)
     </div>
     <div>
         <input type="submit" value="存檔" class="btn btn-success form-button" />

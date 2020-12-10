@@ -25,14 +25,19 @@
         "columns": [
             {
                 "data": "rowid", "width": "30px", "orderable": false, "render": function (data) {
-                    return '<a class="popup"  title="修改記錄" href="/Vendor/Products/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
-                        '<a class="popup" title="刪除記錄" href="/Vendor/Products/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>' +
-                        '<a class="popup" title="上傳圖片" href="/Vendor/Products/Upload/' + data + '"><i class="fas fa-upload fa-2x"></i></a>' +
-                        '<a class="popup" title="商品詳細與庫存" href="/Vendor/ProductTypeDetail/Index/' + data + '"><i class="fas fa-file-alt fa-2x"></i></a>';
+                    return '<a class="popup"  title="修改記錄" href="/Vendor/ProductTypeDetail/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
+                        '<a class="popup" title="刪除記錄" href="/Vendor/ProductTypeDetail/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>' +
+                        '<a class="popup" title="上傳圖片" href="/Vendor/ProductTypeDetail/Upload/' + data + '"><i class="fas fa-upload fa-2x"></i></a>' +
+                        '<a class="popup" title="營地區域描述" href="/Vendor/ProductTypeDetail/Pdescription/' + data + '"><i class="fas fa-file-alt fa-2x"></i></a>' +
+                        '<a title="營地每日空位" href="/Vendor/ProductTypeDetail/Index/' + data + '" ><i class="fas fa-file-alt fa-2x"></i></a>';
                 }
             },
 
-            { "data": "parea_name", "width": "100px" }
+            { "data": "pno", "width": "50px" },
+            { "data": "parea_name", "width": "100px" },
+            { "data": "ptype_no", "width": "100px"},
+            { "data": "ptype_name", "width": "100px" },
+            { "data": "ptype_price", "autoWidth": true  }
         ]
     })
     $('.tablecontainer').on('click', 'a.popup', function (e) {

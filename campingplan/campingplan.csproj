@@ -212,6 +212,7 @@
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelMetaData\categorys.cs" />
+    <Compile Include="Models\ModelMetaData\product_typedetail.cs" />
     <Compile Include="Models\ModelMetaData\status.cs" />
     <Compile Include="Models\ModelMetaData\companys.cs" />
     <Compile Include="Models\ModelMetaData\order.cs" />

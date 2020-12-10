@@ -168,6 +168,7 @@
           <Property Name="ptype_name" Type="nvarchar" MaxLength="50" />
           <Property Name="ptype_price" Type="int" />
           <Property Name="ptype_dep" Type="nvarchar" MaxLength="250" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="product_typedetail_everydaystock">
           <Key>
@@ -378,6 +379,7 @@
           <Property Name="ptype_dep" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="product" Relationship="campingplanModel.productproduct_typedetail" FromRole="product_typedetail" ToRole="product" />
           <NavigationProperty Name="product_typedetail_everydaystock" Relationship="campingplanModel.product_typedetailproduct_typedetail_everydaystock" FromRole="product_typedetail" ToRole="product_typedetail_everydaystock" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="product_typedetail_everydaystock">
           <Key>
@@ -636,6 +638,7 @@
           <EntitySetMapping Name="product_typedetail">
             <EntityTypeMapping TypeName="campingplanModel.product_typedetail">
               <MappingFragment StoreEntitySet="product_typedetail">
+                <ScalarProperty Name="remark" ColumnName="remark" />
                 <ScalarProperty Name="ptype_dep" ColumnName="ptype_dep" />
                 <ScalarProperty Name="ptype_price" ColumnName="ptype_price" />
                 <ScalarProperty Name="ptype_name" ColumnName="ptype_name" />

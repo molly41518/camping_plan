@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutEdit.cshtml";
 }
 
-@using (Html.BeginForm("Delete", "product", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+@using (Html.BeginForm("Delete", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
 {
     @Html.HiddenFor(model => model.rowid)
     <div class="control-label control-header control-caption">商品資訊</div>

@@ -11,7 +11,7 @@ namespace campingplan.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class product_typedetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace campingplan.Models
         {
             this.product_typedetail_everydaystock = new HashSet<product_typedetail_everydaystock>();
         }
-
+    
         public int rowid { get; set; }
         public string pno { get; set; }
         public string parea_name { get; set; }
@@ -27,7 +27,8 @@ namespace campingplan.Models
         public string ptype_name { get; set; }
         public Nullable<int> ptype_price { get; set; }
         public string ptype_dep { get; set; }
-
+        public string remark { get; set; }
+    
         public virtual product product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_typedetail_everydaystock> product_typedetail_everydaystock { get; set; }
