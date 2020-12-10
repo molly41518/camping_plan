@@ -119,6 +119,23 @@ namespace campingplan.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult ProductDetail(string id)
+        {
+            DateTime startday = DateTime.Today;
+            DateTime endday = startday.AddDays(1);
+            int qty = Convert.ToInt32(Request.Form["stock_qty"]);
+
+            string dateSearch = Request.Form["dateSearch"];
+            if (!string.IsNullOrEmpty(dateSearch))
+            {
+                var dateList = dateSearch.Split(new string[] { " to " }, StringSplitOptions.None);
+                startday = Convert.ToDateTime(dateList[0]);
+                endday = Convert.ToDateTime(dateList[1]);
+            } 
+            return ProductDetail(id, startday, endday, qty);
+        }
+
         public ActionResult ProductDetail(string id, DateTime? startday, DateTime? endday, int? qty)
         {
             var modal = db.product.Where(m => m.pno == id).FirstOrDefault();
