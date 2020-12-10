@@ -8,7 +8,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.min.css")" />
-    @*<link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.print.css")" />*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <style>
         .masthead {
             padding-top: 10rem;
@@ -38,6 +38,17 @@
 }
 
 @section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        $(document).ready(function () {
+            $("#checkDate").flatpickr({
+                minDate: "today",
+                maxDate: new Date().fp_incr(90),
+                dateFormat: "Y-m-d",
+                mode: "range"
+            })
+        });
+    </script>
     <script src="@Url.Content("~/Scripts/camping/fullcalendar.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/zh-tw.js")"></script>
@@ -174,7 +185,35 @@
             <p>@endday</p>
             <p>@qty</p>
 
-
+            @using (Html.BeginForm("ProductDetail", "Product", FormMethod.Post))
+            {
+                <div class="row d-flex pt-2">
+                    <div class="col-12 col-lg-8">
+                        <i class="far fa-calendar-alt pl-lg-2"></i>
+                        <div class="d-inline-block col-11">
+                            @Html.TextBox("dateSearch", null, new { @class = "form-control", @id = "checkDate" })
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2 mt-lg-0 col-lg-4">
+                        <i class="fas fa-users"></i>
+                        <div class="d-inline-block col-11 col-lg-10">
+                            <select id="stock_qty" name="stock_qty" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-info btn-block m-0 col-12" value="搜尋" />
+            }
             <h2 class="my-5">營地介紹</h2>
             @{
                 var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail, qty, startday, endday);
