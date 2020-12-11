@@ -122,7 +122,7 @@ namespace campingplan.Areas.Vendor.Controllers
                 if (file.ContentLength > 0)
                 {
                     var fileName = UserAccount.UserNo + ".jpg";
-                    var path = Path.Combine(Server.MapPath("~/Images/user"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/images/user"), fileName);
                     if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
                     file.SaveAs(path);
                 }

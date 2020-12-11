@@ -31,6 +31,13 @@
     <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
     <script src="@Url.Content("~/easion/js/chart-js-config.js")">55</script>
 
+
+    <style>
+        .people {
+            border-radius: 30px 30px 30px 30px;
+        }
+    </style>
+
     @RenderSection("styles", required: false)
     @RenderSection("scripts", required: false)
 </head>
@@ -59,7 +66,7 @@
                             個人帳號
                         </a>
                         <div class="dropdown-menu">
-                            @Html.ActionLink("帳號明細", "AdminProfile", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("帳號明細", "VendorProfile", "Vendor", new { Area = "Vendor" }, new { @class = "dropdown-item" })
                             @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dropdown-item" })
                         </div>
                     </li>
@@ -71,14 +78,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
+                        @Html.ActionLink("登出", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
                     </li>
 
                 }
                 else
                 {
                     <li class="nav-item">
-                        @Ajax.ActionLink("登入", "Login", "User", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
+                        @Ajax.ActionLink("登入", "Login", "User", new { area = "" }, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
                     </li>
 
                 }
@@ -98,41 +105,33 @@
 
             <nav class="dash-nav-list">
 
-                <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image" />
+                <div class="text-center">
+                    <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image img-fluid people" style=" width:90px;" />
+                </div>
+                <div class="dash-nav-item text-white" style="padding-left:40px;">
 
-                <span class="side-user">@UserAccount.UserNo</span>
+                    <p class="my-1">HI! @UserAccount.UserNo @UserAccount.UserName</p>
+                </div>
 
-                <span class="side-user">@UserAccount.UserName</span>
-                    <div class="dash-nav-dropdown">
-                        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
-                            <i class="fas fa-shopping-cart"></i> 廠商訂單查詢
-                        </a>
-                        <div class="dash-nav-dropdown-menu">
-                            @Html.ActionLink("未結訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 0 }, new { @class = "dash-nav-dropdown-item side-menu" })
-                            @Html.ActionLink("歷史訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 1 }, new { @class = "dash-nav-dropdown-item side-menu" })
-                        </div>
-                    </div>
-                    <div class="dash-nav-dropdown">
-                        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
-                            <i class="fas fa-shopping-cart"></i> 商品資料管理
-                        </a>
-                        <div class="dash-nav-dropdown-menu">
-                            @Html.ActionLink("商品資料維護", "Index", "Products", new { Area = "Vendor" }, new { @class = "dash-nav-dropdown-item side-menu" })
-                        </div>
-                    </div>
-                    <div class="dash-nav-dropdown">
-                        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
-                            <i class="fas fa-user"></i> 帳號資料管理
-                        </a>
-                        <div class="dash-nav-dropdown-menu">
-                            @Html.ActionLink("帳號明細", "VendorProfile", "Vendor", new { Area = "Vendor" }, new { @class = "dash-nav-dropdown-item side-menu" })
-                            @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dash-nav-dropdown-item side-menu" })
-                        </div>
-                    </div>
-                    <a href="/User/Login" class="dash-nav-item side-menu">
-                        <i class="fas fa-sign-out-alt"></i> 退出廠商專區
+                <div class="dash-nav-dropdown">
+                    <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
+                        <i class="fas fa-shopping-cart"></i> 廠商訂單查詢
                     </a>
-                </nav>
+                    <div class="dash-nav-dropdown-menu">
+                        @Html.ActionLink("未結訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 0 }, new { @class = "dash-nav-dropdown-item side-menu" })
+                        @Html.ActionLink("歷史訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 1 }, new { @class = "dash-nav-dropdown-item side-menu" })
+                    </div>
+                </div>
+                <div class="dash-nav-dropdown">
+                    <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
+                        <i class="fas fa-shopping-cart"></i> 商品資料管理
+                    </a>
+                    <div class="dash-nav-dropdown-menu">
+                        @Html.ActionLink("商品資料維護", "Index", "Products", new { Area = "Vendor" }, new { @class = "dash-nav-dropdown-item side-menu" })
+                    </div>
+                </div>
+
+            </nav>
         </div>
         <div class="dash-app bg-white">
             <main class="dash-content">

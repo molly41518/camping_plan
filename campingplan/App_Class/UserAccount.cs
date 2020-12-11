@@ -88,8 +88,8 @@ namespace campingplan.App_Class
         {
             get
             {
-                string str_url = "~/Images/user/guest.jpg";
-                string str_file = string.Format("~/Images/user/{0}.jpg", UserOfAccount);
+                string str_url = "~/Content/images/user/guest.jpg";
+                string str_file = string.Format("~/Content/images/user/{0}.jpg", UserNo);
                 //Server.MapPath轉型為絕對路徑，網頁只吃絕對路徑
                 if (File.Exists(HttpContext.Current.Server.MapPath(str_file))) str_url = str_file;
                 str_url += string.Format("?{0}", DateTime.Now.ToString("yyyyMMddHHmmssfff"));

@@ -112,7 +112,7 @@
           <Property Name="pno" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="plocation" Type="nvarchar" MaxLength="50" />
           <Property Name="pname" Type="nvarchar" MaxLength="50" />
-          <Property Name="pdescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="pdescription" Type="nvarchar" MaxLength="2000" />
           <Property Name="psetdate" Type="date" Nullable="false" />
           <Property Name="pimg" Type="nvarchar" MaxLength="250" />
           <Property Name="pstatus" Type="int" />
@@ -317,7 +317,7 @@
           <Property Name="pno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="plocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pdescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="pdescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="psetdate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pimg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="pstatus" Type="Int32" />

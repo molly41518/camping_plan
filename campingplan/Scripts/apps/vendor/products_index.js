@@ -29,12 +29,12 @@
                         '<a class="popup" title="刪除記錄" href="/Vendor/Products/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>' +
                         '<a class="popup" title="上傳圖片" href="/Vendor/Products/Upload/' + data + '"><i class="fas fa-upload fa-2x"></i></a>' +
                         '<a class="popup" title="商品描述" href="/Vendor/Products/Pdescription/' + data + '"><i class="fas fa-file-alt fa-2x"></i></a>' +
-                        '<a title="商品詳細頁" href="/Vendor/ProductTypeDetail/Index/' + data + '" ><i class="fas fa-file-alt fa-2x"></i></a>';
+                        '<a title="商品詳細頁" href="/Vendor/ProductTypeDetail/Index/' + data + '" ><i class="fas fa-file-alt fa-2x"></i></a>';''
                 }
             },
             {
                 "data": "pno", "width": "50px", "orderable": false, "render": function (data) {
-                    return '<img src="../../images/product/' + data + '/' + data + '.jpg" class="avatar" style="width:48px;height:48px;" />';
+                    return '<img src="../../Content/images/product/' + data + '.jpeg" class="avatar" style="width:48px;height:48px;" />';
                 }
             },
             { "data": "pno", "width": "50px" },

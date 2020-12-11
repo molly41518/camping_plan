@@ -100,12 +100,13 @@
             </header>
 
             <nav class="dash-nav-list">
+                <div class="text-center">
+                    <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image img-fluid people" style=" width:90px;" />
+                </div>
+                <div class="dash-nav-item text-white" style="padding-left:40px;">
 
-                <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image" />
-
-                <span class="side-user">@UserAccount.UserNo</span>
-
-                <span class="side-user">@UserAccount.UserName</span>
+                    <p class="my-1">HI! @UserAccount.UserNo @UserAccount.UserName</p>
+                </div>
 
                 <div class="dash-nav-dropdown">
                     <a href="#" class="dash-nav-item dash-nav-dropdown-toggle side-menu">
@@ -144,7 +145,6 @@
                         <div class="dash-nav-dropdown ">
                             @Html.ActionLink("公司資料設定", "Index", "Company", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
                             @Html.ActionLink("商品分類設定", "Index", "Category", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
-                            @Html.ActionLink("商品資料設定", "Index", "Products", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
                             @Html.ActionLink("付款方式設定", "Index", "Payment", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
                             @Html.ActionLink("運送方式設定", "Index", "Shipping", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
                             @Html.ActionLink("訂單狀態設定", "Index", "Status", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item side-menu" })
