@@ -3,21 +3,22 @@
 @{
     ViewBag.Title = "商品資料管理 / 商品資料維護";
     Layout = "~/Views/Shared/_LayoutVendor.cshtml";
-    string str_pno = Shop.Pno.ToString();
+    string str_ptype_no = Shop.ProductTypeNo.ToString();
+    string str_pno = Shop.ProductTypeNo.ToString();
     string str_pnames = "";
     string str_space = "＞";
 }
 
 <div style="width:100%; margin:0 auto" class="tablecontainer">
-    @if (str_pno != null)
+    @if (str_ptype_no != null)
     {
         <div>
             <h3>
                 <b>
                     上層類別：
-                    @if (!string.IsNullOrEmpty(str_pno))
+                    @if (!string.IsNullOrEmpty(str_ptype_no))
                     {
-                        List<string> ids = str_pno.Split(',').ToList();
+                        List<string> ids = str_ptype_no.Split(',').ToList();
                         List<string> names = str_pnames.Split(',').ToList();
                         for (int i = 0; i < ids.Count; i++)
                         {
@@ -33,7 +34,7 @@
                         }
                     }
                 </b>
-                @Html.ActionLink("回上一層", "", "Products", new { Area = "Vendor" }, new { @class = "btn btn-primary form-button" })
+                @Html.ActionLink("回上一層", "Index", "ProductTypeDetail", new { Area = "Vendor", id = ViewBag.p_rowid }, new { @class = "btn btn-primary form-button" })
             </h3>
         </div>
         <hr />
@@ -42,16 +43,14 @@
         <thead>
             <tr>
                 <th>
-                    <a class="popup" title="新增記錄" href="/Vendor/ProductTypeDetail/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                    <a class="popup" title="新增記錄" href="/Vendor/ProductTypeDetailEverydayStock/Create"><i class="fas fa-plus fa-2x"></i></a>
                 </th>
                 <th>商品編號</th>
-                <th>區域名稱</th>
-                <th>營地編號</th>
-                <th>營地名稱</th>
-                <th>營地單價</th>
+                <th>日期</th>
+                <th>數量</th>
             </tr>
         </thead>
     </table>
 </div>
 
-<script src="@Url.Content("~/Scripts/apps/vendor/products_type_detail_index.js")"></script>
+<script src="@Url.Content("~/Scripts/apps/vendor/products_type_detail_everyday_stock_index.js")"></script>

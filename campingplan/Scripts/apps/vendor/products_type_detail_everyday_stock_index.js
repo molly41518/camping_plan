@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     var oTable = $('#DatatableList').DataTable({
         "ajax": {
-            "url": '/Vendor/ProductTypeDetail/GetDataList',
+            "url": '/Vendor/ProductTypeDetailEverydayStock/GetDataList',
             "type": "get",
             "datatype": "json"
         },
@@ -25,19 +25,14 @@
         "columns": [
             {
                 "data": "rowid", "width": "30px", "orderable": false, "render": function (data) {
-                    return '<a class="popup"  title="修改記錄" href="/Vendor/ProductTypeDetail/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
-                        '<a class="popup" title="刪除記錄" href="/Vendor/ProductTypeDetail/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>' +
-                        '<a class="popup" title="上傳圖片" href="/Vendor/ProductTypeDetail/Upload/' + data + '"><i class="fas fa-upload fa-2x"></i></a>' +
-                        '<a class="popup" title="營地區域描述" href="/Vendor/ProductTypeDetail/Pdescription/' + data + '"><i class="fas fa-file-alt fa-2x"></i></a>' +
-                        '<a title="營地每日空位" href="/Vendor/ProductTypeDetailEverydayStock/Index/' + data + '" ><i class="fas fa-file-alt fa-2x"></i></a>';
+                    return '<a class="popup"  title="修改記錄" href="/Vendor/ProductTypeDetailEverydayStock/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
+                        '<a class="popup" title="刪除記錄" href="/Vendor/ProductTypeDetailEverydayStock/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>'
                 }
             },
 
-            { "data": "pno", "width": "50px" },
-            { "data": "parea_name", "width": "100px" },
-            { "data": "ptype_no", "width": "100px"},
-            { "data": "ptype_name", "width": "100px" },
-            { "data": "ptype_price", "autoWidth": true  }
+            { "data": "ptype_no", "width": "50px" },
+            { "data": "stock_date", "width": "100px"},
+            { "data": "stock", "autoWidth": true  }
         ]
     })
     $('.tablecontainer').on('click', 'a.popup', function (e) {
