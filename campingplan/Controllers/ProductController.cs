@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -41,6 +42,14 @@ namespace campingplan.Controllers
             return Json(output, JsonRequestBehavior.AllowGet);
         }
 
+        private static void UpdateSearchInfo(ref NameValueCollection SearchInfo, NameValueCollection form, string key)
+        {
+            if (!string.IsNullOrEmpty(form[key]) && form[key] != "false")
+            {
+                SearchInfo[key] = form[key];
+            }
+        }
+
         // GET: Product
         public ActionResult CategoryList(string id, int page = 1)
         {
@@ -48,9 +57,29 @@ namespace campingplan.Controllers
             ViewBag.CategoryNo = id;
             ViewBag.CategoryName = Shop.GetCategoryName(id, ref int_id);
             var relayModel = db.product.Where(m => m.categoryid == int_id);
-            int qty = Convert.ToInt32(Request.Form["stock_qty"]);
+
+            // 準備 SearchInfo
+            NameValueCollection SearchInfo = new NameValueCollection();
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "stock_qty");
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "searchString");
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "dateSearch");
+            var featureEnToCHT = Shop.GetFeatureDict();
+            foreach (var kv in Shop.product_feature_exp_to_string)
+            {
+                UpdateSearchInfo(ref SearchInfo, Request.Form, featureEnToCHT[kv.Value]);
+            }
+            if (SearchInfo.Count != 0)
+            {
+                Shop.SearchInfo = SearchInfo;
+            }
+            else
+            {
+                SearchInfo = Shop.SearchInfo;
+            }
+
+            int qty = Convert.ToInt32(SearchInfo["stock_qty"]);
             //關鍵字搜尋
-            string searchwords = Request.Form["searchString"];
+            string searchwords = SearchInfo["searchString"];
             if (!string.IsNullOrEmpty(searchwords))
             {
                 ViewBag.SearchKeywordProductList = Shop.GetCategoryName(id, ref int_id);
@@ -58,7 +87,7 @@ namespace campingplan.Controllers
             }
 
             // 日期搜索
-            string dateSearch = Request.Form["dateSearch"];
+            string dateSearch = SearchInfo["dateSearch"];
             if (!string.IsNullOrEmpty(dateSearch))
             {
                 var dateList = dateSearch.Split(new string[] { " to " }, StringSplitOptions.None);
@@ -78,10 +107,9 @@ namespace campingplan.Controllers
             }
 
             // 特徵搜索
-            var featureEnToCHT = Shop.GetFeatureDict();
             foreach (var kv in Shop.product_feature_exp_to_string)
             {
-                var result = Request.Form[featureEnToCHT[kv.Value]];
+                var result = SearchInfo[featureEnToCHT[kv.Value]];
                 if (!string.IsNullOrEmpty(result) && result != "false")
                 {
                     relayModel = relayModel.Where(kv.Key);

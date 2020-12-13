@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.IO;
@@ -335,6 +336,12 @@ namespace campingplan.App_Class
             {
                 return db.users.Where(m => m.role_no == "Vendor").OrderBy(m => m.mno).ToList();
             }
+        }
+
+        public static NameValueCollection SearchInfo
+        {
+            get { return (HttpContext.Current.Session["SearchInfo"] == null) ? new NameValueCollection() : (NameValueCollection) HttpContext.Current.Session["SearchInfo"]; }
+            set { HttpContext.Current.Session["SearchInfo"] = value; }
         }
 
     }
