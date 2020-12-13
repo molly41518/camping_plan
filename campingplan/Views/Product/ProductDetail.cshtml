@@ -166,20 +166,20 @@
             </ul>
             <hr />
             <div class="line bg-info mr-2 d-inline-block"></div>
-            <h2 class="my-5 d-inline-block">營地須知</h2>
+            <h3 class="my-5 d-inline-block">營地須知</h3>
             <p>
                 @Html.Raw(Model.pdescription)
             </p>
         </div>
         <div class="col-lg-3">
             <div class="card">
-                <div class="card-header">空位狀況</div>
+                <div class="card-header bg-warning font-weight-bold">空位狀況</div>
                 <div id="calendar"></div>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="line bg-info mr-2 d-inline-block"></div>
-            <h2 class="my-5 d-inline-block">營地地址</h2>
+            <h3 class="my-5 d-inline-block">營地地址</h3>
             <iframe src="@Model.pmapurl"
                     width="1150"
                     height="300"
@@ -194,7 +194,7 @@
             <div class="row align-content-center justify-content-center">
 
 
-                <div class="col-lg-4 d-inline-block h2"><div class="line bg-info mr-2 d-inline-block"></div>預定日期</div>
+                <div class="col-lg-4 d-inline-block h3"><div class="line bg-info mr-2 d-inline-block"></div>預定日期</div>
 
                 @{
                     DateTime startday = DateTime.Today;
@@ -245,34 +245,35 @@
         </div>
 
         <div class="col-lg-12 my-4">
-            <div class="h2 d-inline-block"><div class="line bg-info mr-2 d-inline-block"></div>營地區域</div>
+            <div class="h3 d-inline-block"><div class="line bg-info mr-2 d-inline-block"></div>營地區域</div>
         </div>
         @{
             var productdetaildict = Shop.GetDictProductTypeDetail(Model.product_typedetail, qty, startday, endday);
 
             foreach (var area in productdetaildict)
             {
-                <div class="card mt-3">
-                    <div class="card-header">@area.Key</div>
+                <div class="card mt-1">
+                    <div class="card-header bg-info text-white font-weight-bold">@area.Key</div>
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
                                 @{
                                     foreach (var detail in area.Value)
                                     { <div class="col-lg-4">
-                                            <img src="~/Content/images/bg/bg-1.jpeg" class="img-fluid" />
+                                            <img src="~/Content/images/bg/bg-1.jpeg" class="img-fluid" style="max-width: 80%" />
                                         </div>
                                         <div class="col-lg-8">
-                                            <h5 class="card-title">@detail.ptype_name</h5>
+                                            <h4 class="card-title">@detail.ptype_name</h4>
                                             <p>
                                                 @Html.Raw(detail.ptype_dep)
                                             </p>
-                                            <p class="col-8 text-info font-weight-bold h4 text-right">
-                                                $NT @detail.ptype_price
-                                            </p>
+                                            
                                             <div class="row">
+                                                <p class="col-lg-9 text-info font-weight-bold h3 text-right">
+                                                    $NT @detail.ptype_price
+                                                </p>
                                                 <div class="col-lg-3">
-                                                    @Html.ActionLink("訂購", "AddToCart", "Product", new { pno = detail.pno, ptype_no = detail.ptype_no, startday = startday, endday = endday, qty = qty }, new { @class = "btn btn-primary" })
+                                                    @Html.ActionLink("加入購物車", "AddToCart", "Product", new { pno = detail.pno, ptype_no = detail.ptype_no, startday = startday, endday = endday, qty = qty }, new { @class = "btn btn-info text-right" })
                                                 </div>
                                             </div>
                                         </div>
