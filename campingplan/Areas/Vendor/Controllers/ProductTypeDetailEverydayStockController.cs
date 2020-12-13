@@ -37,6 +37,16 @@ namespace campingplan.Areas.Vendor.Controllers
 
         [HttpGet]
         [LoginAuthorize(RoleNo = "Vendor")]
+        public ActionResult Create()
+        {
+            using (dbcon db = new dbcon())
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        [LoginAuthorize(RoleNo = "Vendor")]
         public ActionResult Edit(int id)
         {
             using (dbcon db = new dbcon())

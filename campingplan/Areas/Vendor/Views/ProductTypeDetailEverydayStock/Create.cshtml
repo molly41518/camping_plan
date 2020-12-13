@@ -3,8 +3,45 @@
 @model campingplan.Models.product_typedetail_everydaystock
 
 @{
-    ViewBag.Title = "商品資料新增");
+    ViewBag.Title = "商品資料新增";
     Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.min.css")" />
+}
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/camping/fullcalendar.js")"></script>
+    <script src="@Url.Content("~/Scripts/camping/moment.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/camping/zh-tw.js")"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('gg');
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                aspectRatio: 0.6,
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    right: 'prev,next',
+                    left: 'title'
+                },
+                titleFormat: {
+                    month: 'short',
+                    year: 'numeric',
+                },
+                fixedWeekCount: false,
+                showNonCurrentDates: true,
+                dayHeaderFormat: { weekday: "narrow" },
+                dayCellContent: function (arg) {
+                  return arg.date.getDate();
+                },
+                locale: 'zh-tw',
+                handleWindowResize: true
+            });
+            calendar.render();
+        });
+    </script>
 }
 
 @using (Html.BeginForm("Create", "ProductTypeDetailEverydayStock", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
@@ -14,6 +51,11 @@
         @Html.LabelFor(model => model.ptype_no, htmlAttributes: new { @class = "control-label control-header" })
         @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
         <span class="control-label control-value">@Shop.ProductTypeNo</span>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div id="calendar"></div>
+        </div>
     </div>
     <div>
         <input type="submit" value="存檔" class="btn btn-success form-button" />
