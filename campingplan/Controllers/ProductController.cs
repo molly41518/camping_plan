@@ -251,7 +251,6 @@ namespace campingplan.Controllers
         [LoginAuthorize(RoleNo = "Member")]
         public ActionResult Checkout()
         {
-           
                 cvmOrder models = new cvmOrder()
                 {
                     receive_name = "",
@@ -264,7 +263,6 @@ namespace campingplan.Controllers
 
                 return View(models);
            
-
         }
 
         [HttpPost]
@@ -282,7 +280,7 @@ namespace campingplan.Controllers
 
             Cart.CartPayment(model);
 
-            return RedirectToAction("CheckoutReport");
+            return Redirect("~/ECPayment.aspx");
         }
 
         public ActionResult CheckoutReport()

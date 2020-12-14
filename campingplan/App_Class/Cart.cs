@@ -313,6 +313,8 @@ namespace campingplan.App_Class
         }
         private static string CreateNewOrderNo(cvmOrder model)
         {
+            Shop.OrderID = 0;
+            Shop.OrderNo = "0";
             string str_order_no = "";
             string str_guid = Guid.NewGuid().ToString().Substring(0, 25).ToUpper();
             using (dbcon db = new dbcon())
@@ -342,6 +344,8 @@ namespace campingplan.App_Class
                 {
                     str_order_no = neword.rowid.ToString().PadLeft(8, '0');
                     neword.order_no = str_order_no;
+                    Shop.OrderID = neword.rowid;
+                    Shop.OrderNo = str_order_no;
                     db.SaveChanges();
                 }
             }

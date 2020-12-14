@@ -11,7 +11,10 @@ namespace campingplan.App_Class
 {
     public class Shop
     {
-
+        /// <summary>
+        /// 應用程式名稱
+        /// </summary>
+        public static string AppName { get { return GetAppConfigValue("AppName"); } }
 
         //在web.config中設定除錯模式<add key="DebugMode" value="1" /> 1為除錯 0為不除錯，發行時要改為0
         /// <summary>
@@ -25,7 +28,7 @@ namespace campingplan.App_Class
         /// </summary>
         /// <param name="keyName">Key 值</param>
         /// <returns></returns>
-        private static string GetAppConfigValue(string keyName)
+        public static string GetAppConfigValue(string keyName)
         {
             object obj_value = WebConfigurationManager.AppSettings[keyName];
             return (obj_value == null) ? "" : obj_value.ToString();
@@ -320,6 +323,23 @@ namespace campingplan.App_Class
             //已領取已付款
             if (orderStatus == "CP") int_value = 1;
             return int_value;
+        }
+
+        /// <summary>
+        /// 訂單 ID
+        /// </summary>
+        public static int OrderID
+        {
+            get { return (HttpContext.Current.Session["OrderID"] == null) ? 0 : (int)HttpContext.Current.Session["OrderID"]; }
+            set { HttpContext.Current.Session["OrderID"] = value; }
+        }
+        /// <summary>
+        /// 訂單 編號
+        /// </summary>
+        public static string OrderNo
+        {
+            get { return (HttpContext.Current.Session["OrderNo"] == null) ? "0" : HttpContext.Current.Session["OrderNo"].ToString(); }
+            set { HttpContext.Current.Session["OrderNo"] = value; }
         }
 
         public static List<status> GetStatusList()
