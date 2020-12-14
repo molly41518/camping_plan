@@ -22,3 +22,35 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*JQ UI close table*/
+.ui-dialog .ui-dialog-titlebar-close {
+    transition: 0.3s;
+    background-color: red !important;
+}
+
+    .ui-dialog .ui-dialog-titlebar-close:focus {
+        outline: 0 !important;
+    }
+
+    .ui-dialog .ui-dialog-titlebar-close::after {
+        content: 'Ｘ' !important;
+        font-weight: 900 !important;
+        position: relative !important;
+        color: #fff !important;
+        top:-4px;
+        left:-1px;
+    }
+
+    .ui-dialog .ui-dialog-titlebar-close:hover {
+        background-color: #fff !important;
+    }
+
+        .ui-dialog .ui-dialog-titlebar-close:hover::after {
+            color: #000 !important;
+        }
+
+/*bar fix*/
+.dash-toolbar {
+    z-index: 10 !important;
+}
