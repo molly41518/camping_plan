@@ -9,6 +9,11 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/camping/fullcalendar.min.css")" />
+    <style>
+    .modal-backdrop{
+    z-index: 50;
+    }
+    </style>
 }
 
 @section scripts{
@@ -17,10 +22,9 @@
     <script src="@Url.Content("~/Scripts/camping/zh-tw.js")"></script>
     <script>
         $(document).ready(function() {
-            console.log('gg');
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                aspectRatio: 0.6,
+                aspectRatio: 1,
                 initialView: 'dayGridMonth',
                 headerToolbar: {
                     right: 'prev,next',
@@ -30,34 +34,87 @@
                     month: 'short',
                     year: 'numeric',
                 },
-                fixedWeekCount: false,
+                fixedWeekCount: true,
                 showNonCurrentDates: true,
                 dayHeaderFormat: { weekday: "narrow" },
-                dayCellContent: function (arg) {
-                  return arg.date.getDate();
-                },
                 locale: 'zh-tw',
-                handleWindowResize: true
+                handleWindowResize: true,
+                selectable: true,
+                dateClick: function(info) {
+                    var mywhen = info.dateStr;
+                    $('#createEventModal #stockDay').val(info.dateStr);
+                    $('#createEventModal #apptAllDay').val(info.allDay);
+                    $('#createEventModal #when').text(mywhen);
+                    $('#createEventModal').modal('show');
+                }
             });
             calendar.render();
+            $('#submitButton').on('click', function(e) {
+                // We don't want this to act as a link so cancel the link action
+                e.preventDefault();
+                doSubmit();
+            });
+
+            function doSubmit(){
+                $("#createEventModal").modal('hide');
+                var num = $('#stockNum').val();
+                var date = $('#stockDay').val();
+                calendar.addEvent({
+                        title: "數量 " + num,
+                        start: new Date(date),
+                        allDay: true,
+                    });
+                var stock_num = date + ":" + num;
+                var day_value_list = document.getElementById('day_value_list')
+                if (day_value_list.value != "")
+                {
+                    day_value_list.value += ",";
+                }
+                day_value_list.value += stock_num;
+            }
         });
     </script>
 }
 
-@using (Html.BeginForm("Create", "ProductTypeDetailEverydayStock", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+
+@using (Html.BeginForm("Create", "ProductTypeDetailEverydayStock", new { area = "Vendor", id = ViewBag.ptype_no }, FormMethod.Post, new { id = "popupForm" }))
 {
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.ptype_no, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
-        <span class="control-label control-value">@Shop.ProductTypeNo</span>
-    </div>
-    <div class="col-lg-3">
-        <div class="card">
-            <div id="calendar"></div>
-        </div>
-    </div>
-    <div>
-        <input type="submit" value="存檔" class="btn btn-success form-button" />
-    </div>
+    <div id="calendar"></div>
+    @Html.Hidden("day_value_list", "")
+    <input type="submit" value="存檔" class="btn btn-success form-button" />
 }
+
+
+<div id="createEventModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <h3 id="myModalLabel1">Create Appointment</h3>
+      </div>
+    <div class="modal-body">
+    <form id="createAppointmentForm" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputPatient">數量:</label>
+            <div class="controls">
+                <input type="text" name="stockNum" id="stockNum" tyle="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]">
+                <input type="hidden" id="stockDay"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="when">When:</label>
+            <div class="controls controls-row" id="when" style="margin-top:5px;">
+            </div>
+        </div>
+    </form>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submitButton">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

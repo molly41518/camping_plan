@@ -41,7 +41,47 @@ namespace campingplan.Areas.Vendor.Controllers
         {
             using (dbcon db = new dbcon())
             {
+                ViewBag.ptype_no = Shop.ProductTypeNo;
                 return View();
+            }
+        }
+
+
+        [HttpPost]
+        [LoginAuthorize(RoleNo = "Vendor")]
+        public ActionResult Create(string id)
+        {
+            using (dbcon db = new dbcon())
+            {
+                bool added = false;
+                string DayValueListStr = Request.Form["day_value_list"];
+                if (!string.IsNullOrEmpty(DayValueListStr))
+                {
+                    var DayValueList = DayValueListStr.Split(',');
+                    foreach (var dvPair in DayValueList)
+                    {
+                        DateTime date = Convert.ToDateTime(dvPair.Split(':')[0]);
+                        int num = Convert.ToInt32(dvPair.Split(':')[1]);
+                        bool hasStock = db.product_typedetail_everydaystock.Count(e => e.ptype_no == id && e.stock_date == date) != 0;
+                        if (hasStock)
+                        {
+                            db.product_typedetail_everydaystock.SingleOrDefault(e => e.ptype_no == id && e.stock_date == date).stock = num;
+                        }
+                        else
+                        {
+                            product_typedetail_everydaystock record = new product_typedetail_everydaystock()
+                            {
+                                ptype_no = id,
+                                stock_date = date,
+                                stock = num
+                            };
+                            db.product_typedetail_everydaystock.Add(record);
+                        }
+                    }
+                    db.SaveChanges();
+                    added = true;
+                }
+                return new JsonResult { Data = new { status = added } };
             }
         }
 
