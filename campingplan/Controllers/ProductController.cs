@@ -282,7 +282,11 @@ namespace campingplan.Controllers
                 return View(model);
             }
 
-            Cart.CartPayment(model);
+            if (!Cart.CartPayment(model))
+            {
+                // TODO Show alert for no space
+                return View();
+            }
 
             return Redirect("~/ECPayment.aspx");
         }

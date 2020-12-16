@@ -257,9 +257,9 @@ namespace campingplan.App_Class
             }
         }
 
-        
 
-        public static void CartPayment(cvmOrder model)
+
+        public static bool CartPayment(cvmOrder model)
         {
             OrderNo = CreateNewOrderNo(model);
             using (dbcon db = new dbcon())
@@ -284,11 +284,20 @@ namespace campingplan.App_Class
                         data.amounts = int_amount;
                         data.taxs = (int)dec_tax;
                         data.totals = int_total;
-                        db.SaveChanges();
                     }
 
                     foreach (var item in datas)
                     {
+                        var stock_date_list = item.ptype_spec.Split(' ');
+                        foreach (var d in stock_date_list)
+                        {
+                            DateTime date = Convert.ToDateTime(d);
+                            var hasStock = db.product_typedetail_everydaystock.Count(e => e.ptype_no == item.ptype_no && e.stock_date == date && e.stock >= item.ptype_qty) > 0;
+                            if (!hasStock)
+                            {
+                                return false;
+                            }
+                        }
                         order_detail detail = new order_detail();
                         detail.order_no = OrderNo;
                         detail.pno = item.pno;
@@ -303,13 +312,13 @@ namespace campingplan.App_Class
                         detail.amount = item.amount;
                         detail.remark = "";
                         db.order_detail.Add(detail);
-                        db.SaveChanges();
 
                         db.carts.Remove(item);
-                        db.SaveChanges();
                     }
+                    db.SaveChanges();
                 }
             }
+            return true;
         }
         private static string CreateNewOrderNo(cvmOrder model)
         {
