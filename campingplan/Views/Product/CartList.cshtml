@@ -38,6 +38,12 @@
         height: 1.5rem;
         width: 4px;
     }
+
+    @@media screen and (max-width: 992px) {
+        .item-hidden {
+            display: none;
+        }
+    }
 </style>
 
 <div class="shoppingcart">
@@ -52,19 +58,19 @@
                 <div class="card carditem">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-lg-3 col-2">
                                 <p class="m-0">選取</p>
                             </div>
-                            <div class="col-3 align-self-center">
+                            <div class="col-lg-3 col-10 align-self-center">
                                 <p class="m-0">商品</p>
                             </div>
-                            <div class="col-2 align-self-center">
+                            <div class="item-hidden col-2 align-self-center">
                                 <p class="m-0">日期</p>
                             </div>
-                            <div class="col-2 align-self-center">
+                            <div class="item-hidden col-2 align-self-center">
                                 <p class="m-0">數量</p>
                             </div>
-                            <div class="col-2 align-self-center">
+                            <div class="item-hidden col-2 align-self-center">
                                 <p class="m-0">單價</p>
                             </div>
                         </div>
@@ -78,20 +84,20 @@
                     <div class="card carditem">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-1 text-center align-self-center">
+                                <div class="col-lg-1 col-2 text-center align-self-center">
                                     <input type="checkbox" style="width: 20px; height: 20px" />
                                 </div>
-                                <div class="col-2 text-center">
+                                <div class="col-lg-2 col-4  text-center">
                                     <img class="img-fluid imgproduct" src="~/Content/images/product/@productimgname" />
                                 </div>
-                                <div class="col-3">
+                                <div class="col-lg-3 col-6">
                                     <h5>@Html.DisplayFor(modelItem => item.pname)</h5>
                                     <p> @Html.DisplayFor(modelItem => item.ptype_name)</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-lg-2 offset-lg-0 col-10 offset-2">
                                     <p>@Html.DisplayFor(modelItem => item.ptype_spec)</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-lg-2 offset-lg-0 col-4 offset-2 pl-0">
                                     <a href="@Url.Action("CartMinus", "Product", new { id = item.rowid })" class="del">
                                         <i class="fas fa-minus-circle text-info"></i>
                                     </a>
@@ -100,10 +106,10 @@
                                         <i class="fas fa-plus-circle text-info"></i>
                                     </a>
                                 </div>
-                                <div class="col-1">
+                                <div class="col-lg-1 col-4 text-info font-weight-bold">
                                     <p>@Html.DisplayFor(modelItem => item.ptype_price)</p>
                                 </div>
-                                <div class="col-1">
+                                <div class="col-lg-1 col-2">
                                     <a href="@Url.Action("CartDelete", "Product", new { id = item.rowid })" class="i-act pr-1 text-info">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
@@ -117,22 +123,22 @@
                 <div class="card carditem">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-1 align-self-center text-center">
+                            <div class="col-lg-1 col-2 align-self-center text-center">
                                 <input type="checkbox"
                                        value="全選"
                                        style="width: 20px; height: 20px" />
                             </div>
-                            <div class="col-5 align-self-center pl-0">
-                                <a href="#" class="pr-3">全選</a>
+                            <div class="col-lg-5 align-self-center pl-0 item-hidden">
+                                <span class="pr-3">全選</span>
                                 <a href="#">刪除點選項目</a>
                             </div>
-                            <div class="col-2 align-self-center text-right p-0">
+                            <div class="col-lg-2 align-self-center text-lg-right p-0 col-4">
                                 <p class="m-0">@Cart.CartCount.ToString("#,##0")件商品共合計</p>
                             </div>
-                            <div class="col-2 align-self-center text-center">
+                            <div class="col-lg-2 align-self-center text-center col-6">
                                 <h3 class="m-0 text-info">@Cart.CartTotal.ToString("#,##0")</h3>
                             </div>
-                            <div class="col-2 align-self-center">
+                            <div class="col-lg-2 align-self-center col-12 mt-2 mt-lg-0">
 
                                 @if (UserAccount.RoleName == "Member")
                                 {

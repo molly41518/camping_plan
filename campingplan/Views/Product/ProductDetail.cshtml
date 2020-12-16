@@ -44,6 +44,11 @@
             height: 1.5rem;
             width: 4px;
         }
+        @@media screen and (max-width: 992px) {
+        .item-hidden {
+            display: none;
+        }
+    }
     </style>
 
 }
@@ -171,7 +176,7 @@
                 @Html.Raw(Model.pdescription)
             </p>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 item-hidden">
             <div class="card">
                 <div class="card-header bg-warning font-weight-bold">空位狀況</div>
                 <div id="calendar"></div>
@@ -179,16 +184,21 @@
         </div>
         <div class="col-lg-12">
             <div class="line bg-info mr-2 d-inline-block"></div>
-            <h3 class="my-5 d-inline-block">營地地址</h3>
-            <iframe src="@Model.pmapurl"
-                    width="1150"
-                    height="300"
-                    frameborder="0"
-                    style="border: 0"
-                    allowfullscreen=""
-                    aria-hidden="false"
-                    tabindex="0">
-            </iframe>
+            <h3 class="my-5 d-inline-block">營地地圖</h3>
+            <div class="col-12">
+                <div class="embed-responsive embed-responsive embed-responsive-21by9">
+                    <iframe src="@Model.pmapurl"
+                            width="1150"
+                            height="300"
+                            frameborder="0"
+                            style="border: 0"
+                            allowfullscreen=""
+                            aria-hidden="false"
+                            tabindex="0">
+                    </iframe>
+                </div>
+            </div>
+  
         </div>
         <div class="col-lg-12 mt-4">
             <div class="row align-content-center justify-content-center">
@@ -212,8 +222,8 @@
                 {
                     <div class="row d-flex">
                         <div class="col-12 col-lg-5">
-                            <i class="far fa-calendar-alt"></i>
-                            <div class="d-inline-block col-10">
+                            <i class="far fa-calendar-alt mr-1 mr-lg-0"></i>
+                            <div class="d-inline-block col-11 col-lg-10">
                                 @Html.TextBox("dateSearch", null, new { @class = "form-control", @id = "checkDate" })
                             </div>
                         </div>
@@ -234,14 +244,17 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-info btn-block m-0 col-2" value="搜尋" />
+                        <input type="submit" class="btn btn-info btn-block col-lg-2 mt-lg-0 offset-lg-0 mt-2 col-10 offset-1" value="搜尋" />
                     </div>
 
                 }
             </div>
-            <spap>起始日期：@startday</spap>
-            <span>結束日期：@endday</span>
-            <span>營位數量：@qty</span>
+            <div class="alert alert-light mt-2" role="alert">
+                <spap>起始日期：@startday</spap>
+                <span>結束日期：@endday</span>
+                <span>營位數量：@qty</span>
+            </div>
+
         </div>
 
         <div class="col-lg-12 my-4">
@@ -252,7 +265,7 @@
 
             foreach (var area in productdetaildict)
             {
-                <div class="card mt-1">
+                <div class="card m-2">
                     <div class="card-header bg-info text-white font-weight-bold">@area.Key</div>
                     <div class="card-body">
                         <div class="container">

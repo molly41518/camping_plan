@@ -48,7 +48,7 @@
             background-repeat: no-repeat;
             background-attachment: scroll;
             background-size: auto;
-            height: 55vh;
+            height: 62vh;
         }
 
         .navbar {
@@ -131,9 +131,20 @@
             }
         }
 
-        @@media screen and (min-width: 572px) {
+        @@media screen and (max-width: 992px) {
             .pr_type_loction_sm {
                 display: none;
+            }
+
+            .masthead {
+                padding-top: 10rem;
+                padding-bottom: calc(18rem - 4.5rem);
+                background-image: url(../../Content/images/bg/bg-2.jpg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+                background-size: auto;
+                height: 90vh;
             }
         }
     </style>
@@ -151,12 +162,12 @@
 
             <div class="col-8 col-lg-8">
                 <ul id="myTab" class="nav nav-tabs border-0">
-                    <li class="nav-item offset-3 col-3 p-0">
+                    <li class="nav-item offset-lg-3 col-lg-3 p-lg-0 col-12 col-md-6">
                         <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
                            data-toggle="tab"
                            href="#tabmenu1">關鍵字搜尋</a>
                     </li>
-                    <li class="nav-item col-3 p-0">
+                    <li class="nav-item col-lg-3 p-lg-0 col-md-6">
                         <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
                            data-toggle="tab"
                            href="#tabmenu2">分類搜尋</a>
@@ -174,22 +185,20 @@
                                         @Html.TextBox("dateSearch", null, new { @class = "form-control", @id = "checkDate" })
                                     </div>
                                 </div>
-                                <div class="col-12 mt-2 mt-lg-0 col-lg-4">
-                                    <i class="fas fa-users"></i>
-                                    <div class="d-inline-block col-11 col-lg-10">
-                                        <select id="stock_qty" name="stock_qty" class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
-                                    </div>
+                                <div class="col-12 col-lg-4 mt-2 mt-lg-0 text-left">
+                                    <i class="fas fa-campground pl-lg-1 pr-lg-0 px-2"></i>
+                                    <select id="stock_qty" name="stock_qty" class="form-control d-inline-block col-10 col-lg-10">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content">
@@ -207,7 +216,7 @@
                                         <ul class="row">
                                             @foreach (var f in Shop.GetFeatureDict())
                                             {
-                                                <li class="col-3 col-lg-3 small text-left">@Html.CheckBox(@f.Value, false) @f.Value</li>
+                                                <li class="col-6 col-lg-3 col-md-4 small text-left">@Html.CheckBox(@f.Value, false) @f.Value</li>
                                             }
                                         </ul>
                                     </div>
@@ -223,37 +232,35 @@
 </header>
 <div class="pr_type_loction_lg mb-4 text-center">
     <ul class="p-0">
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             全部
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             大台北
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             桃園
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
-            新竹
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
+            竹苗
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
-            苗栗
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             中彰投
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             雲嘉南
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             高屏
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             宜蘭
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             花東
         </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2">
+        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2  mt-sm-1">
             離島
         </li>
     </ul>
