@@ -17,7 +17,7 @@ namespace campingplan.Models
     //     如果重新產生程式碼，將會覆寫對這個檔案的手動變更。
     // </auto-generated>
     //------------------------------------------------------------------------------
-    //customer 有一個Metadata是UserMetaData
+    //user 有一個Metadata是UserMetaData
     [MetadataType(typeof(UserMetaData))]
     [Bind(Exclude = "varify_code,isvarify")]
     public partial class users

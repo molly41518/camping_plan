@@ -176,9 +176,11 @@
     <Compile Include="Areas\Vendor\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductTypeDetailController.cs" />
+    <Compile Include="Areas\Vendor\Controllers\ProductTypeDetailEverydayStockController.cs" />
     <Compile Include="Areas\Vendor\Controllers\VendorController.cs" />
     <Compile Include="Areas\Vendor\VendorAreaRegistration.cs" />
     <Compile Include="Controllers\BackProdutController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -1467,6 +1469,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutProduct.cshtml" />
+    <Content Include="Views\User\LoginClear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\campingplan\v16\" />

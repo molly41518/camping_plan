@@ -3,7 +3,7 @@
 @{Layout = null;}
 
 
-@using (Ajax.BeginForm("Register", "Customer", new AjaxOptions { OnSuccess = "showDialogRegister", HttpMethod = "POST" }, new { @class = "modal-dialog modal-dialog-centered modal-lg mowh" }))
+@using (Ajax.BeginForm("Register", "User", new AjaxOptions { OnSuccess = "showDialogRegister", HttpMethod = "POST" }, new { @class = "modal-dialog modal-dialog-centered modal-lg mowh" }))
 {
     @Html.AntiForgeryToken()
 

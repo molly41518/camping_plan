@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using campingplan.App_Class;
+using static campingplan.App_Class.UserAccount;
+using System.Web.Security;
 
 namespace campingplan.Controllers
 {
@@ -14,6 +16,12 @@ namespace campingplan.Controllers
 
         public ActionResult Login()
         {
+            if (UserAccount.IsAuthenticated)
+            {
+                UserAccount.Login(UserAccount.GetIdentityValue(enIdentityType.Name));
+                if (UserAccount.IsLogin) return View("LoginClear");
+            }
+
             cvmLogin model = new cvmLogin()
             {
                 UserAccount = "",
@@ -22,6 +30,13 @@ namespace campingplan.Controllers
                 ErrorMessage = "xxxx"
             };
             return View("Login", model);
+        }
+
+
+        public ActionResult Loginclear()
+        {
+            if (UserAccount.IsLogin) return RedirectToAction("RedirectToUserPage");
+            return View("Index");
         }
 
         [HttpPost]
@@ -47,17 +62,23 @@ namespace campingplan.Controllers
                 .FirstOrDefault();
             if (users == null)
             {
+                UserAccount.LogOut();
+                FormsAuthentication.SignOut();
                 ViewBag.Message = "帳號或密碼錯誤！";
                 return View(model);
             }
 
-            UserAccount.Login(users.mname, users.mno, users.maccount, UserAccount.GetRoleNo(users.role_no));
+            UserAccount.Login(users, UserAccount.GetRoleNo(users.role_no));
+            UserAccount.IsRememberMe = model.Remember;
+            UserAccount.LoginAuthenticate();
+
             return RedirectToAction("RedirectToUserPage");
         }
 
         public ActionResult Logout()
         {
             UserAccount.LogOut();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -141,21 +162,21 @@ namespace campingplan.Controllers
         {
             bool status = false;
             db.Configuration.ValidateOnSaveEnabled = false;
-            var customer = db.users.Where(m => m.varify_code == id).FirstOrDefault();
-            if (customer == null)
+            var user = db.users.Where(m => m.varify_code == id).FirstOrDefault();
+            if (user == null)
             {
                 ViewBag.Message = "驗證碼錯誤！";
                 status = false;
             }
             else
             {
-                if (customer.isvarify == 1)
+                if (user.isvarify == 1)
                 {
                     ViewBag.Message = "已經完成驗證，無須重複執行！";
                 }
                 else
                 {
-                    customer.isvarify = 1;
+                    user.isvarify = 1;
                     db.SaveChanges();
                     status = true;
                 }
@@ -204,6 +225,8 @@ namespace campingplan.Controllers
             if (UserAccount.RoleNo == AppEnums.enUserRole.Vendor) return RedirectToAction("Index", "Vendor", new { area = "Vendor" });
             return RedirectToAction("Index", "Home");
         }
+
+
 
     }
 }

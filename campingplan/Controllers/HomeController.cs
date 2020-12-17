@@ -1,4 +1,5 @@
-﻿using campingplan.Models;
+﻿using campingplan.App_Class;
+using campingplan.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,7 @@ namespace campingplan.Controllers
         dbcon db = new dbcon();
         public ActionResult Index()
         {
-            //var product = db.product.ToList();
-            if (Session["Customer"] == null)
-            {
-                return View("Index", "_Layout");
-            }
-            return View("Index", "_Layout - Login");
+            return View();
         }
 
 
