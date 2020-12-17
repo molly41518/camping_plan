@@ -17,12 +17,15 @@
                 $("#searchString").val("");
                 $(".masthead").focus();
             });
+
             $("#checkDate").flatpickr({
                 minDate: "today",
                 maxDate: new Date().fp_incr(90),
                 dateFormat: "Y-m-d",
                 mode: "range"
-            })
+            });
+
+
         });
     </script>
 }
@@ -125,6 +128,56 @@
             background-color: rgba(0, 0, 0, 0.1);
         }
 
+        .card {
+            overflow: hidden;
+        }
+
+        img {
+            transition: all 0.5s;
+        }
+
+            img:hover {
+                transform: scale(1.1);
+            }
+
+        .searchtitle {
+            opacity: 0;
+            animation: fadeInBig 0.5s linear forwards;
+            -webkit-animation: fadeInBig 0.5s linear forwards;
+        }
+
+        @@keyframes fadeInBig {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .searchcontent {
+            opacity: 0;
+            bottom: -40px;
+            position: relative;
+            animation: showdiv 0.7s linear forwards;
+        }
+
+        @@keyframes showdiv {
+            from {
+                bottom:-40px;
+            }
+
+            to {
+                opacity: 1;
+                bottom: 0px;
+            }
+        }
+
+
+
         @@media screen and (max-width: 572px) {
             .pr_type_loction_lg {
                 display: none;
@@ -152,10 +205,10 @@
 
 
 <header class="masthead mb-3">
-    <div class="container">
+    <div class="container ">
         <div class="row text-center align-self-center justify-content-center">
             <div class="col-12 col-lg-12">
-                <div class="offset-4 col-4 col-lg-4 mb-2">
+                <div class="offset-4 col-4 col-lg-4 mb-2 searchtitle">
                     <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
                 </div>
             </div>
@@ -230,7 +283,7 @@
         </div>
     </div>
 </header>
-<div class="pr_type_loction_lg mb-4 text-center">
+<div class="pr_type_loction_lg mb-4 text-center searchcontent">
     <ul class="p-0">
         <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
             全部
@@ -271,7 +324,7 @@
         @foreach (var item in Model)
         {
             string productimgname = string.Format("{0}.jpeg", @item.pimg);
-            <div class="col-12 col-md-6 col-lg-4 mb-5">
+            <div class="title col-12 col-md-6 col-lg-4 mb-5 searchcontent">
                 <a href="@Url.Action("ProductDetail","Product",new { id = item.pno, startday = ViewBag.startday, endday = ViewBag.endday, qty = ViewBag.qty })">
                     <div class="card pr_carditem">
                         <img class="card-img-top"
