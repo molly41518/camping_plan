@@ -39,6 +39,7 @@
                 dayHeaderFormat: { weekday: "narrow" },
                 locale: 'zh-tw',
                 handleWindowResize: true,
+                events: "@Url.Action("GetStockEvent", "Product", new { Area = "", id = Shop.Pno, ptype_no = ViewBag.ptype_no })",
                 selectable: true,
                 dateClick: function(info) {
                     var mywhen = info.dateStr;
@@ -59,7 +60,14 @@
                 $("#createEventModal").modal('hide');
                 var num = $('#stockNum').val();
                 var date = $('#stockDay').val();
+                var id_event = "id-event-" + date;
+                var ev = calendar.getEventById(id_event);
+                if (ev != null)
+                {
+                    ev.remove();
+                }
                 calendar.addEvent({
+                        id: id_event,
                         title: "數量 " + num,
                         start: new Date(date),
                         allDay: true,

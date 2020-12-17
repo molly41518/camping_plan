@@ -15,10 +15,14 @@ namespace campingplan.Controllers
     {
         dbcon db = new dbcon();
 
-        public JsonResult GetStockEvent(string id, DateTime start, DateTime end)
+        public JsonResult GetStockEvent(string id, DateTime start, DateTime end, string ptype_no)
         {
             var relayStock = db.product_typedetail_everydaystock.Where(s => s.product_typedetail.product.pno == id)
                 .Where(s => s.stock_date >= start && s.stock_date < end);
+            if (!string.IsNullOrEmpty(ptype_no))
+            {
+                relayStock = relayStock.Where(e => e.ptype_no == ptype_no);
+            }
             Dictionary<string, int> stockNum = new Dictionary<string, int>();
             foreach (var s in relayStock)
             {
@@ -278,7 +282,11 @@ namespace campingplan.Controllers
                 return View(model);
             }
 
-            Cart.CartPayment(model);
+            if (!Cart.CartPayment(model))
+            {
+                // TODO Show alert for no space
+                return View();
+            }
 
             return Redirect("~/ECPayment.aspx");
         }
