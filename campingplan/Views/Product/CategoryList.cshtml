@@ -236,7 +236,7 @@
                 <div class="col-lg-12 p-0">
                     @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
                     {
-                        <input type="hidden" id="newSearch" name="newSearch" value="true"/>
+
                         <div class="bg-white pb-2">
                             <div class="row d-flex pt-2">
                                 <div class="col-12 col-lg-8">
@@ -293,6 +293,7 @@
 <div class="pr_type_loction_lg mb-4 text-center searchcontent">
     @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post, new { id = "location_form" }))
     {
+        <input type="hidden" id="newSearch" name="newSearch" value="false"/>
         <input type="hidden" id="locationSearch" name="locationSearch" value=""/>
         <ul class="p-0">
         <input type="button" onclick="submitLocationForm('all')" class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1" value="全部" />
@@ -347,7 +348,7 @@
         }
         <div class="col-12">
             <div class="text-center">
-                @Html.PagedListPager(Model, page => Url.Action("CategoryList", "Product", new { page }))
+                @Html.PagedListPager(Model, page => Url.Action("CategoryList", "Product", new { @page = page, @isNew = false}))
             </div>
         </div>
     </div>

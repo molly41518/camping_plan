@@ -141,7 +141,7 @@ namespace campingplan.Controllers
             }
         }
 
-        public ActionResult CategoryList(string id, int page = 1)
+        public ActionResult CategoryList(string id, int page = 1, bool isNew = true)
         {
             int int_id = 0;
             ViewBag.CategoryNo = id;
@@ -149,7 +149,10 @@ namespace campingplan.Controllers
             var relayModel = db.product.Where(m => m.categoryid == int_id);
 
             // 準備 SearchInfo
-            bool isNew = !string.IsNullOrEmpty(Request.Form["newSearch"]);
+            if(!string.IsNullOrEmpty(Request.Form["newSearch"]) && Request.Form["newSearch"] == "false")
+            {
+                isNew = false;
+            }
             if (isNew)
             {
                 Shop.SearchInfo = NewSearchInfo();
