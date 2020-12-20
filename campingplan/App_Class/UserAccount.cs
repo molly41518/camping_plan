@@ -144,11 +144,11 @@ namespace campingplan.App_Class
             Cart.LoginCart();
         }
 
-        public static void Login(string UserNo)
+        public static void Login(string Userno)
         {
             using (dbcon db = new dbcon())
             {
-                var users = db.users.Where(m => m.mno == UserNo).FirstOrDefault();
+                var users = db.users.Where(m => m.mno == Userno).FirstOrDefault();
                 if(users != null)
                 {
                     UserNo = users.mno;

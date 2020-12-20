@@ -197,7 +197,7 @@
         <div class="dropdown-menu dropdown-menu-lg-right">
             <span class="nav-link">@UserAccount.UserInfo</span>
             <hr />
-            @Html.ActionLink("帳號明細", "AdminProfile", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
+            @Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "dropdown-item" })
             @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dropdown-item" })
         </div>
     </li>

@@ -92,7 +92,7 @@ namespace campingplan.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(users model)
+        public ActionResult Register(cvmRegister model)
         {
             if (!ModelState.IsValid)
             {
@@ -114,21 +114,32 @@ namespace campingplan.Controllers
                 model.ConfirmPassword = model.mpassword;
             }
 
-            //產生驗證碼
-            model.varify_code = Guid.NewGuid().ToString().ToUpper();
-            model.isvarify = 0;
-
-            model.role_no = "Member";
+            user.mno = model.maccount;
+            user.mno = model.mname;
+            user.mpassword = model.mpassword;
+            user.memail = model.memail;
+            user.birthday = model.birthday;
+            user.remark = model.remark;
+            user.role_no = "Member";  //設定角色代號為 Member
+            user.varify_code = UserAccount.GetNewVarifyCode(); //產生驗證碼
+            user.isvarify = 0;
 
             //寫入資料庫
-            db.Configuration.ValidateOnSaveEnabled = false;
-            db.users.Add(model);
-            db.SaveChanges();
+            try
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.users.Add(user);
+                db.SaveChanges();
+                db.Configuration.ValidateOnSaveEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                string str_message = ex.Message;
+            }
 
             //寄出驗證信
-            SendVerifyMail(model.memail, model.varify_code);
+            SendVerifyMail(model.memail, user.varify_code);
             return RedirectToAction("SendEmailResult");
-
         }
 
         private string SendVerifyMail(string usermemail, string varifyCode)
@@ -185,6 +196,19 @@ namespace campingplan.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ResetPassword()
+        {
+            cvmResetPassword model = new cvmResetPassword()
+            {
+                UserAccount = UserAccount.UserOfAccount,
+                CurrentPassword = "",
+                NewPassword = "",
+                ConfirmPassword = ""
+            };
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult ResetPassword(cvmResetPassword model)
         {
@@ -197,14 +221,14 @@ namespace campingplan.Controllers
             bool bln_error = false;
 
             var check = db.users
-                .Where(m => m.mno == model.UserNo)
+                .Where(m => m.maccount == model.UserAccount)
                 .Where(m => m.mpassword == str_password)
                 .FirstOrDefault();
             if (check == null) { ModelState.AddModelError("", "目前密碼輸入錯誤!!"); bln_error = true; }
             if (bln_error) return View(model);
 
             str_password = model.NewPassword;
-            var user = db.users.Where(m => m.mno == model.UserNo).FirstOrDefault();
+            var user = db.users.Where(m => m.maccount == model.UserAccount).FirstOrDefault();
             if (user != null)
             {
                 //密碼加密
@@ -225,8 +249,6 @@ namespace campingplan.Controllers
             if (UserAccount.RoleNo == AppEnums.enUserRole.Vendor) return RedirectToAction("Index", "Vendor", new { area = "Vendor" });
             return RedirectToAction("Index", "Home");
         }
-
-
 
     }
 }

@@ -10,7 +10,7 @@ namespace campingplan.Models
     {
         [Key]
         [Display(Name = "登入帳號")]
-        public string UserNo { get; set; }
+        public string UserAccount { get; set; }
 
         [Required(ErrorMessage = "請輸入目前的密碼!!")]
         [DataType(DataType.Password)]

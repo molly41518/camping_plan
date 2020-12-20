@@ -9,13 +9,8 @@ using campingplan.Models;
 
 namespace campingplan.Controllers
 {
-    public class MemberController : Controller
+    public class MembersController : Controller
     {
-        // GET: Member
-        public ActionResult Index()
-        {
-            return View();
-        }
         [LoginAuthorize(RoleNo = "Member")]
         public ActionResult MemberProfile()
         {

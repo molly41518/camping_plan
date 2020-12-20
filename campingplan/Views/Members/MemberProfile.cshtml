@@ -1,0 +1,72 @@
+﻿@using campingplan.App_Class;
+@model campingplan.Models.users
+
+
+@{
+    ViewBag.Title = "MemberProfile";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+
+
+@if (!UserAccount.UploadImageMode)
+{
+    <div class="col-9">
+        <div class="col-12 d-flex">
+            <div class="line bg-info mr-2"></div>
+            <h4>會員資料</h4>
+        </div>
+        <div class="col-12 mb-2">
+            <div class="card carditem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-profile-image" />
+                        </div>
+                        <div class="col-10">
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.mno)：</span>@Html.DisplayFor(m => m.mno)
+                            </div>
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.maccount)：</span>@Html.DisplayFor(m => m.maccount)
+                            </div>
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.mname)：</span>@Html.DisplayFor(m => m.mname)
+                            </div>
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.memail)：</span>@Html.DisplayFor(m => m.memail)
+                            </div>
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.birthday)：</span>@Html.DisplayFor(m => m.birthday)
+                            </div>
+                            <div class="col-12 control-label control-header">
+                                <span class="control-caption">@Html.DisplayNameFor(m => m.remark)：</span>@Html.DisplayFor(m => m.remark)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="col-12 text-center">
+                    @Html.ActionLink("編輯帳號", "EditProfile", "Members", null, new { @class = "btn btn-success form-button" })
+                    @Html.ActionLink("上傳圖像", "UploadImage", "Member", new { area = "Member" }, new { @class = "btn btn-success form-button" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <h3>帳號圖像上傳</h3>
+        <hr />
+        @using (Html.BeginForm("Upload", "Member", new { area = "Member" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="file" name="file" id="file" class="form-control" />
+            <input type="submit" value="上傳檔案" class="btn btn-primary form-control" />
+        }
+        @Html.ActionLink("返回", "UploadCancel", "Member", new { area = "Member" }, new { @class = "btn btn-success form-button" })
+    </div>
+
+}
+

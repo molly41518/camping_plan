@@ -22,12 +22,6 @@ namespace campingplan.Models
     [Bind(Exclude = "varify_code,isvarify")]
     public partial class users
     {
-        [DisplayName("確認密碼")]
-        [Required(ErrorMessage = "確認密碼不可空白!!")]
-        [DataType(DataType.Password)]
-        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
-        [System.ComponentModel.DataAnnotations.Compare("mpassword",ErrorMessage ="密碼不相符！")]
-        public string ConfirmPassword { get; set; }
 
         [Display(Name = "驗證")]
         public bool bool_isvarify { get; set; }
@@ -65,7 +59,6 @@ namespace campingplan.Models
             public string mname { get; set; }
 
             [DisplayName("暱稱")]
-            [Required]
             public string mnickname { get; set; }
 
             [Required(ErrorMessage = "電子信箱不可空白!!")]

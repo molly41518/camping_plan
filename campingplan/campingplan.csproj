@@ -170,9 +170,6 @@
     <Compile Include="Areas\Admin\Controllers\ShippingController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
-    <Compile Include="Areas\Member\Controllers\MemberController.cs" />
-    <Compile Include="Areas\Member\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Areas\Vendor\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Vendor\Controllers\ProductTypeDetailController.cs" />
@@ -180,7 +177,7 @@
     <Compile Include="Areas\Vendor\Controllers\VendorController.cs" />
     <Compile Include="Areas\Vendor\VendorAreaRegistration.cs" />
     <Compile Include="Controllers\BackProdutController.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -588,16 +585,6 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Areas\Member\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Member\Views\Member\EditProfile.cshtml" />
-    <Content Include="Areas\Member\Views\Member\Index.cshtml" />
-    <Content Include="Areas\Member\Views\Member\MemberProfile.cshtml" />
-    <Content Include="Areas\Member\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\Member\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Member\Views\UnClose\Detail.cshtml" />
-    <Content Include="Areas\Member\Views\UnClose\Index.cshtml" />
-    <Content Include="Areas\Member\Views\UnClose\OrderDetail.cshtml" />
-    <Content Include="Areas\Member\Views\web.config" />
     <Content Include="Areas\Vendor\Views\Vendor\EditProfile.cshtml" />
     <Content Include="Areas\Vendor\Views\Vendor\Index.cshtml" />
     <Content Include="Areas\Vendor\Views\Vendor\VendorProfile.cshtml" />
@@ -1455,7 +1442,6 @@
     <Content Include="Views\Product\CheckoutReport.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutEdit.cshtml" />
-    <Content Include="Views\Shared\_LayoutMember.cshtml" />
     <Content Include="Views\Shared\_LayoutVendor.cshtml" />
     <Content Include="Views\Shared\_PartialAdmin.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -1470,11 +1456,14 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutProduct.cshtml" />
     <Content Include="Views\User\LoginClear.cshtml" />
+    <Content Include="Views\Members\MemberProfile.cshtml" />
+    <Content Include="Views\Members\EditProfile.cshtml" />
+    <Content Include="Views\Shared\_LayoutMember.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\campingplan\v16\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Member\Models\" />
     <Folder Include="Areas\Vendor\Models\" />
     <Folder Include="Areas\Vendor\Views\Shared\" />
   </ItemGroup>

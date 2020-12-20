@@ -14,7 +14,7 @@ namespace campingplan.Models
         [Required(ErrorMessage = "帳號不可空白!!")]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true, NullDisplayText = "請輸入帳號")]
         [Display(Name = "帳號")]
-        public string mno { get; set; }
+        public string maccount { get; set; }
 
         [Required(ErrorMessage = "姓名不可空白")]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true, NullDisplayText = "請輸入姓名")]
@@ -25,7 +25,7 @@ namespace campingplan.Models
         [DataType(DataType.Password)]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
         [Display(Name = "密碼")]
-        public string password { get; set; }
+        public string mpassword { get; set; }
 
         [Display(Name = "確認密碼")]
         [DataType(DataType.Password)]
@@ -37,7 +37,7 @@ namespace campingplan.Models
         [Display(Name = "電子信箱")]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true, NullDisplayText = "請輸入電子信箱")]
         [EmailAddress(ErrorMessage = "請輸入電子信箱格式")]
-        public string email { get; set; }
+        public string memail { get; set; }
 
         [Display(Name = "出生日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
