@@ -48,45 +48,20 @@ namespace campingplan.Controllers
 
         private static void UpdateSearchInfo(ref NameValueCollection SearchInfo, NameValueCollection form, string key)
         {
-            if (!string.IsNullOrEmpty(form[key]) && form[key] != "false")
+            string value = form[key];
+            if (!string.IsNullOrEmpty(value))
             {
-                SearchInfo[key] = form[key];
+                SearchInfo[key] = value;
             }
         }
 
-        // GET: Product
-        public ActionResult CategoryList(string id, int page = 1)
+        private void QueryBySearchInfo(ref NameValueCollection SearchInfo, ref IQueryable<product> relayModel)
         {
-            int int_id = 0;
-            ViewBag.CategoryNo = id;
-            ViewBag.CategoryName = Shop.GetCategoryName(id, ref int_id);
-            var relayModel = db.product.Where(m => m.categoryid == int_id);
-
-            // 準備 SearchInfo
-            NameValueCollection SearchInfo = new NameValueCollection();
-            UpdateSearchInfo(ref SearchInfo, Request.Form, "stock_qty");
-            UpdateSearchInfo(ref SearchInfo, Request.Form, "searchString");
-            UpdateSearchInfo(ref SearchInfo, Request.Form, "dateSearch");
-            var featureEnToCHT = Shop.GetFeatureDict();
-            foreach (var kv in Shop.product_feature_exp_to_string)
-            {
-                UpdateSearchInfo(ref SearchInfo, Request.Form, featureEnToCHT[kv.Value]);
-            }
-            if (SearchInfo.Count != 0)
-            {
-                Shop.SearchInfo = SearchInfo;
-            }
-            else
-            {
-                SearchInfo = Shop.SearchInfo;
-            }
-
             int qty = Convert.ToInt32(SearchInfo["stock_qty"]);
             //關鍵字搜尋
             string searchwords = SearchInfo["searchString"];
             if (!string.IsNullOrEmpty(searchwords))
             {
-                ViewBag.SearchKeywordProductList = Shop.GetCategoryName(id, ref int_id);
                 relayModel = relayModel.Where(m => m.pname.Contains(searchwords));
             }
 
@@ -111,6 +86,7 @@ namespace campingplan.Controllers
             }
 
             // 特徵搜索
+            var featureEnToCHT = Shop.GetFeatureDict();
             foreach (var kv in Shop.product_feature_exp_to_string)
             {
                 var result = SearchInfo[featureEnToCHT[kv.Value]];
@@ -120,11 +96,27 @@ namespace campingplan.Controllers
                 }
             }
 
-            //分頁
-            int pagesize = 6;
-            int pagecurrent = page < 1 ? 1 : page;
-            IPagedList<product> model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
+        }
 
+        private NameValueCollection NewSearchInfo()
+        {
+            // 準備 SearchInfo
+            NameValueCollection SearchInfo = new NameValueCollection();
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "stock_qty");
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "searchString");
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "dateSearch");
+            var featureEnToCHT = Shop.GetFeatureDict();
+            foreach (var kv in Shop.product_feature_exp_to_string)
+            {
+                UpdateSearchInfo(ref SearchInfo, Request.Form, featureEnToCHT[kv.Value]);
+            }
+            return SearchInfo;
+        }
+
+        private void UpdatePrice(ref NameValueCollection SearchInfo, ref IPagedList<product> model)
+        {
+            string dateSearch = SearchInfo["dateSearch"];
+            int qty = Convert.ToInt32(SearchInfo["stock_qty"]);
             if (!string.IsNullOrEmpty(dateSearch))
             {
                 foreach (var p in model)
@@ -147,6 +139,46 @@ namespace campingplan.Controllers
                     p.min_price = price;
                 }
             }
+        }
+
+        public ActionResult CategoryList(string id, int page = 1, bool isNew = true)
+        {
+            int int_id = 0;
+            ViewBag.CategoryNo = id;
+            ViewBag.CategoryName = Shop.GetCategoryName(id, ref int_id);
+            var relayModel = db.product.Where(m => m.categoryid == int_id);
+
+            // 準備 SearchInfo
+            if(!string.IsNullOrEmpty(Request.Form["newSearch"]) && Request.Form["newSearch"] == "false")
+            {
+                isNew = false;
+            }
+            if (isNew)
+            {
+                Shop.SearchInfo = NewSearchInfo();
+            }
+            NameValueCollection SearchInfo = Shop.SearchInfo;
+            ViewBag.SearchKeywordProductList = Shop.GetCategoryName(id, ref int_id);
+
+            UpdateSearchInfo(ref SearchInfo, Request.Form, "locationSearch");
+
+            QueryBySearchInfo(ref SearchInfo, ref relayModel);
+
+            // 地點搜尋
+            string locationSearch = SearchInfo["locationSearch"];
+            if (!string.IsNullOrEmpty(locationSearch) && locationSearch != "all")
+            {
+                var locationType = db.product_features_type.Where(pft => pft.features_parents_id == 1 && pft.features_member == locationSearch).SingleOrDefault().rowid;
+                relayModel = relayModel.Where(m => m.product_features.location_type == locationType);
+            }
+
+            //分頁
+            int pagesize = 6;
+            int pagecurrent = page < 1 ? 1 : page;
+            IPagedList<product> model = relayModel.OrderBy(m => m.pno).ToPagedList(pagecurrent, pagesize);
+
+            // 更新價錢
+            UpdatePrice(ref SearchInfo, ref model);
 
             return View(model);
         }

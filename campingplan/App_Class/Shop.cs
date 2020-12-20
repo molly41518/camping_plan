@@ -106,7 +106,8 @@ namespace campingplan.App_Class
             Dictionary<string, List<product_typedetail>> output = new Dictionary<string, List<product_typedetail>>();
             foreach (var p in product_detail_list)
             {
-                if (!IsHasStock(p, qty, startday, endday)) {
+                if (!IsHasStock(p, qty, startday, endday))
+                {
                     continue;
                 }
                 bool is_output_has_area = output.ContainsKey(p.parea_name);
@@ -120,19 +121,28 @@ namespace campingplan.App_Class
             return output;
         }
 
-        private static Dictionary<string, string> product_feature_dict = new Dictionary<string, string>();
-        public static ref Dictionary<string, string> GetFeatureDict()
+        private static List<int> product_feature_key = new List<int>();
+        private static Dictionary<string, string>[] product_feature_value = new Dictionary<string, string>[10];
+        public static ref Dictionary<string, string> GetFeatureDict(int type = 2)
         {
-            if (product_feature_dict.Count == 0)
+            for (int i = 0; i < product_feature_key.Count(); ++i)
             {
-                var db = new dbcon();
-                var f_model = db.product_features_type.Where(m => m.features_parents_id == 2).ToList();
-                foreach (var i in f_model)
+                if (product_feature_key[i] == type && product_feature_value[i].Count != 0)
                 {
-                    product_feature_dict.Add(i.features_member, i.features_name);
+                    return ref product_feature_value[i];
                 }
             }
-            return ref product_feature_dict;
+            Dictionary<string, string> f_dict = new Dictionary<string, string>();
+            var db = new dbcon();
+            var f_model = db.product_features_type.Where(m => m.features_parents_id == type).ToList();
+            foreach (var i in f_model)
+            {
+                f_dict.Add(i.features_member, i.features_name);
+            }
+            product_feature_key.Add(type);
+            product_feature_value[product_feature_key.Count - 1] = f_dict;
+
+            return ref product_feature_value[product_feature_key.Count - 1];
         }
 
         public static List<KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>> product_feature_exp_to_string = new List<KeyValuePair<System.Linq.Expressions.Expression<Func<product, bool>>, string>>() {

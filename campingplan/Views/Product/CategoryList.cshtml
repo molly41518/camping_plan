@@ -28,6 +28,12 @@
 
         });
     </script>
+    <script>
+        function submitLocationForm(loc){
+            $('#locationSearch').val(loc);
+            $('#location_form').submit();
+        }
+    </script>
 }
 @section styles{
     <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -230,6 +236,7 @@
                 <div class="col-lg-12 p-0">
                     @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
                     {
+
                         <div class="bg-white pb-2">
                             <div class="row d-flex pt-2">
                                 <div class="col-12 col-lg-8">
@@ -258,19 +265,19 @@
                                 <div id="tabmenu1" class="tab-pane">
                                     <div class="col-12 col-lg-12 p-0">
                                         <div class="input-group my-2">
-
                                             @Html.TextBox("searchString", null, new { @class = "form-control col-lg-12 mx-3 mt-3", @placeholder = "請輸入關鍵字" })
-
                                         </div>
                                     </div>
                                 </div>
                                 <div id="tabmenu2" class="tab-pane fade">
                                     <div class="col-12 col-lg-12 bg-white pt-3">
                                         <ul class="row">
-                                            @foreach (var f in Shop.GetFeatureDict())
+                                        @{
+                                            foreach (var f in Shop.GetFeatureDict())
                                             {
                                                 <li class="col-6 col-lg-3 col-md-4 small text-left">@Html.CheckBox(@f.Value, false) @f.Value</li>
                                             }
+                                        }
                                         </ul>
                                     </div>
                                 </div>
@@ -284,39 +291,18 @@
     </div>
 </header>
 <div class="pr_type_loction_lg mb-4 text-center searchcontent">
-    <ul class="p-0">
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            全部
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            大台北
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            桃園
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            竹苗
-        </li>
-
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            中彰投
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            雲嘉南
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            高屏
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            宜蘭
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1">
-            花東
-        </li>
-        <li class="pr_type_loction btn btn-outline-info d-inline-block mr-2  mt-sm-1">
-            離島
-        </li>
-    </ul>
+    @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post, new { id = "location_form" }))
+    {
+        <input type="hidden" id="newSearch" name="newSearch" value="false"/>
+        <input type="hidden" id="locationSearch" name="locationSearch" value=""/>
+        <ul class="p-0">
+        <input type="button" onclick="submitLocationForm('all')" class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1" value="全部" />
+        @foreach (var f in Shop.GetFeatureDict(1))
+        {
+            <input type="button" onclick="submitLocationForm('@f.Key')" class="pr_type_loction btn btn-outline-info d-inline-block mr-2 mt-sm-1" value="@f.Value" />
+        }
+       </ul>
+    }
 </div>
 
 <div class="container">
@@ -362,7 +348,7 @@
         }
         <div class="col-12">
             <div class="text-center">
-                @Html.PagedListPager(Model, page => Url.Action("CategoryList", "Product", new { page }))
+                @Html.PagedListPager(Model, page => Url.Action("CategoryList", "Product", new { @page = page, @isNew = false}))
             </div>
         </div>
     </div>
