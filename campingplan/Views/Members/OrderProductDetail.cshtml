@@ -1,0 +1,55 @@
+﻿@model IEnumerable<campingplan.Models.order_detail>
+
+@{
+    ViewBag.Title = "OrderProductDetail";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<div class="col-9 mg-product">
+    <div class="col-12 mb-2">
+        <div class="row">
+            <div class="col-10 d-flex">
+                <div class="title-item"></div>
+                <h5 class="ml-3">訂單明細</h5>@Html.ActionLink("回到商品列表", "BackProdutList")
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="bg-white py-3">
+            <h5 class="text-center pt-2">訂單編號 @ViewBag.OrderNo</h5>
+            <hr class="col-3" />
+            <div class="row text-center">
+                <div class="col-12 d-flex">
+                    <div class="col-8 text-left pl-5 text-secondary">商品內容</div>
+                    <div class="col-2 text-secondary">數量</div>
+                    <div class="col-2 text-secondary">金額</div>
+                </div>
+                <div class="col-12 d-flex mt-2">
+                    @foreach (var item in Model)
+                    {
+                        string productimgname = string.Format("{0}.jpeg", @item.pno);
+                        <div class="col-2 text-right pr-0 pl-5">
+                            <img class="img-fluid imgproduct" src="~/Content/images/product/@productimgname" />
+                        </div>
+                        <div class="col-6">
+                            <div class="col-12 text-left">@item.pname</div>
+                            <div class="col-12 d-flex">@item.ptype_name @item.ptype_spec</div>
+                        </div>
+                        <div class="col-2 align-self-center">@item.qty</div>
+                        <div class="col-2 align-self-center">@item.amount</div>
+                    }
+                </div>
+                <hr class="col-10" />
+                <div class="offset-9 col-3 text-right">
+
+                    <div class="pr-5">
+                        稅金 @ViewBag.tax
+                    </div>
+                    <div class="h3 text-info pr-5">
+                        總計 @ViewBag.total
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -288,7 +288,8 @@ namespace campingplan.App_Class
 
                     foreach (var item in datas)
                     {
-                        var stock_date_list = item.ptype_spec.Split(' ');
+                        var stock_date_list = item.ptype_spec.Trim().Split(' ').ToList();
+                        stock_date_list.RemoveAt(stock_date_list.Count - 1);
                         foreach (var d in stock_date_list)
                         {
                             DateTime date = Convert.ToDateTime(d);

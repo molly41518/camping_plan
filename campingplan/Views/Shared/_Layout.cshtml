@@ -138,7 +138,7 @@
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
          id="navsr">
         <a class="navbar-brand js-scroll-trigger p-0" href="/Home/Index" id="navbr">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
+            <img src="~/Content/images/logo/logo-04.png" alt="" class="" style="height:45px;"/>
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -198,7 +198,7 @@
             <span class="nav-link">@UserAccount.UserInfo</span>
             <hr />
             @Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "dropdown-item" })
-            @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dropdown-item" })
+            @Html.ActionLink("重設密碼", "ResetPassword", "User", null , new { @class = "dropdown-item" })
         </div>
     </li>
     <li class="nav-item">

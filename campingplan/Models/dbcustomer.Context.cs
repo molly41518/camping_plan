@@ -42,5 +42,7 @@ namespace campingplan.Models
         public virtual DbSet<order_detail> order_detail { get; set; }
 
         public System.Data.Entity.DbSet<campingplan.Models.cvmResetPassword> cvmResetPasswords { get; set; }
+
+        public System.Data.Entity.DbSet<campingplan.Models.cvmLogin> cvmLogins { get; set; }
     }
 }

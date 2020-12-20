@@ -288,10 +288,10 @@ namespace campingplan.App_Class
         /// <returns></returns>
         public static bool IsUnCloseOrder(string orderStatus)
         {
-            bool bln_value = false;
-            if (orderStatus == "CP") bln_value = true;
-            if (orderStatus == "OR") bln_value = true;
-            if (orderStatus == "RT") bln_value = true;
+            bool bln_value = true;
+            if (orderStatus == "CP") bln_value = false;
+            if (orderStatus == "OR") bln_value = false;
+            if (orderStatus == "RT") bln_value = false;
             return bln_value;
         }
 
