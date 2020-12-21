@@ -30,8 +30,12 @@ namespace campingplan.Models
         [Display(Name = "確認密碼")]
         [DataType(DataType.Password)]
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true)]
-        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "確認密碼不相符!!")]
+        [System.ComponentModel.DataAnnotations.Compare("mpassword", ErrorMessage = "確認密碼不相符!!")]
         public string ConfirmPassword { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = false, HtmlEncode = true, NullDisplayText = "請輸入綽號")]
+        [Display(Name = "綽號")]
+        public string mnickname { get; set; }
 
         [Required(ErrorMessage = "電子信箱不可空白")]
         [Display(Name = "電子信箱")]

@@ -87,7 +87,7 @@ namespace campingplan.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            users model = new users();
+            cvmRegister model = new cvmRegister();
             return View(model);
         }
 
