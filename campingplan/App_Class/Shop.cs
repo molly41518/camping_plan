@@ -186,6 +186,22 @@ namespace campingplan.App_Class
             return output;
         }
 
+        public static List<KeyValuePair<string, KeyValuePair<string, bool>>> GetFeatureKVList(product_features p_feature)
+        {
+            List<KeyValuePair<string, KeyValuePair<string, bool>>> output = new List<KeyValuePair<string, KeyValuePair<string, bool>>>();
+            foreach (var kv in product_feature_to_string)
+            {
+                string name = kv.Value;
+                string text = GetFeatureDict()[name];
+                bool ret = kv.Key(p_feature);
+                output.Add(new KeyValuePair<string, KeyValuePair<string, bool>> (
+                        name,
+                        new KeyValuePair<string, bool>(text, ret)
+                    ));
+            }
+            return output;
+        }
+
         public static int GetProductPrice(string productNo)
         {
             int int_price = 0;

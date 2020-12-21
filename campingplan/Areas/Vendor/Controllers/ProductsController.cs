@@ -35,8 +35,6 @@ namespace campingplan.Areas.Vendor.Controllers
                     {
                         models[i].bool_istop = (models[i].istop == 1);
                         models[i].bool_issale = (models[i].issale == 1);
-                        models[i].bool_iscolor = (models[i].iscolor == 1);
-                        models[i].bool_issize = (models[i].issize == 1);
                     }
                 }
 
@@ -56,12 +54,14 @@ namespace campingplan.Areas.Vendor.Controllers
                 //Category DropDownList
                 string str_rowid = "0";
                 var categoryList = new List<SelectListItem>();
-                List<categorys> clists = db.categorys.OrderBy(m => m.category_no).ToList();
+                List<categorys> clists = db.categorys.Where(m => m.parentid == 0).OrderBy(m => m.rowid).ToList();
                 foreach (var item in clists)
                 {
-                    SelectListItem list = new SelectListItem();
-                    list.Value = item.rowid.ToString();
-                    list.Text = Shop.GetCategoryName(item.rowid.ToString());
+                    SelectListItem list = new SelectListItem
+                    {
+                        Value = item.rowid.ToString(),
+                        Text = item.category_name
+                    };
                     categoryList.Add(list);
                     if (id == 0)
                     { if (str_rowid == "0") str_rowid = item.rowid.ToString(); }
@@ -70,28 +70,35 @@ namespace campingplan.Areas.Vendor.Controllers
                 if (models != null) str_rowid = models.categoryid.ToString();
 
                 //預設選擇哪一筆
-                categoryList.Where(m => m.Value == str_rowid).First().Selected = true;
+                categoryList.First(m => m.Value == str_rowid).Selected = true;
                 ViewBag.CategoryList = categoryList;
+
+                var locationTypeList = new List<SelectListItem>();
+                List<product_features_type> localtions = db.product_features_type.Where(f => f.features_parents_id == 1).ToList();
+                foreach (var l in localtions)
+                {
+                    SelectListItem list = new SelectListItem
+                    {
+                        Value = l.rowid.ToString(),
+                        Text = l.features_name
+                    };
+                    locationTypeList.Add(list);
+                }
+                ViewBag.LocationTypeList = locationTypeList;
 
                 if (id == 0)
                 {
-                    product new_model = new product();
-                    new_model.size_name = "";
-                    new_model.color_name = "";
-                    new_model.remark = "";
-                    new_model.start_count = 5;
-                    new_model.browse_count = 0;
-                    new_model.bool_istop = false;
-                    new_model.bool_issale = true;
-                    new_model.bool_iscolor = true;
-                    new_model.bool_issize = true;
+                    product new_model = new product
+                    {
+                        remark = "",
+                        start_count = 5,
+                        browse_count = 0,
+                        product_features = new product_features()
+                    };
                     return View(new_model);
                 }
-
-                models.bool_istop = (models.istop == 1);
-                models.bool_issale = (models.issale == 1);
-                models.bool_iscolor = (models.iscolor == 1);
-                models.bool_issize = (models.issize == 1);
+                Console.WriteLine(models.product_features.near_river);
+                Console.WriteLine(models.product_typedetail.Count);
                 return View(models);
             }
         }
@@ -115,19 +122,35 @@ namespace campingplan.Areas.Vendor.Controllers
                             int_cate_id = models.categoryid.GetValueOrDefault();
                             product.pno = models.pno;//有疑慮
                             product.pname = models.pname;//有疑慮
-                            product.pdescription = models.pdescription;
                             product.categoryid = int_cate_id;
                             product.category_name = Shop.GetCategoryName(int_cate_id.ToString());
                             product.istop = (models.bool_istop) ? 1 : 0;
                             product.issale = (models.bool_issale) ? 1 : 0;
-                            product.issize = (models.bool_issize) ? 1 : 0;
-                            product.iscolor = (models.bool_iscolor) ? 1 : 0;
                             product.start_count = models.start_count;
                             product.browse_count = models.browse_count;
                             product.vendor_no = UserAccount.UserOfAccount;
-                            product.color_name = models.color_name;
-                            product.size_name = models.size_name;
                             product.remark = models.remark;
+                            var feature = db.product_features.Where(f => f.pno == models.pno).FirstOrDefault();
+                            if (feature != null)
+                            {
+                                feature.location_type = models.product_features.location_type;
+                                feature.near_river = models.product_features.near_river;
+                                feature.near_sea = models.product_features.near_sea;
+                                feature.no_tent = models.product_features.no_tent;
+                                feature.have_canopy = models.product_features.have_canopy;
+                                feature.have_clouds = models.product_features.have_clouds;
+                                feature.have_firefly = models.product_features.have_firefly;
+                                feature.could_book_all = models.product_features.could_book_all;
+                                feature.have_rental_equipment = models.product_features.have_rental_equipment;
+                                feature.have_game_area = models.product_features.have_game_area;
+                                feature.elevation_under_300m = models.product_features.elevation_under_300m;
+                                feature.elevation_301m_to_500m = models.product_features.elevation_301m_to_500m;
+                                feature.elevation_over_501m = models.product_features.elevation_over_501m;
+                            }
+                            else
+                            {
+                                db.product_features.Add(models.product_features);
+                            }
                         }
                     }
                     else
@@ -138,9 +161,10 @@ namespace campingplan.Areas.Vendor.Controllers
                         models.category_name = Shop.GetCategoryName(int_cate_id.ToString());
                         models.istop = (models.bool_istop) ? 1 : 0;
                         models.issale = (models.bool_issale) ? 1 : 0;
-                        models.issize = (models.bool_issize) ? 1 : 0;
-                        models.iscolor = (models.bool_iscolor) ? 1 : 0;
+                        models.product_features.pno = models.pno;
+                        models.product_features.product = models;
                         db.product.Add(models);
+                        db.product_features.Add(models.product_features);
                     }
                     db.SaveChanges();
                     status = true;

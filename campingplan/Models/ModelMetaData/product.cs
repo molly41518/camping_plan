@@ -21,13 +21,22 @@ namespace campingplan.Models
     public partial class product
     {
         [Display(Name = "熱門")]
-        public bool bool_istop { get; set; }
+        public bool bool_istop {
+            get
+            {
+                return istop == 1; 
+            }
+            set { }
+        }
         [Display(Name = "上架")]
-        public bool bool_issale { get; set; }
-        [Display(Name = "顏色")]
-        public bool bool_iscolor { get; set; }
-        [Display(Name = "尺寸")]
-        public bool bool_issize { get; set; }
+        public bool bool_issale
+        {
+            get
+            {
+                return issale == 1;
+            }
+            set { }
+        }
         [Display(Name = "最低價錢")]
         public int min_price
         {
@@ -64,14 +73,6 @@ namespace campingplan.Models
             public Nullable<int> istop { get; set; }
             [Display(Name = "上架銷售")]
             public Nullable<int> issale { get; set; }
-            [Display(Name = "區分顏色")]
-            public Nullable<int> iscolor { get; set; }
-            [Display(Name = "區分尺寸")]
-            public Nullable<int> issize { get; set; }
-            [Display(Name = "自定尺寸")]
-            public string size_name { get; set; }
-            [Display(Name = "自定顏色")]
-            public string color_name { get; set; }
             [Display(Name = "瀏覽次數")]
             public Nullable<int> browse_count { get; set; }
             [Display(Name = "廠商編號")]

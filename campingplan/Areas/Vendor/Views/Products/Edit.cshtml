@@ -1,5 +1,7 @@
 ﻿@using campingplan.Models;
+@using campingplan.App_Class;
 @model campingplan.Models.product
+
 
 @{
     ViewBag.Title = "商品資料" + ((Model.rowid > 0) ? "修改" : "新增");
@@ -11,7 +13,7 @@
     if (Model != null && Model.rowid > 0)
     {
         @Html.HiddenFor(model => model.rowid)
-        @Html.HiddenFor(model => model.pdescription)
+
         @Html.HiddenFor(model => model.category_name)
         @Html.HiddenFor(model => model.vendor_no)
         @Html.HiddenFor(model => model.remark)
@@ -34,16 +36,6 @@
         @Html.ValidationMessageFor(model => model.categoryid)
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.size_name, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.TextBoxFor(model => model.size_name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.size_name)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.color_name, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.TextBoxFor(model => model.color_name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.color_name)
-    </div>
-    <div class="form-group">
         @Html.LabelFor(model => model.bool_istop, htmlAttributes: new { @class = "control-label control-header" })
         @Html.CheckBoxFor(model => model.bool_istop, new { @class = "form-control form-control-checkbox" })
         @Html.ValidationMessageFor(model => model.bool_istop)
@@ -55,14 +47,69 @@
         @Html.ValidationMessageFor(model => model.bool_issale)
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.bool_iscolor, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.CheckBoxFor(model => model.bool_iscolor, new { @class = "form-control form-control-checkbox" })
-        @Html.ValidationMessageFor(model => model.bool_iscolor)
+        @Html.LabelFor(model => model.product_features.location_type, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.DropDownList("product_features.location_type", (IEnumerable<SelectListItem>)ViewBag.LocationTypeList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.product_features.location_type)
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.bool_issize, htmlAttributes: new { @class = "control-label control-header" })
-        @Html.CheckBoxFor(model => model.bool_issize, new { @class = "form-control form-control-checkbox" })
-        @Html.ValidationMessageFor(model => model.bool_issize)
+        @Html.LabelFor(model => model.product_features.bool_near_river, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_near_river, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_near_river)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_near_sea, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_near_sea, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_near_sea)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_no_tent, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_no_tent, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_no_tent)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_have_canopy, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_have_canopy, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_have_canopy)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_have_clouds, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_have_clouds, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_have_clouds)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_have_firefly, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_have_firefly, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_have_firefly)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_could_book_all, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_could_book_all, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_could_book_all)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_have_rental_equipment, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_have_rental_equipment, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_have_rental_equipment)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_have_game_area, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_have_game_area, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_have_game_area)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_elevation_under_300m, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_elevation_under_300m, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_elevation_under_300m)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_elevation_301m_to_500m, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_elevation_301m_to_500m, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_elevation_301m_to_500m)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_features.bool_elevation_over_501m, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.product_features.bool_elevation_over_501m, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.product_features.bool_elevation_over_501m)
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.start_count, htmlAttributes: new { @class = "control-label control-header" })

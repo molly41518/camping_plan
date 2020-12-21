@@ -40,8 +40,6 @@
             { "data": "pno", "width": "50px" },
             { "data": "pname", "autoWidth": true },
             { "data": "category_name", "width": "100px" },
-            { "data": "size_name", "width": "100px" },
-            { "data": "color_name", "width": "100px" },
             {
                 "data": "istop", "width": "30px", "render": function (data) {
                     if (data === 1) {
@@ -54,26 +52,6 @@
             },
             {
                 "data": "issale", "width": "30px", "render": function (data) {
-                    if (data === 1) {
-                        return '<input type="checkbox" checked="checked" disabled="disabled" />';
-                    }
-                    else {
-                        return '<input type="checkbox" disabled="disabled" />';
-                    }
-                }
-            },
-            {
-                "data": "iscolor", "width": "30px", "render": function (data) {
-                    if (data === 1) {
-                        return '<input type="checkbox" checked="checked" disabled="disabled" />';
-                    }
-                    else {
-                        return '<input type="checkbox" disabled="disabled" />';
-                    }
-                }
-            },
-            {
-                "data": "issize", "width": "30px", "render": function (data) {
                     if (data === 1) {
                         return '<input type="checkbox" checked="checked" disabled="disabled" />';
                     }
