@@ -63,40 +63,7 @@
             list-style: none;
         }
 
-        #carousel-1,
-        #carousel-2,
-        #carousel-3 {
-            padding-top: 20rem;
-            padding-bottom: calc(20rem - 4.5rem);
-        }
 
-        #carousel-1 {
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-1.jpeg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-        }
-
-        #carousel-2 {
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-2.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-        }
-
-        #carousel-3 {
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg/bg-4.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: cover;
-        }
-
-        .carousel-caption {
-            top: 35%;
-        }
 
         .navbar-light .navbar-nav .nav-link {
             color: white;
@@ -138,7 +105,7 @@
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
          id="navsr">
         <a class="navbar-brand js-scroll-trigger p-0" href="/Home/Index" id="navbr">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" style="height:45px;"/>
+            <img src="~/Content/images/logo/logo-04.png" alt="" class="" style="height:45px;" />
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -186,126 +153,125 @@
                     <a class="nav-link d-inline-block position-relative px-3" href="@Url.Action("CartList","Product")">
                         <i class="fas fa-shopping-cart "></i>
                         <div class="position-absolute bg-danger px-2 small text-white" style="top: 2px; left: 26px; border-radius: 50%;">@Cart.CartCount</div>
-                        </a>
+                    </a>
                 </li>
-@if (UserAccount.IsLogin)
-{
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            <i class="far fa-user-circle"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg-right">
-            <span class="nav-link">@UserAccount.UserInfo</span>
-            <hr />
-            @Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "dropdown-item" })
-            @Html.ActionLink("重設密碼", "ResetPassword", "User", null , new { @class = "dropdown-item" })
+                @if (UserAccount.IsLogin)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            <i class="far fa-user-circle"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-right">
+                            <span class="nav-link">@UserAccount.UserInfo</span>
+                            <hr />
+                            @Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("重設密碼", "ResetPassword", "User", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
+                    </li>
+
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @Ajax.ActionLink("登入", "Login", "User", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
+                    </li>
+
+                }
+
+            </ul>
         </div>
-    </li>
-    <li class="nav-item">
-        @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
-    </li>
+    </nav>
 
-}
-else
-{
-    <li class="nav-item">
-        @Ajax.ActionLink("登入", "Login", "User", null, new AjaxOptions { OnSuccess = "showDialogLogin", HttpMethod = "GET" }, new { @class = "nav-link" })
-    </li>
+    <div class="modal fade mt-5" id="showLogin"></div>
+    <div class="modal fade" id="showRegister"></div>
 
-}
+    @RenderBody()
 
-</ul>
-</div>
-</nav>
-
-<div class="modal fade mt-5" id="showLogin"></div>
-<div class="modal fade" id="showRegister"></div>
-
-
-@RenderBody()
-
-<footer class="bg-dark py-5">
-    <div class="container">
-        <div class="row small text-white">
-            <div class="col-12 col-lg-3 small">
-                <div class="row">
-                    <div class="col-6 col-lg-8 mb-2">
-                        <img src="/logo/logo-04.png" alt="" class="img-fluid" />
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row small text-white">
+                <div class="col-12 col-lg-3 small">
+                    <div class="row">
+                        <div class="col-6 col-lg-8 mb-2">
+                            <img src="@Url.Content("/logo/logo-04.png")" alt="" class="img-fluid" />
+                        </div>
                     </div>
+                    <p>體驗，遇見更美好的自己</p>
+                    <p>
+                        Niceday 玩體驗成立於
+                        2013年，提供特色體驗預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
+                    </p>
                 </div>
-                <p>體驗，遇見更美好的自己</p>
-                <p>
-                    Niceday 玩體驗成立於
-                    2013年，提供特色體驗預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
-                </p>
+                <div class="col-4 col-lg-2 small">
+                    <p>認識我們</p>
+                    <ul class="p-0">
+                        <li>關於營火計畫</li>
+                        <li>露營攻略部落格</li>
+                        <li>加入我們</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>合作營火</p>
+                    <ul class="p-0">
+                        <li>商家加入</li>
+                        <li>聯合行銷</li>
+                        <li>企業合作</li>
+                        <li>同業交易</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>網站資訊</p>
+                    <ul class="p-0">
+                        <li>常見問題 FAQ</li>
+                        <li>服務條款</li>
+                        <li>隱私權條款</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3 small">
+                    <p>追蹤我們</p>
+                    <ul class="p-0">
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-facebook-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-line"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-youtube-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-instagram-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-twitter-square"></i>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-4 col-lg-2 small">
-                <p>認識我們</p>
-                <ul class="p-0">
-                    <li>關於營火計畫</li>
-                    <li>露營攻略部落格</li>
-                    <li>加入我們</li>
-                </ul>
-            </div>
-            <div class="col-4 col-lg-2 small">
-                <p>合作營火</p>
-                <ul class="p-0">
-                    <li>商家加入</li>
-                    <li>聯合行銷</li>
-                    <li>企業合作</li>
-                    <li>同業交易</li>
-                </ul>
-            </div>
-            <div class="col-4 col-lg-2 small">
-                <p>網站資訊</p>
-                <ul class="p-0">
-                    <li>常見問題 FAQ</li>
-                    <li>服務條款</li>
-                    <li>隱私權條款</li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-3 small">
-                <p>追蹤我們</p>
-                <ul class="p-0">
-                    <li class="d-inline-block h2 pr-1">
-                        <i class="fab fa-facebook-square"></i>
-                    </li>
-                    <li class="d-inline-block h2 pr-1">
-                        <i class="fab fa-line"></i>
-                    </li>
-                    <li class="d-inline-block h2 pr-1">
-                        <i class="fab fa-youtube-square"></i>
-                    </li>
-                    <li class="d-inline-block h2 pr-1">
-                        <i class="fab fa-instagram-square"></i>
-                    </li>
-                    <li class="d-inline-block h2 pr-1">
-                        <i class="fab fa-twitter-square"></i>
-                    </li>
-                </ul>
+            <hr />
+            <div class="row text-white">
+                <span class="col-12 col-lg-2 small text-muted text-center text-lg-left">
+                    © camping, Inc.
+                </span>
+                <span class="col-12 col-lg-10 small text-center text-lg-right text-muted">
+                    客服信箱：service@camping.tw | 客服中心：02-8912-6200 |
+                    服務時間：週一～週日 10:00 - 18:00
+                </span>
             </div>
         </div>
-        <hr />
-        <div class="row text-white">
-            <span class="col-12 col-lg-2 small text-muted text-center text-lg-left">
-                © camping, Inc.
-            </span>
-            <span class="col-12 col-lg-10 small text-center text-lg-right text-muted">
-                客服信箱：service@camping.tw | 客服中心：02-8912-6200 |
-                服務時間：週一～週日 10:00 - 18:00
-            </span>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 
 
-@*<script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>*@
-<script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
-<script src="@Url.Content("~/Scripts/camping/popper.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    @*<script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/camping/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
 </body>
 </html>

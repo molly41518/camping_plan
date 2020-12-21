@@ -459,6 +459,9 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg\bg-4.jpeg" />
+    <Content Include="Content\images\indexbg\01.jpg" />
+    <Content Include="Content\images\indexbg\02.jpg" />
+    <Content Include="Content\images\indexbg\03.jpg" />
     <Content Include="Content\images\logo\logo_svg.svg" />
     <Content Include="Content\images\product\C0002.jpeg" />
     <Content Include="Content\images\product\C0003.jpeg" />
