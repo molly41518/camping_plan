@@ -131,7 +131,7 @@
 
 
 <header>
-    @{string productimgname = string.Format("{0}.jpeg", @Model.pno); }
+    @{string productimgname = string.Format("{0}/{0}.jpg", @Model.pno); }
     <div class="container">
         <div id="carouselExampleIndicators"
              class="carousel slide"
@@ -306,7 +306,7 @@
                                 @{
                                     foreach (var detail in area.Value)
                                     { <div class="col-lg-4">
-                                            <img src="~/Content/images/bg/bg-1.jpeg" class="img-fluid" style="max-width: 80%" />
+                                            <img src=@Shop.GetProductTypeDetailImpPath(detail) class="img-fluid" style="max-width: 80%" />
                                         </div>
                                         <div class="col-lg-8">
                                             <h4 class="card-title">@detail.ptype_name</h4>

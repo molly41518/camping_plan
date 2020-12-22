@@ -22,20 +22,14 @@ namespace campingplan.Models
     {
         [Display(Name = "熱門")]
         public bool bool_istop {
-            get
-            {
-                return istop == 1; 
-            }
-            set { }
+            get { return istop == 1; }
+            set { istop = value ? 1 : 0; }
         }
         [Display(Name = "上架")]
         public bool bool_issale
         {
-            get
-            {
-                return issale == 1;
-            }
-            set { }
+            get { return issale == 1; }
+            set { issale = value ? 1 : 0;  }
         }
         [Display(Name = "最低價錢")]
         public int min_price
@@ -83,6 +77,8 @@ namespace campingplan.Models
             public string pname { get; set; }
             [Display(Name = "商品地點")]
             public string plocation { get; set; }
+            [Display(Name = "商品 Google Map URL")]
+            public string pmapurl { get; set; }
             [Display(Name = "商品敘述")]
             public string pdescription { get; set; }
 

@@ -167,7 +167,7 @@ namespace campingplan.Areas.Vendor.Controllers
             {
                 if (file.ContentLength > 0)
                 {
-                    string str_folder = string.Format("~/Images/product/{0}/{1}", Shop.ProductNo,Shop.ProductTypeNo);
+                    string str_folder = string.Format("~/Content/images/product/{0}/product_type_detail/{1}", Shop.ProductNo, Shop.ProductTypeNo);
                     string str_folder_path = Server.MapPath(str_folder);
                     if (!Directory.Exists(str_folder_path)) Directory.CreateDirectory(str_folder_path);
                     string str_file_name = Shop.ProductTypeNo + ".jpg";
@@ -176,7 +176,12 @@ namespace campingplan.Areas.Vendor.Controllers
                     file.SaveAs(path);
                 }
             }
-            return RedirectToAction("Index");
+            using (dbcon db = new dbcon())
+            {
+                var pno = Shop.ProductNo;
+                var rowid = db.product.Where(p => p.pno == pno).SingleOrDefault().rowid;
+                return RedirectToAction("Index", "ProductTypeDetail", new { id = rowid });
+            }
         }
 
 

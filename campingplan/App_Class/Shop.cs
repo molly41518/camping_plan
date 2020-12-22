@@ -58,6 +58,14 @@ namespace campingplan.App_Class
             return str_name;
         }
 
+        public static string GetCategoryNameByid(int id)
+        {
+            using (dbcon db = new dbcon())
+            {
+                return db.categorys.Where(m => m.rowid == id).FirstOrDefault().category_name;
+            }
+        }
+
         public static string GetCategoryName(string pno)
         {
             string str_name = "";
@@ -388,6 +396,11 @@ namespace campingplan.App_Class
         {
             get { return (HttpContext.Current.Session["SearchInfo"] == null) ? new NameValueCollection() : (NameValueCollection) HttpContext.Current.Session["SearchInfo"]; }
             set { HttpContext.Current.Session["SearchInfo"] = value; }
+        }
+
+        public static string GetProductTypeDetailImpPath(product_typedetail ptd)
+        {
+            return "../../Content/images/product/" + ptd.pno + "/product_type_detail/" + ptd.ptype_no + "/" + ptd.ptype_no + ".jpg";
         }
 
     }

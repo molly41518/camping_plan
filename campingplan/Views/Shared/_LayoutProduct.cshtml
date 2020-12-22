@@ -18,7 +18,14 @@
     @RenderSection("styles", required: false)
     @RenderSection("scripts", required: false)
 
-
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["message"]));
+            alert(message);
+        </script>
+    }
+        
     <script type="text/javascript">
         function showDialogLogin(data) {
             $("#showLogin").html(data);

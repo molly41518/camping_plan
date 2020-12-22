@@ -34,7 +34,7 @@
             },
             {
                 "data": "pno", "width": "50px", "orderable": false, "render": function (data) {
-                    return '<img src="../../Content/images/product/' + data + '.jpeg" class="avatar" style="width:48px;height:48px;" />';
+                    return '<img src="../../Content/images/product/' + data + '/' + data + '.jpg" class="avatar" style="width:48px;height:48px;" />';
                 }
             },
             { "data": "pno", "width": "50px" },
