@@ -316,8 +316,12 @@ namespace campingplan.Controllers
 
             if (!Cart.CartPayment(model))
             {
-                // TODO Show alert for no space
-                return View();
+                TempData["message"] = "營位不足, 請再次確認.";
+                if (model.PaymentsList == null)
+                {
+                    model.PaymentsList = db.payments.OrderBy(m => m.payment_no).ToList();
+                }
+                return View(model);
             }
 
             return Redirect("~/ECPayment.aspx");
