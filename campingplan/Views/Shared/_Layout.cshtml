@@ -26,16 +26,20 @@
                 // check if scroll event happened
                 if ($(document).scrollTop() > 10) {
                     // check if user scrolled more than 50 from top of the browser window
-                    $(".navbar-fixed-top").css("background-color", "#f8f8f8");
+                    $(".navbar-fixed-top").css("background-color", "#ffffff");
                     $("nav").addClass("navbarshadow");
                     $("a").addClass("text-info");
-                    $("#dropdown").removeClass("bg-dark");
+                    $(".dropdown-item").addClass("text-info");
+                    $(".nav-link").addClass("text-info");
+                    $(".dropdowncolor").removeClass("bg-dark");
                     // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
                 } else {
                     $(".navbar-fixed-top").css("background-color", "transparent");
                     $("nav").removeClass("navbarshadow");
                     $("a").removeClass("text-info");
-                    $("#dropdown").addClass("bg-dark");
+                    $(".dropdown-item").removeClass("text-info");
+                    $(".nav-link").removeClass("text-info");
+                    $(".dropdowncolor").addClass("bg-dark");
                     // if not, change it back to transparent
                 }
             });
@@ -54,16 +58,32 @@
         }
     </script>
 
-
-
-
     <style>
+        /*基本設定*/
         * {
             font-family: 微軟正黑體;
             list-style: none;
         }
+        a:hover{
+            text-decoration:none;
+        }
 
+        ul .dropdown-item{
+            color: white;
+        }
 
+        ul .dropdown-item:hover{
+            background:none;
+            color:black;
+        }
+
+        ul .dropdown-item a {
+            color: white;
+        }
+
+            ul .dropdown-item:hover a {
+                color: black;
+            }
 
         .navbar-light .navbar-nav .nav-link {
             color: white;
@@ -81,10 +101,10 @@
             border-color: rgb(7, 161, 189);
         }
 
-        .i-size {
+/*        .i-size {
             font-size: 4rem;
             color: rgb(7, 161, 189);
-        }
+        }*/
 
         .navFixed {
             z-index: 10;
@@ -96,6 +116,14 @@
             transition: opacity 0.5s ease-out;
             background-color: white;
         }
+
+       .logo {
+            transition: all 0.5s;
+        }
+
+            .logo:hover {
+                transform: scale(1.1);
+            }
     </style>
 
 
@@ -104,8 +132,8 @@
     <!-- navbar-expand-lg 是指在 lg 範圍以上才會直接展開選項 -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
          id="navsr">
-        <a class="navbar-brand js-scroll-trigger p-0" href="/Home/Index" id="navbr">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" style="height:45px;" />
+        <a class="navbar-brand js-scroll-trigger p-0" href="@Url.Action("Index","Home")" id="navbr">
+            <img src="@Url.Content("~/Content/images/logo/logo-04.png")" alt="營火計畫" class="logo" style="height:45px;" />
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -121,18 +149,15 @@
                 <li class="dropdown nav-item">
                     <a href="#"
                        data-toggle="dropdown"
-                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">購物商城</a>
-                    <ul id="dropdown"
-                        class="dropdown-menu bg-dark"
-                        role="menu"
-                        aria-labelledby="tutorial">
+                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">開始計畫</a>
+                    <ul class="dropdown-menu bg-dark dropdowncolor" role="menu" aria-labelledby="tutorial">
                         @{
                             var lists1 = Shop.Getategorys(0);
                             foreach (var item1 in lists1)
                             {
-                                <li role="presentation">
-                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger atextcolor" })
 
+                                <li role="presentation">
+                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger" })
                                 </li>
 
                             }
@@ -144,29 +169,37 @@
                 </li>
                 <li class="nav-item text-info">
                     <a class="nav-link js-scroll-trigger atextcolor"
-                       href="~/Home/About"
+                       href="@Url.Action("About","Home")"
                        aria-disabled="true">關於我們</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link d-inline-block position-relative px-3" href="@Url.Action("CartList","Product")">
-                        <i class="fas fa-shopping-cart "></i>
-                        <div class="position-absolute bg-danger px-2 small text-white" style="top: 2px; left: 26px; border-radius: 50%;">@Cart.CartCount</div>
+                        <i class="fas fa-shopping-cart h5"></i>
+                        @if(@Cart.CartCount != 0)
+                        {
+                            <div class="position-absolute bg-danger px-2 small text-white" style="top: 2px; left: 26px; border-radius: 50%;">@Cart.CartCount</div>
+                        }
+
                     </a>
                 </li>
                 @if (UserAccount.IsLogin)
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            <i class="far fa-user-circle"></i>
+                            <i class="far fa-user-circle h5"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right">
-                            <span class="nav-link">@UserAccount.UserInfo</span>
-                            <hr />
-                            @Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("重設密碼", "ResetPassword", "User", null, new { @class = "dropdown-item" })
-                        </div>
+                        <ul class="dropdown-menu dropdown-menu-lg-right bg-dark dropdowncolor text-white">
+                            <li class="nav-link text-center text-white">@UserAccount.UserInfo</li>
+                            <hr class="my-1 text-white" />
+                            <li class="dropdown-item">
+                                <i class="far fa-file-alt pr-2"></i>@Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "" })
+                            </li>
+                            <li class="dropdown-item">
+                                <i class="fas fa-key" style="padding-right:6px;"></i>@Html.ActionLink("重設密碼", "ResetPassword", "User", null, new { @class = "" })
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
@@ -196,13 +229,13 @@
                 <div class="col-12 col-lg-3 small">
                     <div class="row">
                         <div class="col-6 col-lg-8 mb-2">
-                            <img src="@Url.Content("/logo/logo-04.png")" alt="" class="img-fluid" />
+                            <img src="@Url.Content("~/Content/images/logo/logo-04.png")" alt="營火計畫" class="img-fluid logo" />
                         </div>
                     </div>
-                    <p>體驗，遇見更美好的自己</p>
+                    <p>冒險，遇見更美好的自己</p>
                     <p>
-                        Niceday 玩體驗成立於
-                        2013年，提供特色體驗預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
+                        營火計畫成立於
+                        2013年，提供特色露營預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
                     </p>
                 </div>
                 <div class="col-4 col-lg-2 small">

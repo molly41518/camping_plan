@@ -12,6 +12,7 @@ namespace campingplan.Models
     [MetadataType(typeof(ProductFeaturesMetaData))]
     public partial class product_features
     {
+
         [Display(Name = "近河流")]
         public bool bool_near_river {
             get { return near_river == 1; } 
@@ -93,6 +94,9 @@ namespace campingplan.Models
 
             [JsonIgnore]
             public virtual product product { get; set; }
+
+            [Display(Name = "地點")]
+            public bool location_type { get; set; }
         }
     }
 }

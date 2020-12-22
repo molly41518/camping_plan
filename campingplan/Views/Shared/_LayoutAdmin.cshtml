@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Page.Title</title>
+    <title>管理員後台-營火計畫</title>
 
     <link href="@Url.Content("~/Content/camping/bootstrap.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" />
@@ -32,15 +32,44 @@
     <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
     <script src="@Url.Content("~/easion/js/chart-js-config.js")">55</script>
 
+    <style>
+        * {
+            font-family: 微軟正黑體;
+            list-style: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .people {
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        .dash-nav {
+            padding-top: 6rem;
+        }
+
+        .dash-app {
+            margin-top: 0px;
+        }
+
+        .navbarshadow {
+            -webkit-box-shadow: 0 8px 6px -6px #444;
+            -moz-box-shadow: 0 8px 6px -6px #555;
+            box-shadow: 0 8px 6px -6px #999;
+        }
+    </style>
+
     @RenderSection("styles", required: false)
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
-        <a class="navbar-brand js-scroll-trigger p-0" href="index.html">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3 navbarshadow">
+        <a class="navbar-brand js-scroll-trigger p-0" href="@Url.Action("Index", "Admin", new { Area = "Admin" })" id="navbr">
+            <img src="@Url.Content("~/Content/images/logo/logo-04.png")" alt="營火計畫" style="height:45px;" />
         </a>
-        <h5 class="d-inline m-0 pt-2">@Html.ActionLink("後台管理專區", "Index", "Admin", new { Area = "Admin" }, new { @class = "easion-logo side-logo" })</h5>
+        <h5 class="d-inline m-0 pt-2 easion-logo side-logo">管理員專區</h5>
         <p class=" d-inline m-0 pt-2">目前位置： @ViewBag.Title</p>
         <button class="navbar-toggler"
                 type="button"
@@ -55,21 +84,19 @@
             <ul class="nav navbar-nav ml-auto">
                 @if (UserAccount.IsLogin)
                 {
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            個人帳號
+                            <i class="far fa-user-circle h5"></i>
                         </a>
-                        <div class="dropdown-menu">
-                            @Html.ActionLink("帳號明細", "AdminProfile", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
-                            @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dropdown-item" })
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="nav-link"></span>
-                        <div class="">
-
-                        </div>
+                        <ul class="dropdown-menu dropdown-menu-lg-right ">
+                            <li class="dropdown-item ">
+                                <i class="far fa-file-alt pr-2"></i>@Html.ActionLink("帳號明細", "AdminProfile", "Admin", new { Area = "Admin" }, new { @class = "" })
+                            </li>
+                            <li class="dropdown-item">
+                                <i class="fas fa-key" style="padding-right:1px;"></i> @Html.ActionLink("重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "" })
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("登出", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
@@ -93,19 +120,11 @@
 
     <div class="dash">
         <div class="dash-nav dash-nav-dark bg-primary">
-            <header>
-                <a href="#" class="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </a>
-
-            </header>
-
             <nav class="dash-nav-list">
                 <div class="text-center">
                     <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image img-fluid people" style=" width:90px;" />
                 </div>
-                <div class="dash-nav-item text-white" style="padding-left:40px;">
-
+                <div class="text-white pb-3" style="padding-left:40px;">
                     <p class="my-1">HI! @UserAccount.UserNo @UserAccount.UserName</p>
                 </div>
 

@@ -224,6 +224,7 @@
       <DependentUpon>dbcustomer.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelMetaData\categorys.cs" />
+    <Compile Include="Models\ModelMetaData\product_features.cs" />
     <Compile Include="Models\ModelMetaData\product_typedetail.cs" />
     <Compile Include="Models\ModelMetaData\status.cs" />
     <Compile Include="Models\ModelMetaData\companys.cs" />
@@ -1441,7 +1442,6 @@
     <Content Include="Views\BackProdut\BackProdutList.cshtml" />
     <Content Include="Views\BackProdut\BackProdutInsert.cshtml" />
     <Content Include="Views\BackProdut\BackProductEdit.cshtml" />
-    <Content Include="Views\Shared\_Layoutback.cshtml" />
     <Content Include="Views\Product\CartList.cshtml" />
     <Content Include="Views\Product\Checkout.cshtml" />
     <Content Include="Views\Product\CheckoutReport.cshtml" />
