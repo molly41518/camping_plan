@@ -25,11 +25,11 @@
         "columns": [
             {
                 "data": "rowid", "width": "30px", "orderable": false, "render": function (data) {
-                    return '<a class="popup"  title="修改記錄" href="/Vendor/Products/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
+                    return '<a class="popup"  title="修改商品" href="/Vendor/Products/Edit/' + data + '"><i class="fas fa-edit fa-2x"></i></a>' +
                         '<a class="popup" title="刪除記錄" href="/Vendor/Products/Delete/' + data + '"><i class="fas fa-trash-alt fa-2x"></i></a>' +
                         '<a class="popup" title="上傳圖片" href="/Vendor/Products/Upload/' + data + '"><i class="fas fa-upload fa-2x"></i></a>' +
                         '<a class="popup" title="商品描述" href="/Vendor/Products/Pdescription/' + data + '"><i class="fas fa-file-alt fa-2x"></i></a>' +
-                        '<a title="商品詳細頁" href="/Vendor/ProductTypeDetail/Index/' + data + '" ><i class="fas fa-file-alt fa-2x"></i></a>';''
+                        '<a title="商品詳細頁" href="/Vendor/ProductTypeDetail/Index/' + data + '" ><i class="fas fa-arrow-right fa-2x"></i></a>';''
                 }
             },
             {

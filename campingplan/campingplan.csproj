@@ -526,6 +526,7 @@
     <Content Include="Scripts\apps\easyzoom.js" />
     <Content Include="Scripts\apps\member\history_order.js" />
     <Content Include="Scripts\apps\member\unclose_order.js" />
+    <Content Include="Scripts\apps\vendor\products_type_detail_everyday_stock_index.js" />
     <Content Include="Scripts\apps\vendor\products_type_detail_index.js" />
     <Content Include="Scripts\apps\vendor\products_index.js" />
     <Content Include="Scripts\apps\vendor\vendor_order.js" />
@@ -1154,6 +1155,10 @@
     <Content Include="Areas\Vendor\Views\ProductTypeDetail\Index.cshtml" />
     <Content Include="Areas\Vendor\Views\ProductTypeDetail\Pdescription.cshtml" />
     <Content Include="Areas\Vendor\Views\ProductTypeDetail\Upload.cshtml" />
+    <Content Include="Areas\Vendor\Views\ProductTypeDetailEverydayStock\Create.cshtml" />
+    <Content Include="Areas\Vendor\Views\ProductTypeDetailEverydayStock\Delete.cshtml" />
+    <Content Include="Areas\Vendor\Views\ProductTypeDetailEverydayStock\Edit.cshtml" />
+    <Content Include="Areas\Vendor\Views\ProductTypeDetailEverydayStock\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

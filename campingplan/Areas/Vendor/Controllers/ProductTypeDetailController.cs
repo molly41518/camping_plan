@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -140,6 +141,47 @@ namespace campingplan.Areas.Vendor.Controllers
         }
 
         [LoginAuthorize(RoleNo = "Vendor")]
+        public ActionResult Upload(int id = 0)
+        {
+            using (dbcon db = new dbcon())
+            {
+                var model = db.product_typedetail.Where(m => m.rowid == id).FirstOrDefault();
+                if (model != null)
+                {
+                    Shop.ProductNo = model.pno;
+                    Shop.ProductTypeNo = model.ptype_no;
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+
+        [HttpPost]
+        [LoginAuthorize(RoleNo = "Vendor")]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                if (file.ContentLength > 0)
+                {
+                    string str_folder = string.Format("~/Images/product/{0}/{1}", Shop.ProductNo,Shop.ProductTypeNo);
+                    string str_folder_path = Server.MapPath(str_folder);
+                    if (!Directory.Exists(str_folder_path)) Directory.CreateDirectory(str_folder_path);
+                    string str_file_name = Shop.ProductTypeNo + ".jpg";
+                    var path = Path.Combine(str_folder_path, str_file_name);
+                    if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
+                    file.SaveAs(path);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+
+
+        [LoginAuthorize(RoleNo = "Vendor")]
         public ActionResult Pdescription(int id)
         {
             using (dbcon db = new dbcon())
@@ -173,6 +215,36 @@ namespace campingplan.Areas.Vendor.Controllers
                 }
             }
             return new JsonResult { Data = new { status = status } };
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UploadImage(HttpPostedFileBase upload, string CKEditorFuncNum, string CKEditor, string langCode)
+        {
+            string url; // url to return
+            string message; // message to display (optional)
+
+            // 設定圖片上傳路徑
+            string path = Server.MapPath("~/Images/uploads");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            path = System.IO.Path.Combine(path, Shop.ProductNo);
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+            string ImageName = upload.FileName;
+            string str_file_name = System.IO.Path.Combine(path, ImageName);
+            if (System.IO.File.Exists(str_file_name)) System.IO.File.Delete(str_file_name);
+            upload.SaveAs(str_file_name);
+
+
+            // 取得網址
+            // http://localhost:9999/Images/uploads/00001/ImageName.jpg
+            url = Request.Url.GetLeftPart(UriPartial.Authority) + "/Images/uploads/" + Shop.ProductNo + "/" + Shop.ProductTypeNo + "/" + ImageName;
+
+            // passing message success/failure
+            message = "圖片儲存成功!!";
+
+            // since it is an ajax request it requires this string
+            string output = @"<html><body><script>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", \"" + url + "\", \"" + message + "\");</script></body></html>";
+            return Content(output);
         }
     }
 }
