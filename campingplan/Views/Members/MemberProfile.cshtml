@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2">
-                            <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-profile-image" />
+                            <i class="far fa-user-circle fa-7x p-2"></i>
                         </div>
                         <div class="col-10">
                             <div class="col-12 control-label control-header">
@@ -48,7 +48,6 @@
                 <hr />
                 <div class="col-12 text-center">
                     @Html.ActionLink("編輯帳號", "EditProfile", "Members", null, new { @class = "btn btn-success form-button" })
-                    @Html.ActionLink("上傳圖像", "UploadImage", "Member", new { area = "Member" }, new { @class = "btn btn-success form-button" })
                 </div>
             </div>
         </div>

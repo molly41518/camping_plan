@@ -29,7 +29,7 @@
                     // check if user scrolled more than 50 from top of the browser window
                     $(".navbar-fixed-top").css("background-color", "#ffffff");
                     $("nav").addClass("navbarshadow");
-                    $("a").addClass("text-info");
+                    $(".bb").addClass("text-info");
                     $(".dropdown-item").addClass("text-info");
                     $(".nav-link").addClass("text-info");
                     $(".dropdowncolor").removeClass("bg-dark");
@@ -37,7 +37,7 @@
                 } else {
                     $(".navbar-fixed-top").css("background-color", "transparent");
                     $("nav").removeClass("navbarshadow");
-                    $("a").removeClass("text-info");
+                    $(".bb").removeClass("text-info");
                     $(".dropdown-item").removeClass("text-info");
                     $(".nav-link").removeClass("text-info");
                     $(".dropdowncolor").addClass("bg-dark");
@@ -151,7 +151,7 @@
                 <li class="dropdown nav-item">
                     <a href="#"
                        data-toggle="dropdown"
-                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">開始計畫</a>
+                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor bb">開始計畫</a>
                     <ul class="dropdown-menu bg-dark dropdowncolor" role="menu" aria-labelledby="tutorial">
                         @{
                             var lists1 = Shop.Getategorys(0);
@@ -159,7 +159,7 @@
                             {
 
                                 <li role="presentation">
-                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger" })
+                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger bb" })
                                 </li>
 
                             }
@@ -167,17 +167,17 @@
                     </ul>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger atextcolor" href="#">營火傳遞</a>
+                    <a class="nav-link js-scroll-trigger atextcolor bb" href="#">營火傳遞</a>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger atextcolor"
+                    <a class="nav-link js-scroll-trigger atextcolor bb"
                        href="@Url.Action("About","Home")"
                        aria-disabled="true">關於我們</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link d-inline-block position-relative px-3" href="@Url.Action("CartList","Product")">
+                    <a class="nav-link d-inline-block position-relative px-3 bb" href="@Url.Action("CartList","Product")">
                         <i class="fas fa-shopping-cart h5"></i>
                         @if(@Cart.CartCount != 0)
                         {
@@ -189,7 +189,7 @@
                 @if (UserAccount.IsLogin)
                 {
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle bb" href="#" id="navbardrop" data-toggle="dropdown">
                             <i class="far fa-user-circle h5"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg-right bg-dark dropdowncolor text-white">

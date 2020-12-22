@@ -333,7 +333,8 @@
                                             Now go out and get a new one !
                                         </p>
                                     </div>
-                                    @Html.ActionLink("找營地", "CategoryList", "Product", new { id = "A" }, new { @class = "mt-5 col-lg-2 btn btn-info text" })
+                                   
+                                    @Html.ActionLink("找營地", "CategoryList", "Product", new { id = "A" }, new { @class = "mt-5 col-lg-2 btn btn-info text-white bt" })
                                 </div>
                             </div>
                         </div>
@@ -430,7 +431,7 @@
                                                 var item = mList[i];
                                                 <div class="col-12 col-lg-4">
                                                     @{
-                                                        string productimgname = string.Format("{0}.jpeg", @item.pimg);
+                                                        string productimgname = string.Format("{0}/{0}.jpg", @item.pimg);
                                                     }
                                                     <div class="title mb-5 searchcontent">
                                                         <a href="@Url.Action("ProductDetail", "Product", new { id = item.pno, startday = ViewBag.startday, endday = ViewBag.endday, qty = ViewBag.qty })">
