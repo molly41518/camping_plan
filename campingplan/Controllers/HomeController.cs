@@ -13,7 +13,11 @@ namespace campingplan.Controllers
         dbcon db = new dbcon();
         public ActionResult Index()
         {
-            return View();
+            dbcon db = new dbcon();
+            var model = db.product
+               .Where(m => m.istop == 1)
+               .ToList();
+            return View(model);
         }
 
 

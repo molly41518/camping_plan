@@ -460,6 +460,8 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg\bg-4.jpeg" />
+    <Content Include="Content\images\bg\bg-5.jpg" />
+    <Content Include="Content\images\bg\bg-6.jpg" />
     <Content Include="Content\images\indexbg\01.jpg" />
     <Content Include="Content\images\indexbg\02.jpg" />
     <Content Include="Content\images\indexbg\03.jpg" />
@@ -470,6 +472,13 @@
     <Content Include="Content\images\product\C0005.jpeg" />
     <Content Include="Content\images\product\C0006.jpeg" />
     <Content Include="Content\images\product\C0007.jpeg" />
+    <Content Include="Content\images\tool\01.jpg" />
+    <Content Include="Content\images\tool\02.jpg" />
+    <Content Include="Content\images\tool\03.jpg" />
+    <Content Include="Content\images\trip\central.jpg" />
+    <Content Include="Content\images\trip\east.jpg" />
+    <Content Include="Content\images\trip\north.jpg" />
+    <Content Include="Content\images\trip\south.jpg" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -482,6 +491,7 @@
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\tooplate-style.css" />
     <Content Include="Content\video\campingvideo.mp4" />
     <Content Include="easion\css\demo.css" />
     <Content Include="easion\css\demo.min.css" />

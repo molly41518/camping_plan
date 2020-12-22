@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<campingplan.Models.product>
+@using campingplan.App_Class;
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -216,9 +218,61 @@
   -webkit-transform-origin: top right;
           transform-origin: top right;
 }
+    #tm-section-5 {
+        background-image: url(@Url.Content("../Content/images/bg/bg-6.jpg"));
+    }
 
-@@-webkit-keyframes arrow-movement {
-  0% {
+    .bigbg{
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.6) 0%, rgba(92, 77, 66, 0.6) 100% ), url("@Url.Content("../Content/images/bg/bg-5.jpg")");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 68px;
+        background: none;
+    }
+
+        .carousel-control-prev i, .carousel-control-next i {
+            font-size: 28px;
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            margin-top: -15px;
+            z-index: 5;
+            left: 0;
+            right: 0;
+            color: rgba(0, 0, 0, 0.8);
+            text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
+        }
+
+        .carousel-indicators li, .carousel-indicators li.active {
+            width: 10px;
+            height: 10px;
+            border: none;
+            border-radius: 50%;
+            margin: 1px 4px;
+            box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
+        }
+
+        .carousel-indicators li {
+            background: #999;
+            border-color: transparent;
+        }
+
+            .carousel-indicators li.active {
+                background: #555;
+            }
+
+
+
+
+
+    @@-webkit-keyframes arrow-movement {
+        0% {
     opacity: 0;
     top: 60%;
   }
@@ -279,9 +333,7 @@
                                             Now go out and get a new one !
                                         </p>
                                     </div>
-                                    <div class="mt-5 col-lg-2 btn btn-info text">
-                                        找營地
-                                    </div>
+                                    @Html.ActionLink("找營地", "CategoryList", "Product", new { id = "A" }, new { @class = "mt-5 col-lg-2 btn btn-info text" })
                                 </div>
                             </div>
                         </div>
@@ -306,6 +358,133 @@
         </div>
     </div>
 </header>
+
+<div class="container pt-3 pb-5">
+    <div class="row mb-4">
+        <div class="col-lg-12 text-center mt-5"><h4>露營輕鬆有趣</h4></div>
+        <hr class="col-lg-12 divider mt-0" />
+    </div>
+    <div class="row text-center">
+        <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+            <i class="fas fa-campground fa-7x text-info mb-3"></i>
+            <h4 class="text-info">找營地輕輕鬆鬆</h4>
+            <p>時間、特色、地點多元化搜尋功能，</br>讓您找到心目中的好營地。</p>
+            @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "A" }, new { @class = "col-6 btn btn-warning text" })
+        </article>
+        <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+            <i class="fas fa-toolbox fa-7x text-info mb-3"></i>
+            <h4 class="text-info">裝備品質有保證</h4>
+            <p>露營設備均通過國家試驗，</br>售出均有三年以上保固，安心看的見。</p>
+            @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "B" }, new { @class = "col-6 btn btn-warning text" })
+        </article>
+        <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+            <i class="fas fa-ticket-alt fa-7x text-info mb-3"></i>
+            <h4 class="text-info">體驗行程一把抓</h4>
+            <p>各式室內戶外體驗通通都有，</br>旅遊行程共同規劃一次完成，簡單輕鬆。</p>
+            @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "C" }, new { @class = "col-6 btn btn-warning text" })
+        </article>
+    </div>
+</div>
+
+<div class="container-fluid bigbg mt-4">
+    <div class="container py-5">
+        <div class="row text-center py-5">
+            <div class="offset-1 col-10">
+                <h2 class="text-white font-weight-bold">「全方位的服務，只是為了讓您在那一段相聚的時光裡，<br />留下一次美好的旅遊回憶」</h2>
+            </div>
+            <div class="offset-8 col-4">
+                <p class="text-white font-weight-bold">By 營火計畫創始人 Molly</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-light pt-2">
+    <div class="row">
+        <div class="col-lg-12 text-center mt-5"><h4>熱門營地</h4></div>
+        <hr class="col-lg-12 divider mt-0" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12  mx-auto">
+                <div id="myCarousel" class="col-10 offset-1 carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+
+                        @{
+                            var mList = Model.ToList();
+                            for (var i = 0; i < mList.Count(); i++)
+                            {
+                                var class_str = "carousel-item" + (i == 0 ? " active" : "");
+                                <div class="@class_str">
+                                    <div class="row">
+                                        @{
+                                            for (var j = 0; i < mList.Count() && j < 3; j++)
+                                            {
+                                                var item = mList[i];
+                                                <div class="col-12 col-lg-4">
+                                                    @{
+                                                        string productimgname = string.Format("{0}.jpeg", @item.pimg);
+                                                    }
+                                                    <div class="title mb-5 searchcontent">
+                                                        <a href="@Url.Action("ProductDetail", "Product", new { id = item.pno, startday = ViewBag.startday, endday = ViewBag.endday, qty = ViewBag.qty })">
+                                                            <div class="card pr_carditem">
+                                                                <img class="card-img-top"
+                                                                     src="~/Content/images/product/@productimgname"
+                                                                     alt="Card image cap" />
+                                                                <div class="card-body">
+                                                                    <p class="pr_loction_des small m-0 pb-2">
+                                                                        <i class="fas fa-map-marker-alt text-info pr-2"></i>@item.plocation
+                                                                    </p>
+                                                                    <h5 class="card-title font-weight-bold text-dark">@item.pname</h5>
+                                                                    <ul class="p-0">
+                                                                        @foreach (var f in Shop.GetFeatureList(item.product_features))
+                                                                        {
+                                                                            <li class="pr_camptype align-self-center justify-content-center">
+                                                                                <span>@f</span>
+                                                                            </li>
+                                                                        }
+                                                                    </ul>
+                                                                    <hr />
+                                                                    <div class="row align-items-center">
+                                                                        <p class="col-4 text-warning m-0">
+                                                                            <i class="fas fa-star pr-1"></i>4.5
+                                                                        </p>
+                                                                        <p class="col-8 text-info font-weight-bold h4 text-right">
+                                                                            $NT @item.min_price
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                i++;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev mr-5" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a class="carousel-control-next ml-5" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container vh-100">
     <div class="row">
@@ -337,60 +516,61 @@
 
 </div>
 
-<div class="container-fluid bg-light mt-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 col-lg-4 mb-5">
-                <a href="/iproduct_camping_item.html" style="text-decoration: none">
-                    <div class="card pr_carditem">
-                        <img class="card-img-top"
-                             src="~/Content/images/product/C0002.jpeg"
-                             alt="Card image cap" />
-                        <div class="card-body">
-                            <p class="pr_loction_des small m-0 pb-2">
-                                <i class="fas fa-map-marker-alt text-info pr-2"></i>台北市大安區
+
+<div class="tm-section tm-section-pad tm-bg-img" id="tm-section-5">
+    <div class="container ie-h-align-center-fix">
+        <div class="row tm-flex-align-center">
+            <div class="col-xs-12 col-md-12 col-lg-3 col-xl-3 tm-media-title-container">
+                <h4 class="text-uppercase tm-section-title-2">新手攻略</h4>
+                <h5 class="text-info tm-font-semibold tm-section-subtitle-2">
+                    三大神器
+                </h5>
+            </div>
+            <div class="col-xs-12 col-md-12 col-lg-9 col-xl-9 mt-0 mt-sm-3">
+                <div class="ml-auto tm-bg-white-shadow tm-pad tm-media-container">
+                    <article class="media tm-margin-b-20 tm-media-1">
+                        <img src="@Url.Content("../Content/images/tool/01.jpg")" alt="Image" style="height:150px;" />
+                        <div class="media-body tm-media-body-1 tm-media-body-v-center">
+                            <h3 class="tm-font-semibold text-info tm-article-title-3">
+                                帳篷
+                            </h3>
+                            <p>
+                                帳篷的選擇多從「可容納人數」著手，若4 人出遊便建議挑選 6 人帳篷，帳內空間較為舒適。其他選帳篷的重點：是否容易搭設、價格、防水係數、收納尺寸、支柱材料、帳篷高度、重量。
                             </p>
-                            <h5 class="card-title font-weight-bold text-dark">
-                                北市士林 菁山遊憩區
-                            </h5>
-                            <ul class="p-0">
-                                <li class="pr_camptype align-self-center justify-content-center">
-                                    <span>高海拔</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>中部營區</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>近河邊</span>
-                                </li>
-                                <li class="pr_camptype">
-                                    <span>遊戲區</span>
-                                </li>
-                            </ul>
-                            <hr />
-                            <div class="row align-items-center">
-                                <p class="col-12 m-0 mb-1 small">
-                                    最早可預定日期：2020年12月31日
-                                </p>
-                                <p class="col-4 text-warning m-0">
-                                    <i class="fas fa-star pr-1"></i>4.5
-                                </p>
-                                <p class="col-8 text-info font-weight-bold h4 text-right">
-                                    $NT 500
-                                </p>
-                            </div>
                         </div>
-                    </div>
-                </a>
+                    </article>
+                    <article class="media tm-margin-b-20 tm-media-1">
+                        <img src="@Url.Content("../Content/images/tool/02.jpg")" alt="Image" style="height:150px;" />
+                        <div class="media-body tm-media-body-1 tm-media-body-v-center">
+                            <h3 class="tm-font-semibold  text-info tm-article-title-3">
+                                睡袋
+                            </h3>
+                            <p>
+                                怕冷的朋友則可以選擇舒適低溫-5以下的睡袋。 由於台灣大部份都是高濕度環境，在這種環境下會容易產生水寒效應，因為空氣中的水氣會帶走一些身上的溫度，所以會感覺更冷。
+                            </p>
+                        </div>
+                    </article>
+                    <article class="media tm-margin-b-20 tm-media-1">
+                        <img src="@Url.Content("../Content/images/tool/03.jpg")" alt="Image" style="height:150px;" />
+                        <div class="media-body tm-media-body-1 tm-media-body-v-center">
+                            <h3 class="tm-font-semibold text-info tm-article-title-3">
+                                卡斯爐
+                            </h3>
+                            <p>
+                                一般的卡式瓦斯爐尺寸為30×30cm，不過若是人數較多、欲使用的鍋具較大，則建議選擇50×30cm 的大尺寸。 如果鍋身超出爐口，可能會造成瓦斯罐積熱進而導致氣體膨脹產生事故；反之，過小則會使火源不穩定。
+                            </p>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid p-0">
     <div class="col p-0">
-        <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive embed-responsive-21by9">
             <video src="@Url.Content("../Content/video/campingvideo.mp4")"
                    autoplay
                    loop
