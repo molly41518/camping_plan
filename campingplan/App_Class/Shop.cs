@@ -58,6 +58,14 @@ namespace campingplan.App_Class
             return str_name;
         }
 
+        public static string GetCategoryNameByid(int id)
+        {
+            using (dbcon db = new dbcon())
+            {
+                return db.categorys.Where(m => m.rowid == id).FirstOrDefault().category_name;
+            }
+        }
+
         public static string GetCategoryName(string pno)
         {
             string str_name = "";
