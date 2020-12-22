@@ -236,10 +236,17 @@ namespace campingplan.Areas.Vendor.Controllers
             {
                 if (file.ContentLength > 0)
                 {
-                    string str_folder = string.Format("~/Images/product/{0}", Shop.ProductNo);
+                    var pno = Shop.ProductNo;
+                    using (dbcon db = new dbcon())
+                    {
+                        var product = db.product.Where(p => p.pno == pno).SingleOrDefault();
+                        product.pimg = pno;
+                        db.SaveChanges();
+                    }
+                    string str_folder = string.Format("~/Content/images/product/{0}", pno);
                     string str_folder_path = Server.MapPath(str_folder);
                     if (!Directory.Exists(str_folder_path)) Directory.CreateDirectory(str_folder_path);
-                    string str_file_name = Shop.ProductNo + ".jpg";
+                    string str_file_name = pno + ".jpeg";
                     var path = Path.Combine(str_folder_path, str_file_name);
                     if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
                     file.SaveAs(path);
