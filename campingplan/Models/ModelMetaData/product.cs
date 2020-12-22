@@ -77,6 +77,8 @@ namespace campingplan.Models
             public string pname { get; set; }
             [Display(Name = "商品地點")]
             public string plocation { get; set; }
+            [Display(Name = "商品 Google Map URL")]
+            public string pmapurl { get; set; }
             [Display(Name = "商品敘述")]
             public string pdescription { get; set; }
 

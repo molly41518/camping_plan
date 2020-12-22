@@ -27,7 +27,7 @@
                 <div class="col-12 d-flex mt-2">
                     @foreach (var item in Model)
                     {
-                        string productimgname = string.Format("{0}/{0}.jpeg", @item.pno);
+                        string productimgname = string.Format("{0}/{0}.jpg", @item.pno);
                         <div class="col-2 text-right pr-0 pl-5">
                             <img class="img-fluid imgproduct" src="~/Content/images/product/@productimgname" />
                         </div>

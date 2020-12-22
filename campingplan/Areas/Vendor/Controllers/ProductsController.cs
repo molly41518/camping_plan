@@ -128,6 +128,8 @@ namespace campingplan.Areas.Vendor.Controllers
                             product.issale = (models.bool_issale) ? 1 : 0;
                             product.start_count = models.start_count;
                             product.browse_count = models.browse_count;
+                            product.plocation = models.plocation;
+                            product.pmapurl = models.pmapurl;
                             product.vendor_no = UserAccount.UserOfAccount;
                             product.remark = models.remark;
                             var feature = db.product_features.Where(f => f.pno == models.pno).FirstOrDefault();
@@ -246,7 +248,7 @@ namespace campingplan.Areas.Vendor.Controllers
                     string str_folder = string.Format("~/Content/images/product/{0}", pno);
                     string str_folder_path = Server.MapPath(str_folder);
                     if (!Directory.Exists(str_folder_path)) Directory.CreateDirectory(str_folder_path);
-                    string str_file_name = pno + ".jpeg";
+                    string str_file_name = pno + ".jpg";
                     var path = Path.Combine(str_folder_path, str_file_name);
                     if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
                     file.SaveAs(path);

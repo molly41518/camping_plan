@@ -400,7 +400,7 @@ namespace campingplan.App_Class
 
         public static string GetProductTypeDetailImpPath(product_typedetail ptd)
         {
-            return "../../Content/images/product/" + ptd.pno + "/product_type_detail/" + ptd.ptype_no + "/" + ptd.ptype_no + ".jpeg";
+            return "../../Content/images/product/" + ptd.pno + "/product_type_detail/" + ptd.ptype_no + "/" + ptd.ptype_no + ".jpg";
         }
 
     }

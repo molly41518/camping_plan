@@ -309,7 +309,7 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            string productimgname = string.Format("{0}/{0}.jpeg", @item.pimg);
+            string productimgname = string.Format("{0}/{0}.jpg", @item.pimg);
             <div class="title col-12 col-md-6 col-lg-4 mb-5 searchcontent">
                 <a href="@Url.Action("ProductDetail","Product",new { id = item.pno, startday = ViewBag.startday, endday = ViewBag.endday, qty = ViewBag.qty })">
                     <div class="card pr_carditem">

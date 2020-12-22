@@ -170,7 +170,7 @@ namespace campingplan.Areas.Vendor.Controllers
                     string str_folder = string.Format("~/Content/images/product/{0}/product_type_detail/{1}", Shop.ProductNo, Shop.ProductTypeNo);
                     string str_folder_path = Server.MapPath(str_folder);
                     if (!Directory.Exists(str_folder_path)) Directory.CreateDirectory(str_folder_path);
-                    string str_file_name = Shop.ProductTypeNo + ".jpeg";
+                    string str_file_name = Shop.ProductTypeNo + ".jpg";
                     var path = Path.Combine(str_folder_path, str_file_name);
                     if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
                     file.SaveAs(path);
