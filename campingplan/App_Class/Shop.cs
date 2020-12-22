@@ -398,6 +398,11 @@ namespace campingplan.App_Class
             set { HttpContext.Current.Session["SearchInfo"] = value; }
         }
 
+        public static string GetProductTypeDetailImpPath(product_typedetail ptd)
+        {
+            return "../../Content/images/product/" + ptd.pno + "/product_type_detail/" + ptd.ptype_no + "/" + ptd.ptype_no + ".jpeg";
+        }
+
     }
 
 }
