@@ -210,81 +210,83 @@
 }
 
 
-<header class="masthead mb-3">
-    <div class="container ">
-        <div class="row text-center align-self-center justify-content-center">
-            <div class="col-12 col-lg-12">
-                <div class="offset-4 col-4 col-lg-4 mb-2 searchtitle">
-                    <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
+<header class="container-fluid mb-3">
+    <div class="masthead">
+        <div class="container ">
+            <div class="row text-center align-self-center justify-content-center">
+                <div class="col-12 col-lg-12">
+                    <div class="offset-4 col-4 col-lg-4 mb-2 searchtitle">
+                        <h3 class="text-uppercase font-weight-bold text-white">露營地</h3>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-8 col-lg-8">
-                <ul id="myTab" class="nav nav-tabs border-0">
-                    <li class="nav-item offset-lg-3 col-lg-3 p-lg-0 col-12 col-md-6">
-                        <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
-                           data-toggle="tab"
-                           href="#tabmenu1">關鍵字搜尋</a>
-                    </li>
-                    <li class="nav-item col-lg-3 p-lg-0 col-md-6">
-                        <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
-                           data-toggle="tab"
-                           href="#tabmenu2">分類搜尋</a>
-                    </li>
-                </ul>
+                <div class="col-8 col-lg-8">
+                    <ul id="myTab" class="nav nav-tabs border-0">
+                        <li class="nav-item offset-lg-3 col-lg-3 p-lg-0 col-12 col-md-6">
+                            <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
+                               data-toggle="tab"
+                               href="#tabmenu1">關鍵字搜尋</a>
+                        </li>
+                        <li class="nav-item col-lg-3 p-lg-0 col-md-6">
+                            <a class="pr_line nav-link text-white border-0 mb-2 font-weight-bold"
+                               data-toggle="tab"
+                               href="#tabmenu2">分類搜尋</a>
+                        </li>
+                    </ul>
 
-                <div class="col-lg-12 p-0">
-                    @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
-                    {
+                    <div class="col-lg-12 p-0">
+                        @using (Html.BeginForm("CategoryList", "Product", FormMethod.Post))
+                        {
 
-                        <div class="bg-white pb-2">
-                            <div class="row d-flex pt-2">
-                                <div class="col-12 col-lg-8">
-                                    <i class="far fa-calendar-alt pl-lg-2"></i>
-                                    <div class="d-inline-block col-11">
-                                        @Html.TextBox("dateSearch", null, new { @class = "form-control", @id = "checkDate" })
+                            <div class="bg-white pb-2">
+                                <div class="row d-flex pt-2">
+                                    <div class="col-12 col-lg-8">
+                                        <i class="far fa-calendar-alt pl-lg-2"></i>
+                                        <div class="d-inline-block col-11">
+                                            @Html.TextBox("dateSearch", null, new { @class = "form-control", @id = "checkDate" })
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4 mt-2 mt-lg-0 text-left">
+                                        <i class="fas fa-campground pl-lg-1 pr-lg-0 px-2"></i>
+                                        <select id="stock_qty" name="stock_qty" class="form-control d-inline-block col-10 col-lg-10">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-4 mt-2 mt-lg-0 text-left">
-                                    <i class="fas fa-campground pl-lg-1 pr-lg-0 px-2"></i>
-                                    <select id="stock_qty" name="stock_qty" class="form-control d-inline-block col-10 col-lg-10">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="tab-content">
-                                <div id="tabmenu1" class="tab-pane">
-                                    <div class="col-12 col-lg-12 p-0">
-                                        <div class="input-group my-2">
-                                            @Html.TextBox("searchString", null, new { @class = "form-control col-lg-12 mx-3 mt-3", @placeholder = "請輸入關鍵字" })
+                                <div class="tab-content">
+                                    <div id="tabmenu1" class="tab-pane">
+                                        <div class="col-12 col-lg-12 p-0">
+                                            <div class="input-group my-2">
+                                                @Html.TextBox("searchString", null, new { @class = "form-control col-lg-12 mx-3 mt-3", @placeholder = "請輸入關鍵字" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tabmenu2" class="tab-pane fade">
+                                        <div class="col-12 col-lg-12 bg-white pt-3">
+                                            <ul class="row">
+                                                @{
+                                                    foreach (var f in Shop.GetFeatureDict())
+                                                    {
+                                                        <li class="col-6 col-lg-3 col-md-4 small text-left">@Html.CheckBox(@f.Value, false) @f.Value</li>
+                                                    }
+                                                }
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="tabmenu2" class="tab-pane fade">
-                                    <div class="col-12 col-lg-12 bg-white pt-3">
-                                        <ul class="row">
-                                        @{
-                                            foreach (var f in Shop.GetFeatureDict())
-                                            {
-                                                <li class="col-6 col-lg-3 col-md-4 small text-left">@Html.CheckBox(@f.Value, false) @f.Value</li>
-                                            }
-                                        }
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <input type="submit" class="btn btn-info btn-block m-0 col-12" value="搜尋" />
-                    }
+                            <input type="submit" class="btn btn-info btn-block m-0 col-12" value="搜尋" />
+                        }
+                    </div>
                 </div>
             </div>
         </div>
