@@ -27,6 +27,7 @@ namespace campingplan.Controllers
             foreach (var s in relayStock)
             {
                 string dateStr = s.stock_date.GetValueOrDefault().ToString("yyyy-MM-dd");
+                //stockNum.ContainsKey(dateStr)這個不懂
                 if (!stockNum.ContainsKey(dateStr))
                 {
                     stockNum[dateStr] = 0;

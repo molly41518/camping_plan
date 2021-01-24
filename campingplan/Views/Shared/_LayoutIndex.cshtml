@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 營火計畫</title>
 
+    <link rel="stylesheet" href="@Url.Content("~/Content/tooplate-style.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/camping/bootstrap.min.css")" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css" />
 
@@ -22,22 +23,27 @@
             $('#Vermodal').modal();
         })
     </script>
+
     <script>
         $(document).ready(function () {
             $(window).scroll(function () {
                 // check if scroll event happened
                 if ($(document).scrollTop() > 10) {
                     // check if user scrolled more than 50 from top of the browser window
-                    $(".navbar-fixed-top").css("background-color", "#f8f8f8");
+                    $(".navbar-fixed-top").css("background-color", "#ffffff");
                     $("nav").addClass("navbarshadow");
-                    $("a").addClass("text-info");
-                    $("#dropdown").removeClass("bg-dark");
+                    $(".bb").addClass("text-info");
+                    $(".dropdown-item").addClass("text-info");
+                    $(".nav-link").addClass("text-info");
+                    $(".dropdowncolor").removeClass("bg-dark");
                     // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
                 } else {
                     $(".navbar-fixed-top").css("background-color", "transparent");
                     $("nav").removeClass("navbarshadow");
-                    $("a").removeClass("text-info");
-                    $("#dropdown").addClass("bg-dark");
+                    $(".bb").removeClass("text-info");
+                    $(".dropdown-item").removeClass("text-info");
+                    $(".nav-link").removeClass("text-info");
+                    $(".dropdowncolor").addClass("bg-dark");
                     // if not, change it back to transparent
                 }
             });
@@ -57,21 +63,332 @@
     </script>
 
     <style>
+    #carousel-1,
+    #carousel-2,
+    #carousel-3 {
+        padding-top: 20rem;
+        padding-bottom: calc(20rem - 4.5rem);
+    }
+
+    #carousel-1 {
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.3) 0%, rgba(92, 77, 66, 0.3) 100% ), url("@Url.Content("../Content/images/indexbg/01.jpg")");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    #carousel-2 {
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.3) 0%, rgba(92, 77, 66, 0.3) 100% ), url("@Url.Content("../Content/images/indexbg/02.jpg")");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    #carousel-3 {
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.3) 0%, rgba(92, 77, 66, 0.3) 100% ), url("@Url.Content("../Content/images/indexbg/03.jpg")");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    .carousel-caption {
+        top: 22%;
+    }
+
+    .container2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0vmin 6vmin;
+        overflow: hidden;
+        transform: skew(5deg);
+    }
+
+        .container2 .card {
+            flex: 1;
+            transition: all 1s ease-in-out;
+            height: 75vmin;
+            position: relative;
+        }
+
+            .container2 .card .card__head {
+                color: black;
+                background: rgba(2, 177, 247, 0.75);
+                padding: 0.5em;
+                transform: rotate(-90deg);
+                transform-origin: 0% 0%;
+                transition: all 0.5s ease-in-out;
+                min-width: 100%;
+                text-align: center;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                font-size: 1em;
+                white-space: nowrap;
+            }
+
+            .container2 .card:hover {
+                flex-grow: 10;
+            }
+
+                .container2 .card:hover img {
+                    filter: grayscale(0);
+                }
+
+                .container2 .card:hover .card__head {
+                    text-align: center;
+                    top: calc(100% - 2em);
+                    color: white;
+                    background: rgba(0, 0, 0, 0.5);
+                    font-size: 1.5em;
+                    transform: rotate(0deg) skew(-5deg);
+                }
+
+            .container2 .card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 1s ease-in-out;
+                filter: grayscale(100%);
+            }
+
+            .container2 .card:not(:nth-child(5)) {
+                margin-right: 1em;
+            }
+
+    .divider {
+        max-width: 15rem;
+        border-width: 0.2rem;
+        border-color: rgb(7, 161, 189);
+    }
+
+    .i-size {
+        font-size: 4rem;
+        color: rgb(7, 161, 189);
+    }
+
+    .pr_loction_des {
+        color: rgb(110, 109, 109);
+    }
+
+    .pr_campitem {
+        list-style: none;
+        display: inline-block;
+        width: 6rem;
+        height: 3rem;
+        border: 1px solid black;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .pr_camptype {
+        list-style: none;
+        display: inline-block;
+        width: 4rem;
+        height: 1rem;
+        border: 1px solid rgb(110, 109, 109);
+        border-radius: 30px 30px 30px 30px;
+        font-size: 13px;
+        text-align: center;
+        padding-bottom: 1rem;
+        color: rgb(110, 109, 109);
+    }
+
+    .pr_carditem {
+        transition: all 0.5s;
+    }
+
+        .pr_carditem:hover {
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translate3d(0, -1rem, 0);
+            /*transform: scale(1.5,1.5);*/
+            /*transform: skew(30deg,0);*/
+        }
+
+    .pr_type_loction {
+        border-radius: 30px 30px 30px 30px;
+    }
+
+    .title {
+        opacity: 0;
+        bottom: -40px;
+        position: relative;
+        animation: showdiv 0.7s linear forwards;
+    }
+
+    @@keyframes showdiv {
+        from {
+            bottom: -40px;
+        }
+
+        to {
+            opacity: 1;
+            bottom: 0px;
+        }
+    }
+
+.arrow {
+  position: absolute;
+  left: 49%;
+  top: 80%;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: translate3d(-60%, -50%, 0);
+          transform: translate3d(-60%, -50%, 0);
+}
+
+.arrow-1 {
+  -webkit-animation: arrow-movement 2s ease-in-out infinite;
+          animation: arrow-movement 2s ease-in-out infinite;
+}
+
+.arrow-2 {
+  -webkit-animation: arrow-movement 2s 1s ease-in-out infinite;
+          animation: arrow-movement 2s 1s ease-in-out infinite;
+}
+
+.arrow:before,
+.arrow:after {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+}
+
+.arrow:before {
+  -webkit-transform: rotate(45deg) translateX(-23%);
+          transform: rotate(45deg) translateX(-23%);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.arrow:after {
+  -webkit-transform: rotate(-45deg) translateX(23%);
+          transform: rotate(-45deg) translateX(23%);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+    #tm-section-5 {
+        background-image: url(@Url.Content("../Content/images/bg/bg-6.jpg"));
+    }
+
+    .bigbg{
+        background: linear-gradient( to bottom, rgba(92, 77, 66, 0.6) 0%, rgba(92, 77, 66, 0.6) 100% ), url("@Url.Content("../Content/images/bg/bg-5.jpg")");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 68px;
+        background: none;
+    }
+
+        .carousel-control-prev i, .carousel-control-next i {
+            font-size: 28px;
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            margin-top: -15px;
+            z-index: 5;
+            left: 0;
+            right: 0;
+            color: rgba(0, 0, 0, 0.8);
+            text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
+        }
+
+        .carousel-indicators li, .carousel-indicators li.active {
+            width: 10px;
+            height: 10px;
+            border: none;
+            border-radius: 50%;
+            margin: 1px 4px;
+            box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
+        }
+
+        .carousel-indicators li {
+            background: #999;
+            border-color: transparent;
+        }
+
+            .carousel-indicators li.active {
+                background: #555;
+            }
+
+
+
+
+
+    @@-webkit-keyframes arrow-movement {
+        0% {
+    opacity: 0;
+    top: 60%;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+ @@keyframes arrow-movement {
+  0% {
+    opacity: 0;
+    top: 65%;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+    </style>
+
+
+    <style>
+        /*基本設定*/
         * {
             font-family: 微軟正黑體;
+            list-style: none;
         }
 
-        header.masthead {
-            padding-top: 20rem;
-            padding-bottom: calc(20rem - 4.5rem);
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/img/bg-1.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: auto;
+        a:hover {
+            text-decoration: none;
         }
 
-        .navbar {
+        ul .dropdown-item {
+            color: white;
+        }
+
+            ul .dropdown-item:hover {
+                background: none;
+                color: black;
+            }
+
+            ul .dropdown-item a {
+                color: white;
+            }
+
+            ul .dropdown-item:hover a {
+                color: black;
+            }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbarshadow {
             -webkit-box-shadow: 0 8px 6px -6px #444;
             -moz-box-shadow: 0 8px 6px -6px #555;
             box-shadow: 0 8px 6px -6px #777;
@@ -83,35 +400,29 @@
             border-color: rgb(7, 161, 189);
         }
 
-        .i-size {
+        /*        .i-size {
             font-size: 4rem;
             color: rgb(7, 161, 189);
+        }*/
+
+        .navFixed {
+            z-index: 10;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin-top: 0;
+            min-width: 100%;
+            transition: opacity 0.5s ease-out;
+            background-color: white;
         }
 
-        .mowh {
-            max-width: 70%;
+        .logo {
+            transition: all 0.5s;
         }
 
-        header.masthead {
-            padding-top: 20rem;
-            padding-bottom: calc(20rem - 4.5rem);
-            background: linear-gradient( to bottom, rgba(92, 77, 66, 0.5) 0%, rgba(92, 77, 66, 0.5) 100% ), url("/Content/images/bg/bg-1.jpg");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-size: auto;
-        }
-
-        .divider {
-            max-width: 15rem;
-            border-width: 0.2rem;
-            border-color: rgb(7, 161, 189);
-        }
-
-        .i-size {
-            font-size: 4rem;
-            color: rgb(7, 161, 189);
-        }
+            .logo:hover {
+                transform: scale(1.1);
+            }
     </style>
 
 
@@ -120,8 +431,8 @@
     <!-- navbar-expand-lg 是指在 lg 範圍以上才會直接展開選項 -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top navbar-fixed-top"
          id="navsr">
-        <a class="navbar-brand js-scroll-trigger p-0" href="/Home/Index" id="navbr">
-            <img src="~/Content/images/logo/logo-04.png" alt="" class="" height="45px" />
+        <a class="navbar-brand js-scroll-trigger p-0" href="@Url.Action("Index","Home")" id="navbr">
+            <img src="@Url.Content("~/Content/images/logo/logo-04.png")" alt="營火計畫" class="logo" style="height:45px;" />
         </a>
         <button class="navbar-toggler"
                 type="button"
@@ -137,18 +448,15 @@
                 <li class="dropdown nav-item">
                     <a href="#"
                        data-toggle="dropdown"
-                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor">購物商城</a>
-                    <ul id="dropdown"
-                        class="dropdown-menu bg-dark"
-                        role="menu"
-                        aria-labelledby="tutorial">
+                       class="dropdown-toggle nav-link js-scroll-trigger atextcolor bb">開始計畫</a>
+                    <ul class="dropdown-menu bg-dark dropdowncolor" role="menu" aria-labelledby="tutorial">
                         @{
                             var lists1 = Shop.Getategorys(0);
                             foreach (var item1 in lists1)
                             {
-                                <li role="presentation">
-                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger atextcolor" })
 
+                                <li role="presentation">
+                                    @Html.ActionLink(item1.category_name, "CategoryList", "Product", new { id = item1.category_no }, new { @class = "nav-link js-scroll-trigger bb" })
                                 </li>
 
                             }
@@ -156,22 +464,41 @@
                     </ul>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger atextcolor" href="#">營火傳遞</a>
+                    <a class="nav-link js-scroll-trigger atextcolor bb" href="#">營火傳遞</a>
                 </li>
                 <li class="nav-item text-info">
-                    <a class="nav-link js-scroll-trigger atextcolor"
-                       href="~/Home/About"
+                    <a class="nav-link js-scroll-trigger atextcolor bb"
+                       href="@Url.Action("About","Home")"
                        aria-disabled="true">關於我們</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("CartList","Product")">購物車(@Cart.CartCount)</a>
+                    <a class="nav-link d-inline-block position-relative px-3 bb" href="@Url.Action("CartList","Product")">
+                        <i class="fas fa-shopping-cart h5"></i>
+                        @if (@Cart.CartCount != 0)
+                        {
+                            <div class="position-absolute bg-danger px-2 small text-white" style="top: 2px; left: 26px; border-radius: 50%;">@Cart.CartCount</div>
+                        }
+
+                    </a>
                 </li>
                 @if (UserAccount.IsLogin)
                 {
-                    <li class="nav-item">
-                        <span class="nav-link">@UserAccount.UserInfo</span>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bb" href="#" id="navbardrop" data-toggle="dropdown">
+                            <i class="far fa-user-circle h5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-right bg-dark dropdowncolor text-white">
+                            <li class="nav-link text-center text-white">@UserAccount.UserInfo</li>
+                            <hr class="my-1 text-white" />
+                            <li class="dropdown-item">
+                                <i class="far fa-file-alt pr-2"></i>@Html.ActionLink("會員資料", "MemberProfile", "Members", null, new { @class = "" })
+                            </li>
+                            <li class="dropdown-item">
+                                <i class="fas fa-key" style="padding-right:6px;"></i>@Html.ActionLink("重設密碼", "ResetPassword", "User", null, new { @class = "" })
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("登出", "Logout", "User", null, new { @class = "nav-link" })
@@ -190,78 +517,190 @@
         </div>
     </nav>
 
-    <div class="modal fade mt-5" id="showLogin"></div>
-    <div class="modal fade" id="showRegister"></div>
-
     <header class="masthead">
-        <div class="container">
-            <div class="row h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-10 align-self-start">
-                    <h1 class="text-uppercase text-white font-weight-bold">
-                        現在出發冒險去
-                    </h1>
-                </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="font-weight-light mb-5">打造獨一無二的露營計畫</p>
-                </div>
-                <div class="col-8 col-lg-8 bg-white">
-                    <ul class="nav justify-content-start nav-tabs mt-2 border-info">
-                        <li class="nav-item">
-                            <a href=""
-                               class="nav-link text-black mr-1 active"
-                               data-toggle="tab">露營地</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link text-black mr-1" data-toggle="tab">裝備</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link text-black mr-1" data-toggle="tab">活動</a>
-                        </li>
-                    </ul>
-                    <div class="input-group my-2">
-                        <input type="text" class="form-control col-lg-8" />
-                        <a href="#" class="col-lg-4 btn btn-info btn-block m-0">搜尋</a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col p-0">
+                    <div class="carousel slide"
+                         data-ride="carousel"
+                         data-interval="3000"
+                         id="picShow">
+                        <ul class="carousel-indicators py-5">
+                            <li data-target="#picShow"
+                                data-slide-to="0"
+                                class="active aaa"></li>
+                            <li data-target="#picShow" data-slide-to="1" class="aaa"></li>
+                            <li data-target="#picShow" data-slide-to="2" class="aaa"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-caption">
+                                <div class="container">
+                                    <div class="row h-100 align-items-center justify-content-center text-center title">
+                                        <div class="col-lg-10 align-self-start">
+                                            <h1 class="text-uppercase text-white font-weight-bold"
+                                                style="text-shadow: 2px 2px #444">
+                                                現在出發去
+                                            </h1>
+                                            <h1 class="text-uppercase text-white font-weight-bold"
+                                                style="text-shadow: 2px 2px #444; font-size: 1000%;">
+                                                露營
+                                            </h1>
+                                        </div>
+                                        <div class="col-lg-12 align-self-baseline">
+                                            <p class="font-weight-light mb-5">
+                                                Now go out and get a new one !
+                                            </p>
+                                        </div>
+
+                                        @Html.ActionLink("找營地", "CategoryList", "Product", new { id = "A" }, new { @class = "mt-5 col-lg-2 btn btn-info text-white bt" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item vh-100 active" id="carousel-1"></div>
+                            <div class="carousel-item vh-100" id="carousel-2"></div>
+                            <div class="carousel-item vh-100" id="carousel-3"></div>
+                            <a href="#picShow"
+                               data-slide="prev"
+                               class="carousel-control-prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a href="#picShow"
+                               data-slide="next"
+                               class="carousel-control-next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                            <div class="arrow arrow-1"></div>
+                            <div class="arrow arrow-2"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center mt-5"><h4>露營輕鬆愜意</h4></div>
-            <hr class="col-lg-12 divider mt-0 mb-4" />
+    <div class="container pt-3 pb-5">
+        <div class="row mb-4">
+            <div class="col-lg-12 text-center mt-5"><h4>露營輕鬆有趣</h4></div>
+            <hr class="col-lg-12 divider mt-0" />
         </div>
-        <div class="row mb-5 text-center">
-            <div class="col-4">
-                <i class="fas fa-campground i-size my-3"></i>
-                <h3>營地</h3>
-                應當貼布家人，失去刺激我只直接轉換做法供應商聯想我就重大手上直接聽到，女士武器。
-            </div>
-            <div class="col-4">
-                <i class="fas fa-shopping-bag i-size my-3"></i>
-                <h3>裝備</h3>
-                時期行動美元開了節省依舊如果您轉變，把我放棄保留表達取得中心短信幫你，能源人家。
-            </div>
-            <div class="col-4">
-                <i class="fas fa-ticket-alt i-size my-3"></i>
-                <h3>行程</h3>
-                家裡人群包裝前來成本主題幾乎官方庫存最快適應力道清楚，總部很熱簡體主動，渠道小。
+        <div class="row text-center">
+            <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+                <i class="fas fa-campground fa-7x text-info mb-3"></i>
+                <h4 class="text-info">找營地輕輕鬆鬆</h4>
+                <p>時間、特色、地點多元化搜尋功能，</br>讓您找到心目中的好營地。</p>
+                @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "A" }, new { @class = "col-6 btn btn-warning text" })
+            </article>
+            <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+                <i class="fas fa-toolbox fa-7x text-info mb-3"></i>
+                <h4 class="text-info">裝備品質有保證</h4>
+                <p>露營設備均通過國家試驗，</br>售出均有三年以上保固，安心看的見。</p>
+                @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "B" }, new { @class = "col-6 btn btn-warning text" })
+            </article>
+            <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">
+                <i class="fas fa-ticket-alt fa-7x text-info mb-3"></i>
+                <h4 class="text-info">體驗行程一把抓</h4>
+                <p>各式室內戶外體驗通通都有，</br>旅遊行程共同規劃一次完成，簡單輕鬆。</p>
+                @Html.ActionLink("看更多", "CategoryList", "Product", new { id = "C" }, new { @class = "col-6 btn btn-warning text" })
+            </article>
+        </div>
+    </div>
+
+    <div class="container-fluid bigbg mt-4">
+        <div class="container py-5">
+            <div class="row text-center py-5">
+                <div class="offset-1 col-10">
+                    <h2 class="text-white font-weight-bold">「全方位的服務，只是為了讓您在那一段相聚的時光裡，<br />留下一次美好的旅遊回憶」</h2>
+                </div>
+                <div class="offset-8 col-4">
+                    <p class="text-white font-weight-bold">By 營火計畫創始人 Molly</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-light py-5">
+    <div class="modal fade mt-5" id="showLogin"></div>
+    <div class="modal fade" id="showRegister"></div>
+
+
+    @RenderBody()
+
+    <footer class="bg-dark py-5">
         <div class="container">
-            <div class="small text-center text-muted">
-                &copy; @DateTime.Now.Year - Start Bootstrap
+            <div class="row small text-white">
+                <div class="col-12 col-lg-3 small">
+                    <div class="row">
+                        <div class="col-6 col-lg-8 mb-2">
+                            <img src="@Url.Content("~/Content/images/logo/logo-04.png")" alt="營火計畫" class="img-fluid logo" />
+                        </div>
+                    </div>
+                    <p>冒險，遇見更美好的自己</p>
+                    <p>
+                        營火計畫成立於
+                        2013年，提供特色露營預訂服務，我們將台灣好玩的各種體驗發掘出來，提供給喜愛台灣、熱愛生活的人。
+                    </p>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>認識我們</p>
+                    <ul class="p-0">
+                        <li>關於營火計畫</li>
+                        <li>露營攻略部落格</li>
+                        <li>加入我們</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>合作營火</p>
+                    <ul class="p-0">
+                        <li>商家加入</li>
+                        <li>聯合行銷</li>
+                        <li>企業合作</li>
+                        <li>同業交易</li>
+                    </ul>
+                </div>
+                <div class="col-4 col-lg-2 small">
+                    <p>網站資訊</p>
+                    <ul class="p-0">
+                        <li>常見問題 FAQ</li>
+                        <li>服務條款</li>
+                        <li>隱私權條款</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3 small">
+                    <p>追蹤我們</p>
+                    <ul class="p-0">
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-facebook-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-line"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-youtube-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-instagram-square"></i>
+                        </li>
+                        <li class="d-inline-block h2 pr-1">
+                            <i class="fab fa-twitter-square"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row text-white">
+                <span class="col-12 col-lg-2 small text-muted text-center text-lg-left">
+                    © camping, Inc.
+                </span>
+                <span class="col-12 col-lg-10 small text-center text-lg-right text-muted">
+                    客服信箱：service@camping.tw | 客服中心：02-8912-6200 |
+                    服務時間：週一～週日 10:00 - 18:00
+                </span>
             </div>
         </div>
     </footer>
 
-    @RenderBody()
 
-    <script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>
+
+    @*<script src="@Url.Content("~/Scripts/camping/bootstrap.bundle.min.js")"></script>*@
     <script src="@Url.Content("~/Scripts/camping/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Scripts/camping/popper.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
