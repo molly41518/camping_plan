@@ -168,7 +168,7 @@ namespace campingplan.App_Class
             UserName = "";
             RoleNo = AppEnums.enUserRole.Guest;
             IsLogin = false;
-            Cart.LoginCart();
+            Cart.LogoutCart();
         }
         public static string GetNewVarifyCode()
         {

@@ -149,7 +149,7 @@ namespace campingplan.App_Class
         }
 
 
-        //已經登入會員
+        //登入購物車
         public static void LoginCart()//已經登入
         {
             if (!string.IsNullOrEmpty(LotNo))//訪客時的批號不是空
@@ -171,10 +171,23 @@ namespace campingplan.App_Class
                         db.SaveChanges();
                     }
                 }
-                NewLotNo();//若有登入會員，將批號改為空，非會員才建立批號
+                LotNo ="";
+               
             }
             ClearCustomerLotNo();
         }
+
+        //登出購物車
+        public static void LogoutCart()//已經登入
+        {
+            if (string.IsNullOrEmpty(LotNo))//登入時的批號為空
+            {
+                LotNo = Guid.NewGuid().ToString().Substring(0, 15).ToUpper();
+                LotCreateTime = DateTime.Now;
+            }
+            ClearCustomerLotNo();
+        }
+
 
         private static void ClearCustomerLotNo()
         {
@@ -220,6 +233,7 @@ namespace campingplan.App_Class
             {
 
                 //先在購物車搜尋，看有沒有加入過購物車
+                if (UserAccount.IsLogin) { LotNo = "" ;}
                 var datas = db.carts.Where(m => m.lot_no == LotNo)
                     .Where(m => m.mno == UserAccount.UserNo)
                     .Where(m => m.pno == pno)
