@@ -114,21 +114,22 @@ namespace campingplan.Controllers
                 model.ConfirmPassword = model.mpassword;
             }
 
-            user.mno = model.maccount;
-            user.mno = model.mname;
-            user.mpassword = model.mpassword;
-            user.memail = model.memail;
-            user.birthday = model.birthday;
-            user.remark = model.remark;
-            user.role_no = "Member";  //設定角色代號為 Member
-            user.varify_code = UserAccount.GetNewVarifyCode(); //產生驗證碼
-            user.isvarify = 0;
+            users new_user = new users();
+            new_user.maccount = model.maccount;
+            new_user.mname = model.mname;
+            new_user.mpassword = model.mpassword;
+            new_user.memail = model.memail;
+            new_user.birthday = model.birthday;
+            new_user.remark = model.remark;
+            new_user.role_no = "Member";  //設定角色代號為 Member
+            new_user.varify_code = UserAccount.GetNewVarifyCode(); //產生驗證碼
+            new_user.isvarify = 0;
 
             //寫入資料庫
             try
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
-                db.users.Add(user);
+                db.users.Add(new_user);
                 db.SaveChanges();
                 db.Configuration.ValidateOnSaveEnabled = true;
             }
@@ -138,7 +139,7 @@ namespace campingplan.Controllers
             }
 
             //寄出驗證信
-            SendVerifyMail(model.memail, user.varify_code);
+            SendVerifyMail(model.memail, new_user.varify_code);
             return RedirectToAction("SendEmailResult");
         }
 
